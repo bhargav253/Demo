@@ -1,5 +1,5 @@
 ### Directory Structure
-<pre>
+```
 Demo
 ├── rtl
 │   └── rtl files
@@ -8,19 +8,11 @@ Demo
 │   └── edalize
 └── tb
     └── tb files
-</pre>
+```
 
 ### prereqs
-<pre>
+```
 verilator https://verilator.org/guide/latest/install.html
 gtkwave http://gtkwave.sourceforge.net/
 cocotb https://docs.cocotb.org/en/stable/install.html
-</pre>
-
-### Commands to setup scripts
-These install a local copy of fusesoc and edalize.
-Make sure you pip uninstall first (need to find a VENC way to do it perhaps)
-<pre>
-bash scripts_setup.sh
-bash path_setup.sh
-</pre>
+```
