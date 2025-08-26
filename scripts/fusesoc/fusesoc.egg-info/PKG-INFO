@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: fusesoc
+Version: 2.4.4
+Summary: Award-winnning package manager and build abstraction tool for HDL code
+Author-email: Olof Kindgren <olof@award-winning.me>
+Maintainer-email: Olof Kindgren <olof@award-winning.me>
+Project-URL: Homepage, https://fusesoc.net
+Project-URL: Documentation, https://fusesoc.readthedocs.io
+Project-URL: Repository, https://github.com/olofk/fusesoc
+Project-URL: Issues, https://github.com/olofk/fusesoc/issues
+Project-URL: Changelog, https://github.com/olofk/fusesoc/blob/main/NEWS
+Keywords: VHDL,verilog,hdl,rtl,synthesis,FPGA,simulation,ASIC
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Topic :: Utilities
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: BSD License
+Requires-Python: <4,>=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: edalize>=0.4.1
+Requires-Dist: pyparsing>=2.3.1
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: simplesat>=0.9.1
+Requires-Dist: fastjsonschema
+Requires-Dist: jsonschema2md
+Requires-Dist: argcomplete
+Dynamic: license-file

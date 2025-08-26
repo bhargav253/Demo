@@ -1,0 +1,4 @@
+Jinja2>=3
+
+[:python_version < "3.10"]
+importlib_metadata>=1.4

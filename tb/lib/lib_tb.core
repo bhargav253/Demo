@@ -1,0 +1,23 @@
+CAPI=2:
+
+name : lib::lib_tb:0.1
+
+filesets:
+  tb:
+    files:
+      - test_fifo.py : {file_type : user, copyto : .}
+    depend:
+      - lib::lib:0.1
+
+targets:
+  default: &default_target
+    filesets:
+      - tb
+
+  sim_fifo:
+    <<: *default_target
+    flow: sim
+    flow_options:
+      tool : cocoveri
+    filesets : [tb]
+    toplevel : fifo

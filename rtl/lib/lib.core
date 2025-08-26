@@ -1,0 +1,27 @@
+CAPI=2:
+
+name : lib::lib:0.1
+
+filesets:
+  rtl:
+    files:
+      - fifo.sv : {file_type : verilogSource}
+
+targets:
+  default: &default_target
+    filesets:
+      - rtl
+
+  lint_fifo:
+    <<: *default_target
+    default_tool: verilator
+    tools:
+      verilator:
+        lint_only: true
+        verilator_options:
+          - -Wall
+          - -Wno-DECLFILENAME
+          - -Wno-UNUSED
+          - --lint-only
+          - --top-module fifo
+    toplevel: fifo

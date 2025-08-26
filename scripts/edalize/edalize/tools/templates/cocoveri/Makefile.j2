@@ -1,0 +1,11 @@
+SIM ?= verilator
+VERILOG_SOURCES = $(addprefix $(shell pwd)/,$(shell cat {{name}}.src))
+EXTRA_ARGS += --trace --trace-structs -Wno-lint -Wno-fatal
+
+COCOTB_TEST_MODULES = test_{{toplevel}}
+COCOTB_TOPLEVEL = {{toplevel}}
+
+include $(shell cocotb-config --makefiles)/Makefile.sim
+
+run:
+	gtkwave dump.vcd

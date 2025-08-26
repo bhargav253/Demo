@@ -1,0 +1,6 @@
+fusesoc.conf
+**/__pycache__/
+**/build/
+**/build/
+**/*.gtkw
+**/*~
