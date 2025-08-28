@@ -1,4 +1,5 @@
 LICENSE
+dev-requirements.txt
 pyproject.toml
 setup.py
 fusesoc/config.py

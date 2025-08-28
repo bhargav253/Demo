@@ -4,3 +4,6 @@ fusesoc.conf
 **/build/
 **/*.gtkw
 **/*~
+scripts/edalize/edalize.egg-info/SOURCES.txt
+scripts/edalize/fusesoc.egg-info/SOURCES.txt
+venv/
