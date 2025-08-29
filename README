@@ -1,13 +1,16 @@
 ### Directory Structure
 ```
 Demo
-├── rtl
-│   └── rtl files
 ├── scripts
 │   └── fusesoc
 │   └── edalize
-└── tb
-    └── tb files
+└── ip
+    └── bus
+    └── core
+    └── prim
+    └── lint
+    └── pe
+    └── soc
 ```
 
 ### prereqs
