@@ -1,0 +1,32 @@
+CAPI=2:
+# Copyright lowRISC contributors (OpenTitan project).
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+name: "lowrisc:prim:cdc_rand_delay"
+description: "CDC random delay module for DV"
+
+filesets:
+  files_rtl:
+    depend:
+      - lowrisc:prim:assert
+    files:
+      - rtl/prim_cdc_rand_delay.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      # common waivers
+      - lowrisc:lint:common
+    files:
+      - lint/prim_cdc_rand_delay.vlt
+    file_type: vlt
+
+targets:
+  default:
+    tools:
+      verilator:
+        verilator_options:
+          - '-DDISABLE_PRIM_CDC_RAND_DELAY'
+    filesets:
+      - files_rtl
+      - files_verilator_waiver

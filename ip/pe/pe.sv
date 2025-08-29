@@ -2,7 +2,7 @@
  contains two PE_wrappers to allow full throughput
  */
 
-module systolic
+module pe
    (/*AUTOARG*/
    // Outputs
    out_val, c11, c12, c21, c22,

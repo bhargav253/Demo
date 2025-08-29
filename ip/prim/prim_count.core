@@ -1,0 +1,29 @@
+CAPI=2:
+# Copyright lowRISC contributors (OpenTitan project).
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+
+name: "lowrisc:prim:count"
+description: ""
+filesets:
+  files_rtl:
+    depend:
+      - lowrisc:prim:assert
+    files:
+      - rtl/prim_count_pkg.sv
+      - rtl/prim_count.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      # common waivers
+      - lowrisc:lint:common
+    files:
+      - lint/prim_count.vlt
+    file_type: vlt
+
+targets:
+  default:
+    filesets:
+      - files_verilator_waiver
+      - files_rtl

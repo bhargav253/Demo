@@ -30,7 +30,7 @@ VERILATOR ?= $(VERILATOR_ROOT)/bin/verilator
 endif
 
 V$(TOP_MODULE): V$(TOP_MODULE).mk
-	$(MAKE) $(MAKE_OPTIONS) -f $<
+	$(MAKE) $(MAKE_OPTIONS) $<
 V$(TOP_MODULE).mk:
 	$(EDALIZE_LAUNCHER) $(VERILATOR) -f $(VC_FILE) $(VERILATOR_OPTIONS)
 
@@ -294,4 +294,4 @@ class Verilator(Edatool):
         ]:
             return
         logger.info("Running simulation")
-        self._run_tool("./V" + self.toplevel, self.args)
+        self._run_tool("make", self.args)

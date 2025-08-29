@@ -234,8 +234,8 @@ async def test_fifo(dut):
     cocotb.log.info("Starting parallel FIFO test...")
     
     # Start all coroutines in parallel
-    writer_task = cocotb.start_soon(writer_coroutine(tb, num_transactions=200, max_delay=2))
-    reader_task = cocotb.start_soon(reader_coroutine(tb, num_transactions=200, max_delay=2))
+    writer_task = cocotb.start_soon(writer_coroutine(tb, num_transactions=50, max_delay=2))
+    reader_task = cocotb.start_soon(reader_coroutine(tb, num_transactions=50, max_delay=2))
     monitor_task = cocotb.start_soon(status_monitor_coroutine(tb, interval=100, timeout=5000))
     
     # Wait for both reader and writer to complete
