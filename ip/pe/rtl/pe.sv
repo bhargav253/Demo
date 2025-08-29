@@ -3,7 +3,7 @@
  with skid fifos to control logic pushing and popping data 
  */
 
-module proc_ele_wrap
+module pe
   #(parameter WIDTH=4)
    (/*AUTOARG*/
    // Outputs
@@ -268,100 +268,100 @@ module proc_ele_wrap
    
    
    /*
-    proc_ele AUTO_TEMPLATE "ele_\(.*$\)" (
+    pe_core AUTO_TEMPLATE "core_\(.*$\)" (
     .clk    (clk),
     .rst_n  (rst_n),    
     .\(.*\) (@_\1[]),
     );
     */
 
-   proc_ele u_proc_ele_E11 ( /*AUTOINST*/
-			    // Outputs
-			    .cout		(E11_cout[(2*WIDTH):0]), // Templated
-			    .cout_val		(E11_cout_val),	 // Templated
-			    .aout		(E11_aout[WIDTH-1:0]), // Templated
-			    .aout_slot		(E11_aout_slot), // Templated
-			    .aout_val		(E11_aout_val),	 // Templated
-			    .bout		(E11_bout[WIDTH-1:0]), // Templated
-			    .bout_slot		(E11_bout_slot), // Templated
-			    .bout_val		(E11_bout_val),	 // Templated
-			    // Inputs
-			    .clk,				 // Templated
-			    .rst_n,				 // Templated
-			    .ain		(E11_ain[WIDTH-1:0]), // Templated
-			    .ain_slot		(E11_ain_slot),	 // Templated
-			    .ain_val		(E11_ain_val),	 // Templated
-			    .bin		(E11_bin[WIDTH-1:0]), // Templated
-			    .bin_slot		(E11_bin_slot),	 // Templated
-			    .bin_val		(E11_bin_val),	 // Templated
-			    .cin		(E11_cin[(2*WIDTH):0]), // Templated
-			    .cin_val		(E11_cin_val));	 // Templated
+   pe_core u_pe_core_E11 ( /*AUTOINST*/
+			  // Outputs
+			  .cout			(E11_cout[(2*WIDTH):0]), // Templated
+			  .cout_val		(E11_cout_val),	 // Templated
+			  .aout			(E11_aout[WIDTH-1:0]), // Templated
+			  .aout_slot		(E11_aout_slot), // Templated
+			  .aout_val		(E11_aout_val),	 // Templated
+			  .bout			(E11_bout[WIDTH-1:0]), // Templated
+			  .bout_slot		(E11_bout_slot), // Templated
+			  .bout_val		(E11_bout_val),	 // Templated
+			  // Inputs
+			  .clk,					 // Templated
+			  .rst_n,				 // Templated
+			  .ain			(E11_ain[WIDTH-1:0]), // Templated
+			  .ain_slot		(E11_ain_slot),	 // Templated
+			  .ain_val		(E11_ain_val),	 // Templated
+			  .bin			(E11_bin[WIDTH-1:0]), // Templated
+			  .bin_slot		(E11_bin_slot),	 // Templated
+			  .bin_val		(E11_bin_val),	 // Templated
+			  .cin			(E11_cin[(2*WIDTH):0]), // Templated
+			  .cin_val		(E11_cin_val));	 // Templated
    
-   proc_ele u_proc_ele_E12 ( /*AUTOINST*/
-			    // Outputs
-			    .cout		(E12_cout[(2*WIDTH):0]), // Templated
-			    .cout_val		(E12_cout_val),	 // Templated
-			    .aout		(E12_aout[WIDTH-1:0]), // Templated
-			    .aout_slot		(E12_aout_slot), // Templated
-			    .aout_val		(E12_aout_val),	 // Templated
-			    .bout		(E12_bout[WIDTH-1:0]), // Templated
-			    .bout_slot		(E12_bout_slot), // Templated
-			    .bout_val		(E12_bout_val),	 // Templated
-			    // Inputs
-			    .clk,				 // Templated
-			    .rst_n,				 // Templated
-			    .ain		(E12_ain[WIDTH-1:0]), // Templated
-			    .ain_slot		(E12_ain_slot),	 // Templated
-			    .ain_val		(E12_ain_val),	 // Templated
-			    .bin		(E12_bin[WIDTH-1:0]), // Templated
-			    .bin_slot		(E12_bin_slot),	 // Templated
-			    .bin_val		(E12_bin_val),	 // Templated
-			    .cin		(E12_cin[(2*WIDTH):0]), // Templated
-			    .cin_val		(E12_cin_val));	 // Templated
+   pe_core u_pe_core_E12 ( /*AUTOINST*/
+			  // Outputs
+			  .cout			(E12_cout[(2*WIDTH):0]), // Templated
+			  .cout_val		(E12_cout_val),	 // Templated
+			  .aout			(E12_aout[WIDTH-1:0]), // Templated
+			  .aout_slot		(E12_aout_slot), // Templated
+			  .aout_val		(E12_aout_val),	 // Templated
+			  .bout			(E12_bout[WIDTH-1:0]), // Templated
+			  .bout_slot		(E12_bout_slot), // Templated
+			  .bout_val		(E12_bout_val),	 // Templated
+			  // Inputs
+			  .clk,					 // Templated
+			  .rst_n,				 // Templated
+			  .ain			(E12_ain[WIDTH-1:0]), // Templated
+			  .ain_slot		(E12_ain_slot),	 // Templated
+			  .ain_val		(E12_ain_val),	 // Templated
+			  .bin			(E12_bin[WIDTH-1:0]), // Templated
+			  .bin_slot		(E12_bin_slot),	 // Templated
+			  .bin_val		(E12_bin_val),	 // Templated
+			  .cin			(E12_cin[(2*WIDTH):0]), // Templated
+			  .cin_val		(E12_cin_val));	 // Templated
 
-   proc_ele u_proc_ele_E21 ( /*AUTOINST*/
-			    // Outputs
-			    .cout		(E21_cout[(2*WIDTH):0]), // Templated
-			    .cout_val		(E21_cout_val),	 // Templated
-			    .aout		(E21_aout[WIDTH-1:0]), // Templated
-			    .aout_slot		(E21_aout_slot), // Templated
-			    .aout_val		(E21_aout_val),	 // Templated
-			    .bout		(E21_bout[WIDTH-1:0]), // Templated
-			    .bout_slot		(E21_bout_slot), // Templated
-			    .bout_val		(E21_bout_val),	 // Templated
-			    // Inputs
-			    .clk,				 // Templated
-			    .rst_n,				 // Templated
-			    .ain		(E21_ain[WIDTH-1:0]), // Templated
-			    .ain_slot		(E21_ain_slot),	 // Templated
-			    .ain_val		(E21_ain_val),	 // Templated
-			    .bin		(E21_bin[WIDTH-1:0]), // Templated
-			    .bin_slot		(E21_bin_slot),	 // Templated
-			    .bin_val		(E21_bin_val),	 // Templated
-			    .cin		(E21_cin[(2*WIDTH):0]), // Templated
-			    .cin_val		(E21_cin_val));	 // Templated
+   pe_core u_pe_core_E21 ( /*AUTOINST*/
+			  // Outputs
+			  .cout			(E21_cout[(2*WIDTH):0]), // Templated
+			  .cout_val		(E21_cout_val),	 // Templated
+			  .aout			(E21_aout[WIDTH-1:0]), // Templated
+			  .aout_slot		(E21_aout_slot), // Templated
+			  .aout_val		(E21_aout_val),	 // Templated
+			  .bout			(E21_bout[WIDTH-1:0]), // Templated
+			  .bout_slot		(E21_bout_slot), // Templated
+			  .bout_val		(E21_bout_val),	 // Templated
+			  // Inputs
+			  .clk,					 // Templated
+			  .rst_n,				 // Templated
+			  .ain			(E21_ain[WIDTH-1:0]), // Templated
+			  .ain_slot		(E21_ain_slot),	 // Templated
+			  .ain_val		(E21_ain_val),	 // Templated
+			  .bin			(E21_bin[WIDTH-1:0]), // Templated
+			  .bin_slot		(E21_bin_slot),	 // Templated
+			  .bin_val		(E21_bin_val),	 // Templated
+			  .cin			(E21_cin[(2*WIDTH):0]), // Templated
+			  .cin_val		(E21_cin_val));	 // Templated
    
-   proc_ele u_proc_ele_E22 ( /*AUTOINST*/
-			    // Outputs
-			    .cout		(E22_cout[(2*WIDTH):0]), // Templated
-			    .cout_val		(E22_cout_val),	 // Templated
-			    .aout		(E22_aout[WIDTH-1:0]), // Templated
-			    .aout_slot		(E22_aout_slot), // Templated
-			    .aout_val		(E22_aout_val),	 // Templated
-			    .bout		(E22_bout[WIDTH-1:0]), // Templated
-			    .bout_slot		(E22_bout_slot), // Templated
-			    .bout_val		(E22_bout_val),	 // Templated
-			    // Inputs
-			    .clk,				 // Templated
-			    .rst_n,				 // Templated
-			    .ain		(E22_ain[WIDTH-1:0]), // Templated
-			    .ain_slot		(E22_ain_slot),	 // Templated
-			    .ain_val		(E22_ain_val),	 // Templated
-			    .bin		(E22_bin[WIDTH-1:0]), // Templated
-			    .bin_slot		(E22_bin_slot),	 // Templated
-			    .bin_val		(E22_bin_val),	 // Templated
-			    .cin		(E22_cin[(2*WIDTH):0]), // Templated
-			    .cin_val		(E22_cin_val));	 // Templated
+   pe_core u_pe_core_E22 ( /*AUTOINST*/
+			  // Outputs
+			  .cout			(E22_cout[(2*WIDTH):0]), // Templated
+			  .cout_val		(E22_cout_val),	 // Templated
+			  .aout			(E22_aout[WIDTH-1:0]), // Templated
+			  .aout_slot		(E22_aout_slot), // Templated
+			  .aout_val		(E22_aout_val),	 // Templated
+			  .bout			(E22_bout[WIDTH-1:0]), // Templated
+			  .bout_slot		(E22_bout_slot), // Templated
+			  .bout_val		(E22_bout_val),	 // Templated
+			  // Inputs
+			  .clk,					 // Templated
+			  .rst_n,				 // Templated
+			  .ain			(E22_ain[WIDTH-1:0]), // Templated
+			  .ain_slot		(E22_ain_slot),	 // Templated
+			  .ain_val		(E22_ain_val),	 // Templated
+			  .bin			(E22_bin[WIDTH-1:0]), // Templated
+			  .bin_slot		(E22_bin_slot),	 // Templated
+			  .bin_val		(E22_bin_val),	 // Templated
+			  .cin			(E22_cin[(2*WIDTH):0]), // Templated
+			  .cin_val		(E22_cin_val));	 // Templated
    
 endmodule
 

@@ -1,0 +1,15 @@
+work = work
+VVER = 2022.1
+top_tb_name = {{toplevel}}
+
+cmp:
+	/tools/Xilinx/Vivado/$(VVER)/bin/xvlog -work $(work) -i ../sim -sv -f {{name}}_src.f
+	/tools/Xilinx/Vivado/$(VVER)/bin/xelab work.$(top_tb_name) -s $(top_tb_name)_sim -Odisable_unused_removal -timescale 1ns/1ps -debug all
+
+run_sim_wave:
+	/tools/Xilinx/Vivado/$(VVER)/bin/xsim -wdb sim.wdb -log session.log -t logw.tcl $(top_tb_name)_sim
+	/tools/Xilinx/Vivado/$(VVER)/bin/xsim sim.wdb -gui
+
+run:
+	make cmp
+	make run_sim_wave

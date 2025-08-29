@@ -4,7 +4,7 @@
  */
 
 
-module proc_ele
+module pe_core
   #(parameter WIDTH=4)
    (/*AUTOARG*/
    // Outputs

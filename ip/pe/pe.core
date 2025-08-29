@@ -1,0 +1,30 @@
+CAPI=2:
+
+name : demo::pe:0.0
+description: "PE"
+filesets:
+  files_rtl:
+    files:
+      - rtl/pe_core.sv
+      - rtl/pe_in_fifo.sv
+      - rtl/pe_out_fifo.sv
+      - rtl/pe_top.sv
+      - rtl/pe.sv
+
+  files_dv:
+    files:
+      - dv/pe_tb.sv
+    file_type: systemVerilogSource
+
+targets:
+  default: &default_target
+    filesets:
+      - files_rtl
+      - files_dv
+
+  sim:
+    <<: *default_target
+    flow: sim
+    flow_options:
+      tool : custvivado
+    toplevel : pe_tb
