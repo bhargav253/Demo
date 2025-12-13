@@ -1,0 +1,194 @@
+{
+  name:               "dma",
+  human_name:         "DMA",
+  one_line_desc:      "AXIL DMA",
+  clocking: [{clock: "clk_i", reset: "rst_ni"}],
+  bus_interfaces: [
+    { protocol: "apb", direction: "device"}
+  ],
+  regwidth: "32",
+  registers: [
+    { name: "CTRL",
+      desc: "DMA control register",
+      swaccess: "rw",
+      hwaccess: "hro",
+      fields: [
+        { bits: "0",
+          name: "go",
+          desc: "Sets the start for the DMA operation"
+        }
+        { bits: "1",
+          name: "abort",
+          desc: "Stop DMA operation"
+        }
+        { bits: "9:2",
+          name: "max_burst",
+          desc: "Max burst length (ALEN) in AXI xaction"
+        }
+      ]
+    },
+    { name:     "STATUS"
+      desc:     "DMA status register"
+      swaccess: "ro"
+      hwaccess: "hrw"
+      hwext:    "true"
+      hwre:     "true"
+      fields: [
+        { bits: "15:0"
+          name: "version"
+          desc: "DMA version"
+        }
+        { bits: "16"
+          name: "done"
+          desc: "asserted when DMA finishes all descriptors"
+        }
+        { bits: "17"
+          name: "error"
+          desc: "error resume"
+        }
+      ]
+    }
+    { multireg: {
+      	name: "DESC_SRC_ADDR",
+        desc: "source address to fetch data",
+        count: "2",
+	cname: "DMA",
+	swaccess: "rw",
+        hwaccess: "hro",
+        fields: [
+          { bits: "31:0"
+            name: "address"
+            desc: "source address to fetch data"
+          }
+        ]      
+      }
+    }
+    { multireg: {
+      	name: "DESC_DST_ADDR",
+        desc: "destination address to send data",
+        count: "2",
+	cname: "DMA",
+	swaccess: "rw",
+        hwaccess: "hro",
+        fields: [
+          { bits: "31:0"
+            name: "address"
+            desc: "destination address to send data"
+          }
+        ]      
+      }
+    }
+    { multireg: {
+      	name: "DESC_NUM_BYTES",
+        desc: "number of bytes to transfer",
+        count: "2",
+	cname: "DMA",
+	swaccess: "rw",
+        hwaccess: "hro",
+        fields: [
+          { bits: "31:0"
+            name: "num_bytes"
+            desc: "number of bytes to transfer"
+          }
+        ]      
+      }
+    }
+    { multireg: {
+      	name: "DESC_CFG",
+        desc: "number of bytes to transfer",
+        count: "2",
+	cname: "DMA",
+	swaccess: "rw",
+        hwaccess: "hro",
+        fields: [
+          { bits: "0"
+            name: "read_mode"
+            desc: "read transfer mode"
+            enum: [
+              { value: "0",
+                name: "incr",
+                desc: "increment mode"
+              },
+              { value: "1",
+                name: "fixed",
+                desc: "fixed mode"
+              },
+            ]
+          }
+          { bits: "1"
+            name: "write_mode"
+            desc: "write transfer mode"
+            enum: [
+              { value: "0",
+                name: "incr",
+                desc: "increment mode"
+              },
+              { value: "1",
+                name: "fixed",
+                desc: "fixed mode"
+              },
+            ]
+          }
+          { bits: "2"
+            name: "enable"
+            desc: "enable descriptor"
+          }
+        ]      
+      }
+    }
+    { name: "ERR_ADDR",
+      desc: "DMA error address",
+      swaccess: "ro",
+      hwaccess: "hrw",
+      hwext: "true",
+      hwre: "true",
+      fields: [
+        { bits: "31:0"
+          name: "address"
+          desc: "DMA error address"
+        }
+      ]      
+    }
+    { name: "ERR_STATS",
+      desc: "DMA error stats",
+      swaccess: "ro",
+      hwaccess: "hrw",
+      hwext: "true",
+      hwre: "true",
+      fields: [
+        { bits: "0"
+          name: "err_type"
+          desc: "DMA error type"
+          enum: [
+            { value: "0",
+              name: "op",
+              desc: "operation"
+            },
+            { value: "1",
+              name: "cfg",
+              desc: "configuration"
+            },
+          ]
+        }
+        { bits: "1"
+          name: "err_src"
+          desc: "dma error source"
+          enum: [
+            { value: "0",
+              name: "read",
+              desc: "read"
+            },
+            { value: "1",
+              name: "write",
+              desc: "write"
+            },
+          ]	  	  
+        }
+        { bits: "2"
+          name: "err_trig"
+          desc: "dma error, asserted when dma error occurs"
+        }
+      ]      
+    }
+  ]
+}
