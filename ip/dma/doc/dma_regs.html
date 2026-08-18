@@ -1,0 +1,124 @@
+<html><body>
+<h1>dma Register Map</h1>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Name</th><th>Offset</th><th>Length (bytes)</th><th>Description</th></tr>
+<tr><td><a href="#ctrl">CTRL</a></td><td>0x0000</td><td>4</td><td>DMA control register</td></tr>
+<tr><td><a href="#status">STATUS</a></td><td>0x0004</td><td>4</td><td>DMA status register</td></tr>
+<tr><td><a href="#desc_src_addr_0">DESC_SRC_ADDR_0</a></td><td>0x0008</td><td>4</td><td>source address to fetch data</td></tr>
+<tr><td><a href="#desc_src_addr_1">DESC_SRC_ADDR_1</a></td><td>0x000c</td><td>4</td><td>source address to fetch data</td></tr>
+<tr><td><a href="#desc_dst_addr_0">DESC_DST_ADDR_0</a></td><td>0x0010</td><td>4</td><td>destination address to send data</td></tr>
+<tr><td><a href="#desc_dst_addr_1">DESC_DST_ADDR_1</a></td><td>0x0014</td><td>4</td><td>destination address to send data</td></tr>
+<tr><td><a href="#desc_num_bytes_0">DESC_NUM_BYTES_0</a></td><td>0x0018</td><td>4</td><td>number of bytes to transfer</td></tr>
+<tr><td><a href="#desc_num_bytes_1">DESC_NUM_BYTES_1</a></td><td>0x001c</td><td>4</td><td>number of bytes to transfer</td></tr>
+<tr><td><a href="#desc_cfg_0">DESC_CFG_0</a></td><td>0x0020</td><td>4</td><td>number of bytes to transfer</td></tr>
+<tr><td><a href="#desc_cfg_1">DESC_CFG_1</a></td><td>0x0024</td><td>4</td><td>number of bytes to transfer</td></tr>
+<tr><td><a href="#err_addr">ERR_ADDR</a></td><td>0x0028</td><td>4</td><td>DMA error address</td></tr>
+<tr><td><a href="#err_stats">ERR_STATS</a></td><td>0x002c</td><td>4</td><td>DMA error stats</td></tr>
+</table>
+<h2 id="ctrl">CTRL</h2>
+<p>DMA control register</p>
+<p>* Offset: `0x0000`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>0</td><td>go</td><td>Sets the start for the DMA operation</td></tr>
+<tr><td>1</td><td>abort</td><td>Stop DMA operation</td></tr>
+<tr><td>9:2</td><td>max_burst</td><td>Max burst length (ALEN) in AXI xaction</td></tr>
+</table>
+<h2 id="status">STATUS</h2>
+<p>DMA status register</p>
+<p>* Offset: `0x0004`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>15:0</td><td>version</td><td>DMA version</td></tr>
+<tr><td>16</td><td>done</td><td>asserted when DMA finishes all descriptors</td></tr>
+<tr><td>17</td><td>error</td><td>error resume</td></tr>
+</table>
+<h2 id="desc_src_addr_0">DESC_SRC_ADDR_0</h2>
+<p>source address to fetch data</p>
+<p>* Offset: `0x0008`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>31:0</td><td>address_0</td><td>source address to fetch data</td></tr>
+</table>
+<h2 id="desc_src_addr_1">DESC_SRC_ADDR_1</h2>
+<p>source address to fetch data</p>
+<p>* Offset: `0x000c`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>31:0</td><td>address_1</td><td>For DMA1</td></tr>
+</table>
+<h2 id="desc_dst_addr_0">DESC_DST_ADDR_0</h2>
+<p>destination address to send data</p>
+<p>* Offset: `0x0010`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>31:0</td><td>address_0</td><td>destination address to send data</td></tr>
+</table>
+<h2 id="desc_dst_addr_1">DESC_DST_ADDR_1</h2>
+<p>destination address to send data</p>
+<p>* Offset: `0x0014`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>31:0</td><td>address_1</td><td>For DMA1</td></tr>
+</table>
+<h2 id="desc_num_bytes_0">DESC_NUM_BYTES_0</h2>
+<p>number of bytes to transfer</p>
+<p>* Offset: `0x0018`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>31:0</td><td>num_bytes_0</td><td>number of bytes to transfer</td></tr>
+</table>
+<h2 id="desc_num_bytes_1">DESC_NUM_BYTES_1</h2>
+<p>number of bytes to transfer</p>
+<p>* Offset: `0x001c`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>31:0</td><td>num_bytes_1</td><td>For DMA1</td></tr>
+</table>
+<h2 id="desc_cfg_0">DESC_CFG_0</h2>
+<p>number of bytes to transfer</p>
+<p>* Offset: `0x0020`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>0</td><td>read_mode_0</td><td>read transfer mode</td></tr>
+<tr><td>1</td><td>write_mode_0</td><td>write transfer mode</td></tr>
+<tr><td>2</td><td>enable_0</td><td>enable descriptor</td></tr>
+</table>
+<h2 id="desc_cfg_1">DESC_CFG_1</h2>
+<p>number of bytes to transfer</p>
+<p>* Offset: `0x0024`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>0</td><td>read_mode_1</td><td>For DMA1</td></tr>
+<tr><td>1</td><td>write_mode_1</td><td>For DMA1</td></tr>
+<tr><td>2</td><td>enable_1</td><td>For DMA1</td></tr>
+</table>
+<h2 id="err_addr">ERR_ADDR</h2>
+<p>DMA error address</p>
+<p>* Offset: `0x0028`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>31:0</td><td>address</td><td>DMA error address</td></tr>
+</table>
+<h2 id="err_stats">ERR_STATS</h2>
+<p>DMA error stats</p>
+<p>* Offset: `0x002c`</p>
+<p>* Reset default: `0x0`</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><th>Bits</th><th>Name</th><th>Description</th></tr>
+<tr><td>0</td><td>err_type</td><td>DMA error type</td></tr>
+<tr><td>1</td><td>err_src</td><td>dma error source</td></tr>
+<tr><td>2</td><td>err_trig</td><td>dma error, asserted when dma error occurs</td></tr>
+</table>
+</body></html>
