@@ -1,0 +1,9556 @@
+{
+  "schema": "noc-layout-v1",
+  "name": "NoC16 four-by-four concentrated mesh — south-memory layout v2",
+  "viewBox": {
+    "width": 1190,
+    "height": 1080
+  },
+  "notes": [
+    "Each L1/L2/LLCH visual link aggregates four lane-preserving links.",
+    "LLCH node ID is the base node for its four endpoint lanes."
+  ],
+  "clusters": [
+    {
+      "id": 0,
+      "name": "Cluster 00",
+      "row": 0,
+      "col": 0,
+      "x": 190,
+      "y": 145
+    },
+    {
+      "id": 1,
+      "name": "Cluster 01",
+      "row": 0,
+      "col": 1,
+      "x": 460,
+      "y": 145
+    },
+    {
+      "id": 2,
+      "name": "Cluster 02",
+      "row": 0,
+      "col": 2,
+      "x": 730,
+      "y": 145
+    },
+    {
+      "id": 3,
+      "name": "Cluster 03",
+      "row": 0,
+      "col": 3,
+      "x": 1000,
+      "y": 145
+    },
+    {
+      "id": 4,
+      "name": "Cluster 04",
+      "row": 1,
+      "col": 0,
+      "x": 190,
+      "y": 350
+    },
+    {
+      "id": 5,
+      "name": "Cluster 05",
+      "row": 1,
+      "col": 1,
+      "x": 460,
+      "y": 350
+    },
+    {
+      "id": 6,
+      "name": "Cluster 06",
+      "row": 1,
+      "col": 2,
+      "x": 730,
+      "y": 350
+    },
+    {
+      "id": 7,
+      "name": "Cluster 07",
+      "row": 1,
+      "col": 3,
+      "x": 1000,
+      "y": 350
+    },
+    {
+      "id": 8,
+      "name": "Cluster 08",
+      "row": 2,
+      "col": 0,
+      "x": 190,
+      "y": 555
+    },
+    {
+      "id": 9,
+      "name": "Cluster 09",
+      "row": 2,
+      "col": 1,
+      "x": 460,
+      "y": 555
+    },
+    {
+      "id": 10,
+      "name": "Cluster 10",
+      "row": 2,
+      "col": 2,
+      "x": 730,
+      "y": 555
+    },
+    {
+      "id": 11,
+      "name": "Cluster 11",
+      "row": 2,
+      "col": 3,
+      "x": 1000,
+      "y": 555
+    },
+    {
+      "id": 12,
+      "name": "Cluster 12",
+      "row": 3,
+      "col": 0,
+      "x": 190,
+      "y": 760
+    },
+    {
+      "id": 13,
+      "name": "Cluster 13",
+      "row": 3,
+      "col": 1,
+      "x": 460,
+      "y": 760
+    },
+    {
+      "id": 14,
+      "name": "Cluster 14",
+      "row": 3,
+      "col": 2,
+      "x": 730,
+      "y": 760
+    },
+    {
+      "id": 15,
+      "name": "Cluster 15",
+      "row": 3,
+      "col": 3,
+      "x": 1000,
+      "y": 760
+    }
+  ],
+  "nodes": [
+    {
+      "kind": "router",
+      "id": 0,
+      "name": "L1_00",
+      "level": "L1",
+      "x": 190,
+      "y": 145,
+      "parent": 0,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 16,
+      "name": "L2_00",
+      "level": "L2",
+      "x": 190,
+      "y": 197,
+      "parent": 0,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 96,
+      "name": "SHIM_00_00",
+      "level": "SHIM",
+      "x": 118,
+      "y": 223,
+      "parent": 0,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 32,
+      "name": "L3_00_00",
+      "level": "L3",
+      "x": 118,
+      "y": 247,
+      "parent": 0,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 97,
+      "name": "SHIM_00_01",
+      "level": "SHIM",
+      "x": 166,
+      "y": 223,
+      "parent": 0,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 33,
+      "name": "L3_00_01",
+      "level": "L3",
+      "x": 166,
+      "y": 247,
+      "parent": 0,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 98,
+      "name": "SHIM_00_02",
+      "level": "SHIM",
+      "x": 214,
+      "y": 223,
+      "parent": 0,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 34,
+      "name": "L3_00_02",
+      "level": "L3",
+      "x": 214,
+      "y": 247,
+      "parent": 0,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 99,
+      "name": "SHIM_00_03",
+      "level": "SHIM",
+      "x": 262,
+      "y": 223,
+      "parent": 0,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 35,
+      "name": "L3_00_03",
+      "level": "L3",
+      "x": 262,
+      "y": 247,
+      "parent": 0,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 1,
+      "name": "L1_01",
+      "level": "L1",
+      "x": 460,
+      "y": 145,
+      "parent": 1,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 17,
+      "name": "L2_01",
+      "level": "L2",
+      "x": 460,
+      "y": 197,
+      "parent": 1,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 100,
+      "name": "SHIM_01_00",
+      "level": "SHIM",
+      "x": 388,
+      "y": 223,
+      "parent": 1,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 36,
+      "name": "L3_01_00",
+      "level": "L3",
+      "x": 388,
+      "y": 247,
+      "parent": 1,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 101,
+      "name": "SHIM_01_01",
+      "level": "SHIM",
+      "x": 436,
+      "y": 223,
+      "parent": 1,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 37,
+      "name": "L3_01_01",
+      "level": "L3",
+      "x": 436,
+      "y": 247,
+      "parent": 1,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 102,
+      "name": "SHIM_01_02",
+      "level": "SHIM",
+      "x": 484,
+      "y": 223,
+      "parent": 1,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 38,
+      "name": "L3_01_02",
+      "level": "L3",
+      "x": 484,
+      "y": 247,
+      "parent": 1,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 103,
+      "name": "SHIM_01_03",
+      "level": "SHIM",
+      "x": 532,
+      "y": 223,
+      "parent": 1,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 39,
+      "name": "L3_01_03",
+      "level": "L3",
+      "x": 532,
+      "y": 247,
+      "parent": 1,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 2,
+      "name": "L1_02",
+      "level": "L1",
+      "x": 730,
+      "y": 145,
+      "parent": 2,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 18,
+      "name": "L2_02",
+      "level": "L2",
+      "x": 730,
+      "y": 197,
+      "parent": 2,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 104,
+      "name": "SHIM_02_00",
+      "level": "SHIM",
+      "x": 658,
+      "y": 223,
+      "parent": 2,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 40,
+      "name": "L3_02_00",
+      "level": "L3",
+      "x": 658,
+      "y": 247,
+      "parent": 2,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 105,
+      "name": "SHIM_02_01",
+      "level": "SHIM",
+      "x": 706,
+      "y": 223,
+      "parent": 2,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 41,
+      "name": "L3_02_01",
+      "level": "L3",
+      "x": 706,
+      "y": 247,
+      "parent": 2,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 106,
+      "name": "SHIM_02_02",
+      "level": "SHIM",
+      "x": 754,
+      "y": 223,
+      "parent": 2,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 42,
+      "name": "L3_02_02",
+      "level": "L3",
+      "x": 754,
+      "y": 247,
+      "parent": 2,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 107,
+      "name": "SHIM_02_03",
+      "level": "SHIM",
+      "x": 802,
+      "y": 223,
+      "parent": 2,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 43,
+      "name": "L3_02_03",
+      "level": "L3",
+      "x": 802,
+      "y": 247,
+      "parent": 2,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 3,
+      "name": "L1_03",
+      "level": "L1",
+      "x": 1000,
+      "y": 145,
+      "parent": 3,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 19,
+      "name": "L2_03",
+      "level": "L2",
+      "x": 1000,
+      "y": 197,
+      "parent": 3,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 108,
+      "name": "SHIM_03_00",
+      "level": "SHIM",
+      "x": 928,
+      "y": 223,
+      "parent": 3,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 44,
+      "name": "L3_03_00",
+      "level": "L3",
+      "x": 928,
+      "y": 247,
+      "parent": 3,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 109,
+      "name": "SHIM_03_01",
+      "level": "SHIM",
+      "x": 976,
+      "y": 223,
+      "parent": 3,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 45,
+      "name": "L3_03_01",
+      "level": "L3",
+      "x": 976,
+      "y": 247,
+      "parent": 3,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 110,
+      "name": "SHIM_03_02",
+      "level": "SHIM",
+      "x": 1024,
+      "y": 223,
+      "parent": 3,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 46,
+      "name": "L3_03_02",
+      "level": "L3",
+      "x": 1024,
+      "y": 247,
+      "parent": 3,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 111,
+      "name": "SHIM_03_03",
+      "level": "SHIM",
+      "x": 1072,
+      "y": 223,
+      "parent": 3,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 47,
+      "name": "L3_03_03",
+      "level": "L3",
+      "x": 1072,
+      "y": 247,
+      "parent": 3,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 4,
+      "name": "L1_04",
+      "level": "L1",
+      "x": 190,
+      "y": 350,
+      "parent": 4,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 20,
+      "name": "L2_04",
+      "level": "L2",
+      "x": 190,
+      "y": 402,
+      "parent": 4,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 112,
+      "name": "SHIM_04_00",
+      "level": "SHIM",
+      "x": 118,
+      "y": 428,
+      "parent": 4,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 48,
+      "name": "L3_04_00",
+      "level": "L3",
+      "x": 118,
+      "y": 452,
+      "parent": 4,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 113,
+      "name": "SHIM_04_01",
+      "level": "SHIM",
+      "x": 166,
+      "y": 428,
+      "parent": 4,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 49,
+      "name": "L3_04_01",
+      "level": "L3",
+      "x": 166,
+      "y": 452,
+      "parent": 4,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 114,
+      "name": "SHIM_04_02",
+      "level": "SHIM",
+      "x": 214,
+      "y": 428,
+      "parent": 4,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 50,
+      "name": "L3_04_02",
+      "level": "L3",
+      "x": 214,
+      "y": 452,
+      "parent": 4,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 115,
+      "name": "SHIM_04_03",
+      "level": "SHIM",
+      "x": 262,
+      "y": 428,
+      "parent": 4,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 51,
+      "name": "L3_04_03",
+      "level": "L3",
+      "x": 262,
+      "y": 452,
+      "parent": 4,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 5,
+      "name": "L1_05",
+      "level": "L1",
+      "x": 460,
+      "y": 350,
+      "parent": 5,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 21,
+      "name": "L2_05",
+      "level": "L2",
+      "x": 460,
+      "y": 402,
+      "parent": 5,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 116,
+      "name": "SHIM_05_00",
+      "level": "SHIM",
+      "x": 388,
+      "y": 428,
+      "parent": 5,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 52,
+      "name": "L3_05_00",
+      "level": "L3",
+      "x": 388,
+      "y": 452,
+      "parent": 5,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 117,
+      "name": "SHIM_05_01",
+      "level": "SHIM",
+      "x": 436,
+      "y": 428,
+      "parent": 5,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 53,
+      "name": "L3_05_01",
+      "level": "L3",
+      "x": 436,
+      "y": 452,
+      "parent": 5,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 118,
+      "name": "SHIM_05_02",
+      "level": "SHIM",
+      "x": 484,
+      "y": 428,
+      "parent": 5,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 54,
+      "name": "L3_05_02",
+      "level": "L3",
+      "x": 484,
+      "y": 452,
+      "parent": 5,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 119,
+      "name": "SHIM_05_03",
+      "level": "SHIM",
+      "x": 532,
+      "y": 428,
+      "parent": 5,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 55,
+      "name": "L3_05_03",
+      "level": "L3",
+      "x": 532,
+      "y": 452,
+      "parent": 5,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 6,
+      "name": "L1_06",
+      "level": "L1",
+      "x": 730,
+      "y": 350,
+      "parent": 6,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 22,
+      "name": "L2_06",
+      "level": "L2",
+      "x": 730,
+      "y": 402,
+      "parent": 6,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 120,
+      "name": "SHIM_06_00",
+      "level": "SHIM",
+      "x": 658,
+      "y": 428,
+      "parent": 6,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 56,
+      "name": "L3_06_00",
+      "level": "L3",
+      "x": 658,
+      "y": 452,
+      "parent": 6,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 121,
+      "name": "SHIM_06_01",
+      "level": "SHIM",
+      "x": 706,
+      "y": 428,
+      "parent": 6,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 57,
+      "name": "L3_06_01",
+      "level": "L3",
+      "x": 706,
+      "y": 452,
+      "parent": 6,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 122,
+      "name": "SHIM_06_02",
+      "level": "SHIM",
+      "x": 754,
+      "y": 428,
+      "parent": 6,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 58,
+      "name": "L3_06_02",
+      "level": "L3",
+      "x": 754,
+      "y": 452,
+      "parent": 6,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 123,
+      "name": "SHIM_06_03",
+      "level": "SHIM",
+      "x": 802,
+      "y": 428,
+      "parent": 6,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 59,
+      "name": "L3_06_03",
+      "level": "L3",
+      "x": 802,
+      "y": 452,
+      "parent": 6,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 7,
+      "name": "L1_07",
+      "level": "L1",
+      "x": 1000,
+      "y": 350,
+      "parent": 7,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 23,
+      "name": "L2_07",
+      "level": "L2",
+      "x": 1000,
+      "y": 402,
+      "parent": 7,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 124,
+      "name": "SHIM_07_00",
+      "level": "SHIM",
+      "x": 928,
+      "y": 428,
+      "parent": 7,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 60,
+      "name": "L3_07_00",
+      "level": "L3",
+      "x": 928,
+      "y": 452,
+      "parent": 7,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 125,
+      "name": "SHIM_07_01",
+      "level": "SHIM",
+      "x": 976,
+      "y": 428,
+      "parent": 7,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 61,
+      "name": "L3_07_01",
+      "level": "L3",
+      "x": 976,
+      "y": 452,
+      "parent": 7,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 126,
+      "name": "SHIM_07_02",
+      "level": "SHIM",
+      "x": 1024,
+      "y": 428,
+      "parent": 7,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 62,
+      "name": "L3_07_02",
+      "level": "L3",
+      "x": 1024,
+      "y": 452,
+      "parent": 7,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 127,
+      "name": "SHIM_07_03",
+      "level": "SHIM",
+      "x": 1072,
+      "y": 428,
+      "parent": 7,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 63,
+      "name": "L3_07_03",
+      "level": "L3",
+      "x": 1072,
+      "y": 452,
+      "parent": 7,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 8,
+      "name": "L1_08",
+      "level": "L1",
+      "x": 190,
+      "y": 555,
+      "parent": 8,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 24,
+      "name": "L2_08",
+      "level": "L2",
+      "x": 190,
+      "y": 607,
+      "parent": 8,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 128,
+      "name": "SHIM_08_00",
+      "level": "SHIM",
+      "x": 118,
+      "y": 633,
+      "parent": 8,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 64,
+      "name": "L3_08_00",
+      "level": "L3",
+      "x": 118,
+      "y": 657,
+      "parent": 8,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 129,
+      "name": "SHIM_08_01",
+      "level": "SHIM",
+      "x": 166,
+      "y": 633,
+      "parent": 8,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 65,
+      "name": "L3_08_01",
+      "level": "L3",
+      "x": 166,
+      "y": 657,
+      "parent": 8,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 130,
+      "name": "SHIM_08_02",
+      "level": "SHIM",
+      "x": 214,
+      "y": 633,
+      "parent": 8,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 66,
+      "name": "L3_08_02",
+      "level": "L3",
+      "x": 214,
+      "y": 657,
+      "parent": 8,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 131,
+      "name": "SHIM_08_03",
+      "level": "SHIM",
+      "x": 262,
+      "y": 633,
+      "parent": 8,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 67,
+      "name": "L3_08_03",
+      "level": "L3",
+      "x": 262,
+      "y": 657,
+      "parent": 8,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 9,
+      "name": "L1_09",
+      "level": "L1",
+      "x": 460,
+      "y": 555,
+      "parent": 9,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 25,
+      "name": "L2_09",
+      "level": "L2",
+      "x": 460,
+      "y": 607,
+      "parent": 9,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 132,
+      "name": "SHIM_09_00",
+      "level": "SHIM",
+      "x": 388,
+      "y": 633,
+      "parent": 9,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 68,
+      "name": "L3_09_00",
+      "level": "L3",
+      "x": 388,
+      "y": 657,
+      "parent": 9,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 133,
+      "name": "SHIM_09_01",
+      "level": "SHIM",
+      "x": 436,
+      "y": 633,
+      "parent": 9,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 69,
+      "name": "L3_09_01",
+      "level": "L3",
+      "x": 436,
+      "y": 657,
+      "parent": 9,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 134,
+      "name": "SHIM_09_02",
+      "level": "SHIM",
+      "x": 484,
+      "y": 633,
+      "parent": 9,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 70,
+      "name": "L3_09_02",
+      "level": "L3",
+      "x": 484,
+      "y": 657,
+      "parent": 9,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 135,
+      "name": "SHIM_09_03",
+      "level": "SHIM",
+      "x": 532,
+      "y": 633,
+      "parent": 9,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 71,
+      "name": "L3_09_03",
+      "level": "L3",
+      "x": 532,
+      "y": 657,
+      "parent": 9,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 10,
+      "name": "L1_10",
+      "level": "L1",
+      "x": 730,
+      "y": 555,
+      "parent": 10,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 26,
+      "name": "L2_10",
+      "level": "L2",
+      "x": 730,
+      "y": 607,
+      "parent": 10,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 136,
+      "name": "SHIM_10_00",
+      "level": "SHIM",
+      "x": 658,
+      "y": 633,
+      "parent": 10,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 72,
+      "name": "L3_10_00",
+      "level": "L3",
+      "x": 658,
+      "y": 657,
+      "parent": 10,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 137,
+      "name": "SHIM_10_01",
+      "level": "SHIM",
+      "x": 706,
+      "y": 633,
+      "parent": 10,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 73,
+      "name": "L3_10_01",
+      "level": "L3",
+      "x": 706,
+      "y": 657,
+      "parent": 10,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 138,
+      "name": "SHIM_10_02",
+      "level": "SHIM",
+      "x": 754,
+      "y": 633,
+      "parent": 10,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 74,
+      "name": "L3_10_02",
+      "level": "L3",
+      "x": 754,
+      "y": 657,
+      "parent": 10,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 139,
+      "name": "SHIM_10_03",
+      "level": "SHIM",
+      "x": 802,
+      "y": 633,
+      "parent": 10,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 75,
+      "name": "L3_10_03",
+      "level": "L3",
+      "x": 802,
+      "y": 657,
+      "parent": 10,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 11,
+      "name": "L1_11",
+      "level": "L1",
+      "x": 1000,
+      "y": 555,
+      "parent": 11,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 27,
+      "name": "L2_11",
+      "level": "L2",
+      "x": 1000,
+      "y": 607,
+      "parent": 11,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 140,
+      "name": "SHIM_11_00",
+      "level": "SHIM",
+      "x": 928,
+      "y": 633,
+      "parent": 11,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 76,
+      "name": "L3_11_00",
+      "level": "L3",
+      "x": 928,
+      "y": 657,
+      "parent": 11,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 141,
+      "name": "SHIM_11_01",
+      "level": "SHIM",
+      "x": 976,
+      "y": 633,
+      "parent": 11,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 77,
+      "name": "L3_11_01",
+      "level": "L3",
+      "x": 976,
+      "y": 657,
+      "parent": 11,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 142,
+      "name": "SHIM_11_02",
+      "level": "SHIM",
+      "x": 1024,
+      "y": 633,
+      "parent": 11,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 78,
+      "name": "L3_11_02",
+      "level": "L3",
+      "x": 1024,
+      "y": 657,
+      "parent": 11,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 143,
+      "name": "SHIM_11_03",
+      "level": "SHIM",
+      "x": 1072,
+      "y": 633,
+      "parent": 11,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 79,
+      "name": "L3_11_03",
+      "level": "L3",
+      "x": 1072,
+      "y": 657,
+      "parent": 11,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 12,
+      "name": "L1_12",
+      "level": "L1",
+      "x": 190,
+      "y": 760,
+      "parent": 12,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 28,
+      "name": "L2_12",
+      "level": "L2",
+      "x": 190,
+      "y": 812,
+      "parent": 12,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 144,
+      "name": "SHIM_12_00",
+      "level": "SHIM",
+      "x": 118,
+      "y": 838,
+      "parent": 12,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 80,
+      "name": "L3_12_00",
+      "level": "L3",
+      "x": 118,
+      "y": 862,
+      "parent": 12,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 145,
+      "name": "SHIM_12_01",
+      "level": "SHIM",
+      "x": 166,
+      "y": 838,
+      "parent": 12,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 81,
+      "name": "L3_12_01",
+      "level": "L3",
+      "x": 166,
+      "y": 862,
+      "parent": 12,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 146,
+      "name": "SHIM_12_02",
+      "level": "SHIM",
+      "x": 214,
+      "y": 838,
+      "parent": 12,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 82,
+      "name": "L3_12_02",
+      "level": "L3",
+      "x": 214,
+      "y": 862,
+      "parent": 12,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 147,
+      "name": "SHIM_12_03",
+      "level": "SHIM",
+      "x": 262,
+      "y": 838,
+      "parent": 12,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 83,
+      "name": "L3_12_03",
+      "level": "L3",
+      "x": 262,
+      "y": 862,
+      "parent": 12,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 13,
+      "name": "L1_13",
+      "level": "L1",
+      "x": 460,
+      "y": 760,
+      "parent": 13,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 29,
+      "name": "L2_13",
+      "level": "L2",
+      "x": 460,
+      "y": 812,
+      "parent": 13,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 148,
+      "name": "SHIM_13_00",
+      "level": "SHIM",
+      "x": 388,
+      "y": 838,
+      "parent": 13,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 84,
+      "name": "L3_13_00",
+      "level": "L3",
+      "x": 388,
+      "y": 862,
+      "parent": 13,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 149,
+      "name": "SHIM_13_01",
+      "level": "SHIM",
+      "x": 436,
+      "y": 838,
+      "parent": 13,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 85,
+      "name": "L3_13_01",
+      "level": "L3",
+      "x": 436,
+      "y": 862,
+      "parent": 13,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 150,
+      "name": "SHIM_13_02",
+      "level": "SHIM",
+      "x": 484,
+      "y": 838,
+      "parent": 13,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 86,
+      "name": "L3_13_02",
+      "level": "L3",
+      "x": 484,
+      "y": 862,
+      "parent": 13,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 151,
+      "name": "SHIM_13_03",
+      "level": "SHIM",
+      "x": 532,
+      "y": 838,
+      "parent": 13,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 87,
+      "name": "L3_13_03",
+      "level": "L3",
+      "x": 532,
+      "y": 862,
+      "parent": 13,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 14,
+      "name": "L1_14",
+      "level": "L1",
+      "x": 730,
+      "y": 760,
+      "parent": 14,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 30,
+      "name": "L2_14",
+      "level": "L2",
+      "x": 730,
+      "y": 812,
+      "parent": 14,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 152,
+      "name": "SHIM_14_00",
+      "level": "SHIM",
+      "x": 658,
+      "y": 838,
+      "parent": 14,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 88,
+      "name": "L3_14_00",
+      "level": "L3",
+      "x": 658,
+      "y": 862,
+      "parent": 14,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 153,
+      "name": "SHIM_14_01",
+      "level": "SHIM",
+      "x": 706,
+      "y": 838,
+      "parent": 14,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 89,
+      "name": "L3_14_01",
+      "level": "L3",
+      "x": 706,
+      "y": 862,
+      "parent": 14,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 154,
+      "name": "SHIM_14_02",
+      "level": "SHIM",
+      "x": 754,
+      "y": 838,
+      "parent": 14,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 90,
+      "name": "L3_14_02",
+      "level": "L3",
+      "x": 754,
+      "y": 862,
+      "parent": 14,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 155,
+      "name": "SHIM_14_03",
+      "level": "SHIM",
+      "x": 802,
+      "y": 838,
+      "parent": 14,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 91,
+      "name": "L3_14_03",
+      "level": "L3",
+      "x": 802,
+      "y": 862,
+      "parent": 14,
+      "capacity": 60
+    },
+    {
+      "kind": "router",
+      "id": 15,
+      "name": "L1_15",
+      "level": "L1",
+      "x": 1000,
+      "y": 760,
+      "parent": 15,
+      "capacity": 240
+    },
+    {
+      "kind": "router",
+      "id": 31,
+      "name": "L2_15",
+      "level": "L2",
+      "x": 1000,
+      "y": 812,
+      "parent": 15,
+      "capacity": 288
+    },
+    {
+      "kind": "shim",
+      "id": 156,
+      "name": "SHIM_15_00",
+      "level": "SHIM",
+      "x": 928,
+      "y": 838,
+      "parent": 15,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 92,
+      "name": "L3_15_00",
+      "level": "L3",
+      "x": 928,
+      "y": 862,
+      "parent": 15,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 157,
+      "name": "SHIM_15_01",
+      "level": "SHIM",
+      "x": 976,
+      "y": 838,
+      "parent": 15,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 93,
+      "name": "L3_15_01",
+      "level": "L3",
+      "x": 976,
+      "y": 862,
+      "parent": 15,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 158,
+      "name": "SHIM_15_02",
+      "level": "SHIM",
+      "x": 1024,
+      "y": 838,
+      "parent": 15,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 94,
+      "name": "L3_15_02",
+      "level": "L3",
+      "x": 1024,
+      "y": 862,
+      "parent": 15,
+      "capacity": 60
+    },
+    {
+      "kind": "shim",
+      "id": 159,
+      "name": "SHIM_15_03",
+      "level": "SHIM",
+      "x": 1072,
+      "y": 838,
+      "parent": 15,
+      "capacity": 12
+    },
+    {
+      "kind": "router",
+      "id": 95,
+      "name": "L3_15_03",
+      "level": "L3",
+      "x": 1072,
+      "y": 862,
+      "parent": 15,
+      "capacity": 60
+    },
+    {
+      "kind": "endpoint",
+      "id": 320,
+      "name": "LLCH_00",
+      "level": "LLCH",
+      "x": 190,
+      "y": 35,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 324,
+      "name": "LLCH_01",
+      "level": "LLCH",
+      "x": 460,
+      "y": 35,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 328,
+      "name": "LLCH_02",
+      "level": "LLCH",
+      "x": 730,
+      "y": 35,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 332,
+      "name": "LLCH_03",
+      "level": "LLCH",
+      "x": 1000,
+      "y": 35,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 336,
+      "name": "LLCH_04",
+      "level": "LLCH",
+      "x": 1150,
+      "y": 145,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 340,
+      "name": "LLCH_05",
+      "level": "LLCH",
+      "x": 1150,
+      "y": 350,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 344,
+      "name": "LLCH_06",
+      "level": "LLCH",
+      "x": 1150,
+      "y": 555,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 348,
+      "name": "LLCH_07",
+      "level": "LLCH",
+      "x": 1150,
+      "y": 760,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 352,
+      "name": "LLCH_08",
+      "level": "LLCH",
+      "x": 1000,
+      "y": 950,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 356,
+      "name": "LLCH_09",
+      "level": "LLCH",
+      "x": 730,
+      "y": 950,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 360,
+      "name": "LLCH_10",
+      "level": "LLCH",
+      "x": 460,
+      "y": 950,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 364,
+      "name": "LLCH_11",
+      "level": "LLCH",
+      "x": 190,
+      "y": 950,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 368,
+      "name": "LLCH_12",
+      "level": "LLCH",
+      "x": 40,
+      "y": 760,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 372,
+      "name": "LLCH_13",
+      "level": "LLCH",
+      "x": 40,
+      "y": 555,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 376,
+      "name": "LLCH_14",
+      "level": "LLCH",
+      "x": 40,
+      "y": 350,
+      "parent": null,
+      "capacity": 4
+    },
+    {
+      "kind": "endpoint",
+      "id": 380,
+      "name": "LLCH_15",
+      "level": "LLCH",
+      "x": 40,
+      "y": 145,
+      "parent": null,
+      "capacity": 4
+    }
+  ],
+  "ports": [
+    {
+      "router_kind": "router",
+      "router": 0,
+      "router_name": "L1_00",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 168,
+      "y": 158,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 0,
+      "router_name": "L1_00",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 190,
+      "y": 118,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 0,
+      "router_name": "L1_00",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 242,
+      "y": 145,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 0,
+      "router_name": "L1_00",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 212,
+      "y": 173,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 0,
+      "router_name": "L1_00",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 138,
+      "y": 145,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 16,
+      "router_name": "L2_00",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 190,
+      "y": 177,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 16,
+      "router_name": "L2_00",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 160,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 16,
+      "router_name": "L2_00",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 180,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 16,
+      "router_name": "L2_00",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 200,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 16,
+      "router_name": "L2_00",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 220,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 16,
+      "router_name": "L2_00",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 235,
+      "y": 197,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 32,
+      "router_name": "L3_00_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 118,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 32,
+      "router_name": "L3_00_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 135,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 32,
+      "router_name": "L3_00_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 130,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 32,
+      "router_name": "L3_00_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 106,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 32,
+      "router_name": "L3_00_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 101,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 33,
+      "router_name": "L3_00_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 166,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 33,
+      "router_name": "L3_00_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 183,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 33,
+      "router_name": "L3_00_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 178,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 33,
+      "router_name": "L3_00_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 154,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 33,
+      "router_name": "L3_00_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 149,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 34,
+      "router_name": "L3_00_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 214,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 34,
+      "router_name": "L3_00_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 231,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 34,
+      "router_name": "L3_00_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 226,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 34,
+      "router_name": "L3_00_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 202,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 34,
+      "router_name": "L3_00_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 197,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 35,
+      "router_name": "L3_00_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 262,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 35,
+      "router_name": "L3_00_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 279,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 35,
+      "router_name": "L3_00_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 274,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 35,
+      "router_name": "L3_00_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 250,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 35,
+      "router_name": "L3_00_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 245,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 1,
+      "router_name": "L1_01",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 438,
+      "y": 158,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 1,
+      "router_name": "L1_01",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 460,
+      "y": 118,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 1,
+      "router_name": "L1_01",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 512,
+      "y": 145,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 1,
+      "router_name": "L1_01",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 482,
+      "y": 173,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 1,
+      "router_name": "L1_01",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 408,
+      "y": 145,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 17,
+      "router_name": "L2_01",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 460,
+      "y": 177,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 17,
+      "router_name": "L2_01",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 430,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 17,
+      "router_name": "L2_01",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 450,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 17,
+      "router_name": "L2_01",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 470,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 17,
+      "router_name": "L2_01",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 490,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 17,
+      "router_name": "L2_01",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 505,
+      "y": 197,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 36,
+      "router_name": "L3_01_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 388,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 36,
+      "router_name": "L3_01_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 405,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 36,
+      "router_name": "L3_01_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 400,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 36,
+      "router_name": "L3_01_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 376,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 36,
+      "router_name": "L3_01_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 371,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 37,
+      "router_name": "L3_01_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 436,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 37,
+      "router_name": "L3_01_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 453,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 37,
+      "router_name": "L3_01_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 448,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 37,
+      "router_name": "L3_01_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 424,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 37,
+      "router_name": "L3_01_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 419,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 38,
+      "router_name": "L3_01_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 484,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 38,
+      "router_name": "L3_01_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 501,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 38,
+      "router_name": "L3_01_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 496,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 38,
+      "router_name": "L3_01_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 472,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 38,
+      "router_name": "L3_01_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 467,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 39,
+      "router_name": "L3_01_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 532,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 39,
+      "router_name": "L3_01_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 549,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 39,
+      "router_name": "L3_01_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 544,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 39,
+      "router_name": "L3_01_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 520,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 39,
+      "router_name": "L3_01_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 515,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 2,
+      "router_name": "L1_02",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 708,
+      "y": 158,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 2,
+      "router_name": "L1_02",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 730,
+      "y": 118,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 2,
+      "router_name": "L1_02",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 782,
+      "y": 145,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 2,
+      "router_name": "L1_02",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 752,
+      "y": 173,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 2,
+      "router_name": "L1_02",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 678,
+      "y": 145,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 18,
+      "router_name": "L2_02",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 730,
+      "y": 177,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 18,
+      "router_name": "L2_02",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 700,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 18,
+      "router_name": "L2_02",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 720,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 18,
+      "router_name": "L2_02",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 740,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 18,
+      "router_name": "L2_02",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 760,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 18,
+      "router_name": "L2_02",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 775,
+      "y": 197,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 40,
+      "router_name": "L3_02_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 658,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 40,
+      "router_name": "L3_02_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 675,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 40,
+      "router_name": "L3_02_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 670,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 40,
+      "router_name": "L3_02_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 646,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 40,
+      "router_name": "L3_02_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 641,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 41,
+      "router_name": "L3_02_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 706,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 41,
+      "router_name": "L3_02_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 723,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 41,
+      "router_name": "L3_02_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 718,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 41,
+      "router_name": "L3_02_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 694,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 41,
+      "router_name": "L3_02_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 689,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 42,
+      "router_name": "L3_02_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 754,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 42,
+      "router_name": "L3_02_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 771,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 42,
+      "router_name": "L3_02_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 766,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 42,
+      "router_name": "L3_02_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 742,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 42,
+      "router_name": "L3_02_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 737,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 43,
+      "router_name": "L3_02_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 802,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 43,
+      "router_name": "L3_02_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 819,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 43,
+      "router_name": "L3_02_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 814,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 43,
+      "router_name": "L3_02_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 790,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 43,
+      "router_name": "L3_02_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 785,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 3,
+      "router_name": "L1_03",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 978,
+      "y": 158,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 3,
+      "router_name": "L1_03",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 1000,
+      "y": 118,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 3,
+      "router_name": "L1_03",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 1052,
+      "y": 145,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 3,
+      "router_name": "L1_03",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 1022,
+      "y": 173,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 3,
+      "router_name": "L1_03",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 948,
+      "y": 145,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 19,
+      "router_name": "L2_03",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 1000,
+      "y": 177,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 19,
+      "router_name": "L2_03",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 970,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 19,
+      "router_name": "L2_03",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 990,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 19,
+      "router_name": "L2_03",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 1010,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 19,
+      "router_name": "L2_03",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 1030,
+      "y": 217,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 19,
+      "router_name": "L2_03",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 1045,
+      "y": 197,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 44,
+      "router_name": "L3_03_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 928,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 44,
+      "router_name": "L3_03_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 945,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 44,
+      "router_name": "L3_03_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 940,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 44,
+      "router_name": "L3_03_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 916,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 44,
+      "router_name": "L3_03_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 911,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 45,
+      "router_name": "L3_03_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 976,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 45,
+      "router_name": "L3_03_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 993,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 45,
+      "router_name": "L3_03_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 988,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 45,
+      "router_name": "L3_03_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 964,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 45,
+      "router_name": "L3_03_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 959,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 46,
+      "router_name": "L3_03_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 1024,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 46,
+      "router_name": "L3_03_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 1041,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 46,
+      "router_name": "L3_03_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 1036,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 46,
+      "router_name": "L3_03_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 1012,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 46,
+      "router_name": "L3_03_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 1007,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 47,
+      "router_name": "L3_03_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 1072,
+      "y": 230,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 47,
+      "router_name": "L3_03_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 1089,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 47,
+      "router_name": "L3_03_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 1084,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 47,
+      "router_name": "L3_03_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 1060,
+      "y": 260,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 47,
+      "router_name": "L3_03_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 1055,
+      "y": 247,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 4,
+      "router_name": "L1_04",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 168,
+      "y": 363,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 4,
+      "router_name": "L1_04",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 190,
+      "y": 323,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 4,
+      "router_name": "L1_04",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 242,
+      "y": 350,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 4,
+      "router_name": "L1_04",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 212,
+      "y": 378,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 4,
+      "router_name": "L1_04",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 138,
+      "y": 350,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 20,
+      "router_name": "L2_04",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 190,
+      "y": 382,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 20,
+      "router_name": "L2_04",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 160,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 20,
+      "router_name": "L2_04",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 180,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 20,
+      "router_name": "L2_04",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 200,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 20,
+      "router_name": "L2_04",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 220,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 20,
+      "router_name": "L2_04",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 235,
+      "y": 402,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 48,
+      "router_name": "L3_04_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 118,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 48,
+      "router_name": "L3_04_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 135,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 48,
+      "router_name": "L3_04_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 130,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 48,
+      "router_name": "L3_04_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 106,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 48,
+      "router_name": "L3_04_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 101,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 49,
+      "router_name": "L3_04_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 166,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 49,
+      "router_name": "L3_04_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 183,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 49,
+      "router_name": "L3_04_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 178,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 49,
+      "router_name": "L3_04_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 154,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 49,
+      "router_name": "L3_04_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 149,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 50,
+      "router_name": "L3_04_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 214,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 50,
+      "router_name": "L3_04_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 231,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 50,
+      "router_name": "L3_04_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 226,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 50,
+      "router_name": "L3_04_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 202,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 50,
+      "router_name": "L3_04_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 197,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 51,
+      "router_name": "L3_04_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 262,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 51,
+      "router_name": "L3_04_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 279,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 51,
+      "router_name": "L3_04_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 274,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 51,
+      "router_name": "L3_04_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 250,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 51,
+      "router_name": "L3_04_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 245,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 5,
+      "router_name": "L1_05",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 438,
+      "y": 363,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 5,
+      "router_name": "L1_05",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 460,
+      "y": 323,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 5,
+      "router_name": "L1_05",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 512,
+      "y": 350,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 5,
+      "router_name": "L1_05",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 482,
+      "y": 378,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 5,
+      "router_name": "L1_05",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 408,
+      "y": 350,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 21,
+      "router_name": "L2_05",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 460,
+      "y": 382,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 21,
+      "router_name": "L2_05",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 430,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 21,
+      "router_name": "L2_05",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 450,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 21,
+      "router_name": "L2_05",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 470,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 21,
+      "router_name": "L2_05",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 490,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 21,
+      "router_name": "L2_05",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 505,
+      "y": 402,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 52,
+      "router_name": "L3_05_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 388,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 52,
+      "router_name": "L3_05_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 405,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 52,
+      "router_name": "L3_05_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 400,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 52,
+      "router_name": "L3_05_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 376,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 52,
+      "router_name": "L3_05_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 371,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 53,
+      "router_name": "L3_05_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 436,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 53,
+      "router_name": "L3_05_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 453,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 53,
+      "router_name": "L3_05_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 448,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 53,
+      "router_name": "L3_05_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 424,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 53,
+      "router_name": "L3_05_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 419,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 54,
+      "router_name": "L3_05_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 484,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 54,
+      "router_name": "L3_05_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 501,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 54,
+      "router_name": "L3_05_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 496,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 54,
+      "router_name": "L3_05_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 472,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 54,
+      "router_name": "L3_05_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 467,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 55,
+      "router_name": "L3_05_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 532,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 55,
+      "router_name": "L3_05_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 549,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 55,
+      "router_name": "L3_05_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 544,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 55,
+      "router_name": "L3_05_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 520,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 55,
+      "router_name": "L3_05_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 515,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 6,
+      "router_name": "L1_06",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 708,
+      "y": 363,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 6,
+      "router_name": "L1_06",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 730,
+      "y": 323,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 6,
+      "router_name": "L1_06",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 782,
+      "y": 350,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 6,
+      "router_name": "L1_06",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 752,
+      "y": 378,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 6,
+      "router_name": "L1_06",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 678,
+      "y": 350,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 22,
+      "router_name": "L2_06",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 730,
+      "y": 382,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 22,
+      "router_name": "L2_06",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 700,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 22,
+      "router_name": "L2_06",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 720,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 22,
+      "router_name": "L2_06",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 740,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 22,
+      "router_name": "L2_06",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 760,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 22,
+      "router_name": "L2_06",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 775,
+      "y": 402,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 56,
+      "router_name": "L3_06_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 658,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 56,
+      "router_name": "L3_06_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 675,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 56,
+      "router_name": "L3_06_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 670,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 56,
+      "router_name": "L3_06_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 646,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 56,
+      "router_name": "L3_06_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 641,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 57,
+      "router_name": "L3_06_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 706,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 57,
+      "router_name": "L3_06_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 723,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 57,
+      "router_name": "L3_06_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 718,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 57,
+      "router_name": "L3_06_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 694,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 57,
+      "router_name": "L3_06_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 689,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 58,
+      "router_name": "L3_06_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 754,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 58,
+      "router_name": "L3_06_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 771,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 58,
+      "router_name": "L3_06_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 766,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 58,
+      "router_name": "L3_06_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 742,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 58,
+      "router_name": "L3_06_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 737,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 59,
+      "router_name": "L3_06_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 802,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 59,
+      "router_name": "L3_06_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 819,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 59,
+      "router_name": "L3_06_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 814,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 59,
+      "router_name": "L3_06_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 790,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 59,
+      "router_name": "L3_06_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 785,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 7,
+      "router_name": "L1_07",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 978,
+      "y": 363,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 7,
+      "router_name": "L1_07",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 1000,
+      "y": 323,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 7,
+      "router_name": "L1_07",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 1052,
+      "y": 350,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 7,
+      "router_name": "L1_07",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 1022,
+      "y": 378,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 7,
+      "router_name": "L1_07",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 948,
+      "y": 350,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 23,
+      "router_name": "L2_07",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 1000,
+      "y": 382,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 23,
+      "router_name": "L2_07",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 970,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 23,
+      "router_name": "L2_07",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 990,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 23,
+      "router_name": "L2_07",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 1010,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 23,
+      "router_name": "L2_07",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 1030,
+      "y": 422,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 23,
+      "router_name": "L2_07",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 1045,
+      "y": 402,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 60,
+      "router_name": "L3_07_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 928,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 60,
+      "router_name": "L3_07_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 945,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 60,
+      "router_name": "L3_07_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 940,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 60,
+      "router_name": "L3_07_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 916,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 60,
+      "router_name": "L3_07_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 911,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 61,
+      "router_name": "L3_07_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 976,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 61,
+      "router_name": "L3_07_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 993,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 61,
+      "router_name": "L3_07_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 988,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 61,
+      "router_name": "L3_07_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 964,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 61,
+      "router_name": "L3_07_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 959,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 62,
+      "router_name": "L3_07_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 1024,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 62,
+      "router_name": "L3_07_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 1041,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 62,
+      "router_name": "L3_07_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 1036,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 62,
+      "router_name": "L3_07_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 1012,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 62,
+      "router_name": "L3_07_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 1007,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 63,
+      "router_name": "L3_07_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 1072,
+      "y": 435,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 63,
+      "router_name": "L3_07_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 1089,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 63,
+      "router_name": "L3_07_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 1084,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 63,
+      "router_name": "L3_07_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 1060,
+      "y": 465,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 63,
+      "router_name": "L3_07_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 1055,
+      "y": 452,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 8,
+      "router_name": "L1_08",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 168,
+      "y": 568,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 8,
+      "router_name": "L1_08",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 190,
+      "y": 528,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 8,
+      "router_name": "L1_08",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 242,
+      "y": 555,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 8,
+      "router_name": "L1_08",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 212,
+      "y": 583,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 8,
+      "router_name": "L1_08",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 138,
+      "y": 555,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 24,
+      "router_name": "L2_08",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 190,
+      "y": 587,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 24,
+      "router_name": "L2_08",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 160,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 24,
+      "router_name": "L2_08",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 180,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 24,
+      "router_name": "L2_08",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 200,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 24,
+      "router_name": "L2_08",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 220,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 24,
+      "router_name": "L2_08",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 235,
+      "y": 607,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 64,
+      "router_name": "L3_08_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 118,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 64,
+      "router_name": "L3_08_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 135,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 64,
+      "router_name": "L3_08_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 130,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 64,
+      "router_name": "L3_08_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 106,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 64,
+      "router_name": "L3_08_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 101,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 65,
+      "router_name": "L3_08_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 166,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 65,
+      "router_name": "L3_08_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 183,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 65,
+      "router_name": "L3_08_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 178,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 65,
+      "router_name": "L3_08_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 154,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 65,
+      "router_name": "L3_08_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 149,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 66,
+      "router_name": "L3_08_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 214,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 66,
+      "router_name": "L3_08_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 231,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 66,
+      "router_name": "L3_08_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 226,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 66,
+      "router_name": "L3_08_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 202,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 66,
+      "router_name": "L3_08_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 197,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 67,
+      "router_name": "L3_08_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 262,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 67,
+      "router_name": "L3_08_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 279,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 67,
+      "router_name": "L3_08_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 274,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 67,
+      "router_name": "L3_08_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 250,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 67,
+      "router_name": "L3_08_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 245,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 9,
+      "router_name": "L1_09",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 438,
+      "y": 568,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 9,
+      "router_name": "L1_09",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 460,
+      "y": 528,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 9,
+      "router_name": "L1_09",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 512,
+      "y": 555,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 9,
+      "router_name": "L1_09",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 482,
+      "y": 583,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 9,
+      "router_name": "L1_09",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 408,
+      "y": 555,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 25,
+      "router_name": "L2_09",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 460,
+      "y": 587,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 25,
+      "router_name": "L2_09",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 430,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 25,
+      "router_name": "L2_09",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 450,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 25,
+      "router_name": "L2_09",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 470,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 25,
+      "router_name": "L2_09",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 490,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 25,
+      "router_name": "L2_09",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 505,
+      "y": 607,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 68,
+      "router_name": "L3_09_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 388,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 68,
+      "router_name": "L3_09_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 405,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 68,
+      "router_name": "L3_09_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 400,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 68,
+      "router_name": "L3_09_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 376,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 68,
+      "router_name": "L3_09_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 371,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 69,
+      "router_name": "L3_09_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 436,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 69,
+      "router_name": "L3_09_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 453,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 69,
+      "router_name": "L3_09_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 448,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 69,
+      "router_name": "L3_09_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 424,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 69,
+      "router_name": "L3_09_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 419,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 70,
+      "router_name": "L3_09_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 484,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 70,
+      "router_name": "L3_09_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 501,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 70,
+      "router_name": "L3_09_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 496,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 70,
+      "router_name": "L3_09_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 472,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 70,
+      "router_name": "L3_09_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 467,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 71,
+      "router_name": "L3_09_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 532,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 71,
+      "router_name": "L3_09_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 549,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 71,
+      "router_name": "L3_09_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 544,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 71,
+      "router_name": "L3_09_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 520,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 71,
+      "router_name": "L3_09_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 515,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 10,
+      "router_name": "L1_10",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 708,
+      "y": 568,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 10,
+      "router_name": "L1_10",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 730,
+      "y": 528,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 10,
+      "router_name": "L1_10",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 782,
+      "y": 555,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 10,
+      "router_name": "L1_10",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 752,
+      "y": 583,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 10,
+      "router_name": "L1_10",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 678,
+      "y": 555,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 26,
+      "router_name": "L2_10",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 730,
+      "y": 587,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 26,
+      "router_name": "L2_10",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 700,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 26,
+      "router_name": "L2_10",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 720,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 26,
+      "router_name": "L2_10",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 740,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 26,
+      "router_name": "L2_10",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 760,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 26,
+      "router_name": "L2_10",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 775,
+      "y": 607,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 72,
+      "router_name": "L3_10_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 658,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 72,
+      "router_name": "L3_10_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 675,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 72,
+      "router_name": "L3_10_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 670,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 72,
+      "router_name": "L3_10_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 646,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 72,
+      "router_name": "L3_10_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 641,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 73,
+      "router_name": "L3_10_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 706,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 73,
+      "router_name": "L3_10_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 723,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 73,
+      "router_name": "L3_10_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 718,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 73,
+      "router_name": "L3_10_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 694,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 73,
+      "router_name": "L3_10_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 689,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 74,
+      "router_name": "L3_10_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 754,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 74,
+      "router_name": "L3_10_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 771,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 74,
+      "router_name": "L3_10_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 766,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 74,
+      "router_name": "L3_10_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 742,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 74,
+      "router_name": "L3_10_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 737,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 75,
+      "router_name": "L3_10_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 802,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 75,
+      "router_name": "L3_10_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 819,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 75,
+      "router_name": "L3_10_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 814,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 75,
+      "router_name": "L3_10_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 790,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 75,
+      "router_name": "L3_10_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 785,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 11,
+      "router_name": "L1_11",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 978,
+      "y": 568,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 11,
+      "router_name": "L1_11",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 1000,
+      "y": 528,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 11,
+      "router_name": "L1_11",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 1052,
+      "y": 555,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 11,
+      "router_name": "L1_11",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 1022,
+      "y": 583,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 11,
+      "router_name": "L1_11",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 948,
+      "y": 555,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 27,
+      "router_name": "L2_11",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 1000,
+      "y": 587,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 27,
+      "router_name": "L2_11",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 970,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 27,
+      "router_name": "L2_11",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 990,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 27,
+      "router_name": "L2_11",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 1010,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 27,
+      "router_name": "L2_11",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 1030,
+      "y": 627,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 27,
+      "router_name": "L2_11",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 1045,
+      "y": 607,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 76,
+      "router_name": "L3_11_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 928,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 76,
+      "router_name": "L3_11_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 945,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 76,
+      "router_name": "L3_11_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 940,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 76,
+      "router_name": "L3_11_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 916,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 76,
+      "router_name": "L3_11_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 911,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 77,
+      "router_name": "L3_11_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 976,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 77,
+      "router_name": "L3_11_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 993,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 77,
+      "router_name": "L3_11_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 988,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 77,
+      "router_name": "L3_11_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 964,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 77,
+      "router_name": "L3_11_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 959,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 78,
+      "router_name": "L3_11_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 1024,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 78,
+      "router_name": "L3_11_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 1041,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 78,
+      "router_name": "L3_11_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 1036,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 78,
+      "router_name": "L3_11_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 1012,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 78,
+      "router_name": "L3_11_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 1007,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 79,
+      "router_name": "L3_11_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 1072,
+      "y": 640,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 79,
+      "router_name": "L3_11_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 1089,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 79,
+      "router_name": "L3_11_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 1084,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 79,
+      "router_name": "L3_11_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 1060,
+      "y": 670,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 79,
+      "router_name": "L3_11_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 1055,
+      "y": 657,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 12,
+      "router_name": "L1_12",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 168,
+      "y": 773,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 12,
+      "router_name": "L1_12",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 190,
+      "y": 733,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 12,
+      "router_name": "L1_12",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 242,
+      "y": 760,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 12,
+      "router_name": "L1_12",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 212,
+      "y": 788,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 12,
+      "router_name": "L1_12",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 138,
+      "y": 760,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 28,
+      "router_name": "L2_12",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 190,
+      "y": 792,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 28,
+      "router_name": "L2_12",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 160,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 28,
+      "router_name": "L2_12",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 180,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 28,
+      "router_name": "L2_12",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 200,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 28,
+      "router_name": "L2_12",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 220,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 28,
+      "router_name": "L2_12",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 235,
+      "y": 812,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 80,
+      "router_name": "L3_12_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 118,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 80,
+      "router_name": "L3_12_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 135,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 80,
+      "router_name": "L3_12_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 130,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 80,
+      "router_name": "L3_12_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 106,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 80,
+      "router_name": "L3_12_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 101,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 81,
+      "router_name": "L3_12_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 166,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 81,
+      "router_name": "L3_12_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 183,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 81,
+      "router_name": "L3_12_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 178,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 81,
+      "router_name": "L3_12_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 154,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 81,
+      "router_name": "L3_12_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 149,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 82,
+      "router_name": "L3_12_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 214,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 82,
+      "router_name": "L3_12_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 231,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 82,
+      "router_name": "L3_12_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 226,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 82,
+      "router_name": "L3_12_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 202,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 82,
+      "router_name": "L3_12_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 197,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 83,
+      "router_name": "L3_12_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 262,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 83,
+      "router_name": "L3_12_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 279,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 83,
+      "router_name": "L3_12_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 274,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 83,
+      "router_name": "L3_12_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 250,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 83,
+      "router_name": "L3_12_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 245,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 13,
+      "router_name": "L1_13",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 438,
+      "y": 773,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 13,
+      "router_name": "L1_13",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 460,
+      "y": 733,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 13,
+      "router_name": "L1_13",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 512,
+      "y": 760,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 13,
+      "router_name": "L1_13",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 482,
+      "y": 788,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 13,
+      "router_name": "L1_13",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 408,
+      "y": 760,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 29,
+      "router_name": "L2_13",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 460,
+      "y": 792,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 29,
+      "router_name": "L2_13",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 430,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 29,
+      "router_name": "L2_13",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 450,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 29,
+      "router_name": "L2_13",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 470,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 29,
+      "router_name": "L2_13",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 490,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 29,
+      "router_name": "L2_13",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 505,
+      "y": 812,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 84,
+      "router_name": "L3_13_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 388,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 84,
+      "router_name": "L3_13_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 405,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 84,
+      "router_name": "L3_13_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 400,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 84,
+      "router_name": "L3_13_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 376,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 84,
+      "router_name": "L3_13_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 371,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 85,
+      "router_name": "L3_13_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 436,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 85,
+      "router_name": "L3_13_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 453,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 85,
+      "router_name": "L3_13_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 448,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 85,
+      "router_name": "L3_13_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 424,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 85,
+      "router_name": "L3_13_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 419,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 86,
+      "router_name": "L3_13_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 484,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 86,
+      "router_name": "L3_13_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 501,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 86,
+      "router_name": "L3_13_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 496,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 86,
+      "router_name": "L3_13_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 472,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 86,
+      "router_name": "L3_13_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 467,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 87,
+      "router_name": "L3_13_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 532,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 87,
+      "router_name": "L3_13_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 549,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 87,
+      "router_name": "L3_13_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 544,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 87,
+      "router_name": "L3_13_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 520,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 87,
+      "router_name": "L3_13_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 515,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 14,
+      "router_name": "L1_14",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 708,
+      "y": 773,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 14,
+      "router_name": "L1_14",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 730,
+      "y": 733,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 14,
+      "router_name": "L1_14",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 782,
+      "y": 760,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 14,
+      "router_name": "L1_14",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 752,
+      "y": 788,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 14,
+      "router_name": "L1_14",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 678,
+      "y": 760,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 30,
+      "router_name": "L2_14",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 730,
+      "y": 792,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 30,
+      "router_name": "L2_14",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 700,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 30,
+      "router_name": "L2_14",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 720,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 30,
+      "router_name": "L2_14",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 740,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 30,
+      "router_name": "L2_14",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 760,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 30,
+      "router_name": "L2_14",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 775,
+      "y": 812,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 88,
+      "router_name": "L3_14_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 658,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 88,
+      "router_name": "L3_14_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 675,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 88,
+      "router_name": "L3_14_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 670,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 88,
+      "router_name": "L3_14_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 646,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 88,
+      "router_name": "L3_14_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 641,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 89,
+      "router_name": "L3_14_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 706,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 89,
+      "router_name": "L3_14_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 723,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 89,
+      "router_name": "L3_14_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 718,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 89,
+      "router_name": "L3_14_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 694,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 89,
+      "router_name": "L3_14_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 689,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 90,
+      "router_name": "L3_14_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 754,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 90,
+      "router_name": "L3_14_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 771,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 90,
+      "router_name": "L3_14_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 766,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 90,
+      "router_name": "L3_14_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 742,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 90,
+      "router_name": "L3_14_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 737,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 91,
+      "router_name": "L3_14_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 802,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 91,
+      "router_name": "L3_14_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 819,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 91,
+      "router_name": "L3_14_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 814,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 91,
+      "router_name": "L3_14_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 790,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 91,
+      "router_name": "L3_14_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 785,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 15,
+      "router_name": "L1_15",
+      "level": "L1",
+      "port": 0,
+      "label": "local L2",
+      "x": 978,
+      "y": 773,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 15,
+      "router_name": "L1_15",
+      "level": "L1",
+      "port": 1,
+      "label": "north",
+      "x": 1000,
+      "y": 733,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 15,
+      "router_name": "L1_15",
+      "level": "L1",
+      "port": 2,
+      "label": "east",
+      "x": 1052,
+      "y": 760,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 15,
+      "router_name": "L1_15",
+      "level": "L1",
+      "port": 3,
+      "label": "south",
+      "x": 1022,
+      "y": 788,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 15,
+      "router_name": "L1_15",
+      "level": "L1",
+      "port": 4,
+      "label": "west",
+      "x": 948,
+      "y": 760,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 31,
+      "router_name": "L2_15",
+      "level": "L2",
+      "port": 0,
+      "label": "L1 uplink",
+      "x": 1000,
+      "y": 792,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 31,
+      "router_name": "L2_15",
+      "level": "L2",
+      "port": 1,
+      "label": "L3 tile 0",
+      "x": 970,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 31,
+      "router_name": "L2_15",
+      "level": "L2",
+      "port": 2,
+      "label": "L3 tile 1",
+      "x": 990,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 31,
+      "router_name": "L2_15",
+      "level": "L2",
+      "port": 3,
+      "label": "L3 tile 2",
+      "x": 1010,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 31,
+      "router_name": "L2_15",
+      "level": "L2",
+      "port": 4,
+      "label": "L3 tile 3",
+      "x": 1030,
+      "y": 832,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 31,
+      "router_name": "L2_15",
+      "level": "L2",
+      "port": 5,
+      "label": "CDMA",
+      "x": 1045,
+      "y": 812,
+      "capacity": 48,
+      "max_rate": 4
+    },
+    {
+      "router_kind": "router",
+      "router": 92,
+      "router_name": "L3_15_00",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 928,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 92,
+      "router_name": "L3_15_00",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 945,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 92,
+      "router_name": "L3_15_00",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 940,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 92,
+      "router_name": "L3_15_00",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 916,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 92,
+      "router_name": "L3_15_00",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 911,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 93,
+      "router_name": "L3_15_01",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 976,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 93,
+      "router_name": "L3_15_01",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 993,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 93,
+      "router_name": "L3_15_01",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 988,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 93,
+      "router_name": "L3_15_01",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 964,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 93,
+      "router_name": "L3_15_01",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 959,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 94,
+      "router_name": "L3_15_02",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 1024,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 94,
+      "router_name": "L3_15_02",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 1041,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 94,
+      "router_name": "L3_15_02",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 1036,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 94,
+      "router_name": "L3_15_02",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 1012,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 94,
+      "router_name": "L3_15_02",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 1007,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 95,
+      "router_name": "L3_15_03",
+      "level": "L3",
+      "port": 0,
+      "label": "shim uplink",
+      "x": 1072,
+      "y": 845,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 95,
+      "router_name": "L3_15_03",
+      "level": "L3",
+      "port": 1,
+      "label": "PE",
+      "x": 1089,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 95,
+      "router_name": "L3_15_03",
+      "level": "L3",
+      "port": 2,
+      "label": "TDMA",
+      "x": 1084,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 95,
+      "router_name": "L3_15_03",
+      "level": "L3",
+      "port": 3,
+      "label": "TSRAM",
+      "x": 1060,
+      "y": 875,
+      "capacity": 12,
+      "max_rate": 1
+    },
+    {
+      "router_kind": "router",
+      "router": 95,
+      "router_name": "L3_15_03",
+      "level": "L3",
+      "port": 4,
+      "label": "CSRAM",
+      "x": 1055,
+      "y": 862,
+      "capacity": 12,
+      "max_rate": 1
+    }
+  ],
+  "links": [
+    {
+      "id": "l2_shim_0_0",
+      "source": "router:16",
+      "target": "shim:96",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_0_0",
+      "source": "shim:96",
+      "target": "router:32",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_0_1",
+      "source": "router:16",
+      "target": "shim:97",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_0_1",
+      "source": "shim:97",
+      "target": "router:33",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_0_2",
+      "source": "router:16",
+      "target": "shim:98",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_0_2",
+      "source": "shim:98",
+      "target": "router:34",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_0_3",
+      "source": "router:16",
+      "target": "shim:99",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_0_3",
+      "source": "shim:99",
+      "target": "router:35",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_0",
+      "source": "router:0",
+      "target": "router:16",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_1_0",
+      "source": "router:17",
+      "target": "shim:100",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_1_0",
+      "source": "shim:100",
+      "target": "router:36",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_1_1",
+      "source": "router:17",
+      "target": "shim:101",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_1_1",
+      "source": "shim:101",
+      "target": "router:37",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_1_2",
+      "source": "router:17",
+      "target": "shim:102",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_1_2",
+      "source": "shim:102",
+      "target": "router:38",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_1_3",
+      "source": "router:17",
+      "target": "shim:103",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_1_3",
+      "source": "shim:103",
+      "target": "router:39",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_1",
+      "source": "router:1",
+      "target": "router:17",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_2_0",
+      "source": "router:18",
+      "target": "shim:104",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_2_0",
+      "source": "shim:104",
+      "target": "router:40",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_2_1",
+      "source": "router:18",
+      "target": "shim:105",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_2_1",
+      "source": "shim:105",
+      "target": "router:41",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_2_2",
+      "source": "router:18",
+      "target": "shim:106",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_2_2",
+      "source": "shim:106",
+      "target": "router:42",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_2_3",
+      "source": "router:18",
+      "target": "shim:107",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_2_3",
+      "source": "shim:107",
+      "target": "router:43",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_2",
+      "source": "router:2",
+      "target": "router:18",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_3_0",
+      "source": "router:19",
+      "target": "shim:108",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_3_0",
+      "source": "shim:108",
+      "target": "router:44",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_3_1",
+      "source": "router:19",
+      "target": "shim:109",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_3_1",
+      "source": "shim:109",
+      "target": "router:45",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_3_2",
+      "source": "router:19",
+      "target": "shim:110",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_3_2",
+      "source": "shim:110",
+      "target": "router:46",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_3_3",
+      "source": "router:19",
+      "target": "shim:111",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_3_3",
+      "source": "shim:111",
+      "target": "router:47",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_3",
+      "source": "router:3",
+      "target": "router:19",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_4_0",
+      "source": "router:20",
+      "target": "shim:112",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_4_0",
+      "source": "shim:112",
+      "target": "router:48",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_4_1",
+      "source": "router:20",
+      "target": "shim:113",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_4_1",
+      "source": "shim:113",
+      "target": "router:49",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_4_2",
+      "source": "router:20",
+      "target": "shim:114",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_4_2",
+      "source": "shim:114",
+      "target": "router:50",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_4_3",
+      "source": "router:20",
+      "target": "shim:115",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_4_3",
+      "source": "shim:115",
+      "target": "router:51",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_4",
+      "source": "router:4",
+      "target": "router:20",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_5_0",
+      "source": "router:21",
+      "target": "shim:116",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_5_0",
+      "source": "shim:116",
+      "target": "router:52",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_5_1",
+      "source": "router:21",
+      "target": "shim:117",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_5_1",
+      "source": "shim:117",
+      "target": "router:53",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_5_2",
+      "source": "router:21",
+      "target": "shim:118",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_5_2",
+      "source": "shim:118",
+      "target": "router:54",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_5_3",
+      "source": "router:21",
+      "target": "shim:119",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_5_3",
+      "source": "shim:119",
+      "target": "router:55",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_5",
+      "source": "router:5",
+      "target": "router:21",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_6_0",
+      "source": "router:22",
+      "target": "shim:120",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_6_0",
+      "source": "shim:120",
+      "target": "router:56",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_6_1",
+      "source": "router:22",
+      "target": "shim:121",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_6_1",
+      "source": "shim:121",
+      "target": "router:57",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_6_2",
+      "source": "router:22",
+      "target": "shim:122",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_6_2",
+      "source": "shim:122",
+      "target": "router:58",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_6_3",
+      "source": "router:22",
+      "target": "shim:123",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_6_3",
+      "source": "shim:123",
+      "target": "router:59",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_6",
+      "source": "router:6",
+      "target": "router:22",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_7_0",
+      "source": "router:23",
+      "target": "shim:124",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_7_0",
+      "source": "shim:124",
+      "target": "router:60",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_7_1",
+      "source": "router:23",
+      "target": "shim:125",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_7_1",
+      "source": "shim:125",
+      "target": "router:61",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_7_2",
+      "source": "router:23",
+      "target": "shim:126",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_7_2",
+      "source": "shim:126",
+      "target": "router:62",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_7_3",
+      "source": "router:23",
+      "target": "shim:127",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_7_3",
+      "source": "shim:127",
+      "target": "router:63",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_7",
+      "source": "router:7",
+      "target": "router:23",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_8_0",
+      "source": "router:24",
+      "target": "shim:128",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_8_0",
+      "source": "shim:128",
+      "target": "router:64",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_8_1",
+      "source": "router:24",
+      "target": "shim:129",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_8_1",
+      "source": "shim:129",
+      "target": "router:65",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_8_2",
+      "source": "router:24",
+      "target": "shim:130",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_8_2",
+      "source": "shim:130",
+      "target": "router:66",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_8_3",
+      "source": "router:24",
+      "target": "shim:131",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_8_3",
+      "source": "shim:131",
+      "target": "router:67",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_8",
+      "source": "router:8",
+      "target": "router:24",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_9_0",
+      "source": "router:25",
+      "target": "shim:132",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_9_0",
+      "source": "shim:132",
+      "target": "router:68",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_9_1",
+      "source": "router:25",
+      "target": "shim:133",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_9_1",
+      "source": "shim:133",
+      "target": "router:69",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_9_2",
+      "source": "router:25",
+      "target": "shim:134",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_9_2",
+      "source": "shim:134",
+      "target": "router:70",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_9_3",
+      "source": "router:25",
+      "target": "shim:135",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_9_3",
+      "source": "shim:135",
+      "target": "router:71",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_9",
+      "source": "router:9",
+      "target": "router:25",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_10_0",
+      "source": "router:26",
+      "target": "shim:136",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_10_0",
+      "source": "shim:136",
+      "target": "router:72",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_10_1",
+      "source": "router:26",
+      "target": "shim:137",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_10_1",
+      "source": "shim:137",
+      "target": "router:73",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_10_2",
+      "source": "router:26",
+      "target": "shim:138",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_10_2",
+      "source": "shim:138",
+      "target": "router:74",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_10_3",
+      "source": "router:26",
+      "target": "shim:139",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_10_3",
+      "source": "shim:139",
+      "target": "router:75",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_10",
+      "source": "router:10",
+      "target": "router:26",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_11_0",
+      "source": "router:27",
+      "target": "shim:140",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_11_0",
+      "source": "shim:140",
+      "target": "router:76",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_11_1",
+      "source": "router:27",
+      "target": "shim:141",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_11_1",
+      "source": "shim:141",
+      "target": "router:77",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_11_2",
+      "source": "router:27",
+      "target": "shim:142",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_11_2",
+      "source": "shim:142",
+      "target": "router:78",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_11_3",
+      "source": "router:27",
+      "target": "shim:143",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_11_3",
+      "source": "shim:143",
+      "target": "router:79",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_11",
+      "source": "router:11",
+      "target": "router:27",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_12_0",
+      "source": "router:28",
+      "target": "shim:144",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_12_0",
+      "source": "shim:144",
+      "target": "router:80",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_12_1",
+      "source": "router:28",
+      "target": "shim:145",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_12_1",
+      "source": "shim:145",
+      "target": "router:81",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_12_2",
+      "source": "router:28",
+      "target": "shim:146",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_12_2",
+      "source": "shim:146",
+      "target": "router:82",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_12_3",
+      "source": "router:28",
+      "target": "shim:147",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_12_3",
+      "source": "shim:147",
+      "target": "router:83",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_12",
+      "source": "router:12",
+      "target": "router:28",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_13_0",
+      "source": "router:29",
+      "target": "shim:148",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_13_0",
+      "source": "shim:148",
+      "target": "router:84",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_13_1",
+      "source": "router:29",
+      "target": "shim:149",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_13_1",
+      "source": "shim:149",
+      "target": "router:85",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_13_2",
+      "source": "router:29",
+      "target": "shim:150",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_13_2",
+      "source": "shim:150",
+      "target": "router:86",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_13_3",
+      "source": "router:29",
+      "target": "shim:151",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_13_3",
+      "source": "shim:151",
+      "target": "router:87",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_13",
+      "source": "router:13",
+      "target": "router:29",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_14_0",
+      "source": "router:30",
+      "target": "shim:152",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_14_0",
+      "source": "shim:152",
+      "target": "router:88",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_14_1",
+      "source": "router:30",
+      "target": "shim:153",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_14_1",
+      "source": "shim:153",
+      "target": "router:89",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_14_2",
+      "source": "router:30",
+      "target": "shim:154",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_14_2",
+      "source": "shim:154",
+      "target": "router:90",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_14_3",
+      "source": "router:30",
+      "target": "shim:155",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_14_3",
+      "source": "shim:155",
+      "target": "router:91",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_14",
+      "source": "router:14",
+      "target": "router:30",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "l2_shim_15_0",
+      "source": "router:31",
+      "target": "shim:156",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_15_0",
+      "source": "shim:156",
+      "target": "router:92",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_15_1",
+      "source": "router:31",
+      "target": "shim:157",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_15_1",
+      "source": "shim:157",
+      "target": "router:93",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_15_2",
+      "source": "router:31",
+      "target": "shim:158",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_15_2",
+      "source": "shim:158",
+      "target": "router:94",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l2_shim_15_3",
+      "source": "router:31",
+      "target": "shim:159",
+      "kind": "L2-SHIM",
+      "lanes": 4
+    },
+    {
+      "id": "shim_l3_15_3",
+      "source": "shim:159",
+      "target": "router:95",
+      "kind": "SHIM-L3",
+      "lanes": 1
+    },
+    {
+      "id": "l1_l2_15",
+      "source": "router:15",
+      "target": "router:31",
+      "kind": "L1-L2",
+      "lanes": 4
+    },
+    {
+      "id": "mesh_ew_0_1",
+      "source": "router:0",
+      "target": "router:1",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          242,
+          145
+        ],
+        [
+          408,
+          145
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_0_4",
+      "source": "router:0",
+      "target": "router:4",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          212,
+          173
+        ],
+        [
+          312,
+          173
+        ],
+        [
+          312,
+          323
+        ],
+        [
+          190,
+          323
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_1_2",
+      "source": "router:1",
+      "target": "router:2",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          512,
+          145
+        ],
+        [
+          678,
+          145
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_1_5",
+      "source": "router:1",
+      "target": "router:5",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          482,
+          173
+        ],
+        [
+          582,
+          173
+        ],
+        [
+          582,
+          323
+        ],
+        [
+          460,
+          323
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_2_3",
+      "source": "router:2",
+      "target": "router:3",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          782,
+          145
+        ],
+        [
+          948,
+          145
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_2_6",
+      "source": "router:2",
+      "target": "router:6",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          752,
+          173
+        ],
+        [
+          852,
+          173
+        ],
+        [
+          852,
+          323
+        ],
+        [
+          730,
+          323
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_3_7",
+      "source": "router:3",
+      "target": "router:7",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          1022,
+          173
+        ],
+        [
+          1122,
+          173
+        ],
+        [
+          1122,
+          323
+        ],
+        [
+          1000,
+          323
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_4_5",
+      "source": "router:4",
+      "target": "router:5",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          242,
+          350
+        ],
+        [
+          408,
+          350
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_4_8",
+      "source": "router:4",
+      "target": "router:8",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          212,
+          378
+        ],
+        [
+          312,
+          378
+        ],
+        [
+          312,
+          528
+        ],
+        [
+          190,
+          528
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_5_6",
+      "source": "router:5",
+      "target": "router:6",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          512,
+          350
+        ],
+        [
+          678,
+          350
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_5_9",
+      "source": "router:5",
+      "target": "router:9",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          482,
+          378
+        ],
+        [
+          582,
+          378
+        ],
+        [
+          582,
+          528
+        ],
+        [
+          460,
+          528
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_6_7",
+      "source": "router:6",
+      "target": "router:7",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          782,
+          350
+        ],
+        [
+          948,
+          350
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_6_10",
+      "source": "router:6",
+      "target": "router:10",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          752,
+          378
+        ],
+        [
+          852,
+          378
+        ],
+        [
+          852,
+          528
+        ],
+        [
+          730,
+          528
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_7_11",
+      "source": "router:7",
+      "target": "router:11",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          1022,
+          378
+        ],
+        [
+          1122,
+          378
+        ],
+        [
+          1122,
+          528
+        ],
+        [
+          1000,
+          528
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_8_9",
+      "source": "router:8",
+      "target": "router:9",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          242,
+          555
+        ],
+        [
+          408,
+          555
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_8_12",
+      "source": "router:8",
+      "target": "router:12",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          212,
+          583
+        ],
+        [
+          312,
+          583
+        ],
+        [
+          312,
+          733
+        ],
+        [
+          190,
+          733
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_9_10",
+      "source": "router:9",
+      "target": "router:10",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          512,
+          555
+        ],
+        [
+          678,
+          555
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_9_13",
+      "source": "router:9",
+      "target": "router:13",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          482,
+          583
+        ],
+        [
+          582,
+          583
+        ],
+        [
+          582,
+          733
+        ],
+        [
+          460,
+          733
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_10_11",
+      "source": "router:10",
+      "target": "router:11",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          782,
+          555
+        ],
+        [
+          948,
+          555
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_10_14",
+      "source": "router:10",
+      "target": "router:14",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          752,
+          583
+        ],
+        [
+          852,
+          583
+        ],
+        [
+          852,
+          733
+        ],
+        [
+          730,
+          733
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ns_11_15",
+      "source": "router:11",
+      "target": "router:15",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          1022,
+          583
+        ],
+        [
+          1122,
+          583
+        ],
+        [
+          1122,
+          733
+        ],
+        [
+          1000,
+          733
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_12_13",
+      "source": "router:12",
+      "target": "router:13",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          242,
+          760
+        ],
+        [
+          408,
+          760
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_13_14",
+      "source": "router:13",
+      "target": "router:14",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          512,
+          760
+        ],
+        [
+          678,
+          760
+        ]
+      ]
+    },
+    {
+      "id": "mesh_ew_14_15",
+      "source": "router:14",
+      "target": "router:15",
+      "kind": "L1-MESH",
+      "lanes": 4,
+      "points": [
+        [
+          782,
+          760
+        ],
+        [
+          948,
+          760
+        ]
+      ]
+    },
+    {
+      "id": "llch_0",
+      "source": "router:0",
+      "target": "endpoint:320",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_1",
+      "source": "router:1",
+      "target": "endpoint:324",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_2",
+      "source": "router:2",
+      "target": "endpoint:328",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_3",
+      "source": "router:3",
+      "target": "endpoint:332",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_4",
+      "source": "router:3",
+      "target": "endpoint:336",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_5",
+      "source": "router:7",
+      "target": "endpoint:340",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_6",
+      "source": "router:11",
+      "target": "endpoint:344",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_7",
+      "source": "router:15",
+      "target": "endpoint:348",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_8",
+      "source": "router:15",
+      "target": "endpoint:352",
+      "kind": "L1-LLCH",
+      "lanes": 4,
+      "points": [
+        [
+          1022,
+          788
+        ],
+        [
+          1122,
+          788
+        ],
+        [
+          1122,
+          950
+        ],
+        [
+          1000,
+          950
+        ]
+      ]
+    },
+    {
+      "id": "llch_9",
+      "source": "router:14",
+      "target": "endpoint:356",
+      "kind": "L1-LLCH",
+      "lanes": 4,
+      "points": [
+        [
+          752,
+          788
+        ],
+        [
+          852,
+          788
+        ],
+        [
+          852,
+          950
+        ],
+        [
+          730,
+          950
+        ]
+      ]
+    },
+    {
+      "id": "llch_10",
+      "source": "router:13",
+      "target": "endpoint:360",
+      "kind": "L1-LLCH",
+      "lanes": 4,
+      "points": [
+        [
+          482,
+          788
+        ],
+        [
+          582,
+          788
+        ],
+        [
+          582,
+          950
+        ],
+        [
+          460,
+          950
+        ]
+      ]
+    },
+    {
+      "id": "llch_11",
+      "source": "router:12",
+      "target": "endpoint:364",
+      "kind": "L1-LLCH",
+      "lanes": 4,
+      "points": [
+        [
+          212,
+          788
+        ],
+        [
+          312,
+          788
+        ],
+        [
+          312,
+          950
+        ],
+        [
+          190,
+          950
+        ]
+      ]
+    },
+    {
+      "id": "llch_12",
+      "source": "router:12",
+      "target": "endpoint:368",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_13",
+      "source": "router:8",
+      "target": "endpoint:372",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_14",
+      "source": "router:4",
+      "target": "endpoint:376",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    },
+    {
+      "id": "llch_15",
+      "source": "router:0",
+      "target": "endpoint:380",
+      "kind": "L1-LLCH",
+      "lanes": 4
+    }
+  ]
+}

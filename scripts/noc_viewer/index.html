@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NoC Telemetry Viewer</title>
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>NoC Telemetry Viewer</h1>
+      <p id="subtitle">Static-layout and synthetic-data prototype</p>
+    </div>
+    <div class="file-controls">
+      <label>Bundled topology
+        <select id="bundledTopology">
+          <option value="noc16">NoC16 synthetic</option>
+          <option value="noc12">NoC12 synthetic</option>
+          <option value="noc16c">NoC16C synthetic</option>
+        </select>
+      </label>
+      <label>Layout JSON <input id="layoutFile" type="file" accept=".json"></label>
+      <label>Telemetry CSV <input id="telemetryFile" type="file" accept=".csv"></label>
+      <button id="loadSample">Reload bundled sample</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="toolbar">
+      <label>Metric
+        <select id="metric">
+          <option value="occupancy_ratio">Occupancy (% capacity)</option>
+          <option value="throughput">Output throughput (packet/cycle)</option>
+          <option value="router_avg_queue_wait">Router average queue wait</option>
+          <option value="router_avg_residence">Router average residence</option>
+          <option value="credit_stall_cycles">Credit stalls</option>
+          <option value="contention_cycles">Contention</option>
+          <option value="port_throughput">Port throughput (% capacity)</option>
+          <option value="avg_queue_wait" selected>Port average queue wait</option>
+          <option value="avg_residence">Port average residence</option>
+          <option value="port_credit_stalls">Port credit stalls</option>
+          <option value="allocator_loss_cycles">Port allocator losses</option>
+        </select>
+      </label>
+      <label>Level
+        <select id="level">
+          <option value="ALL">All levels</option>
+          <option value="L1">L1</option>
+          <option value="L2">L2</option>
+          <option value="L3">L3</option>
+          <option value="SHIM">Shim</option>
+          <option value="LLCH">LLCH</option>
+        </select>
+      </label>
+      <label>Color maximum
+        <input id="scaleMax" type="number" min="0" step="any" placeholder="Auto per cycle">
+      </label>
+      <button id="first" title="First cycle">|&lt;</button>
+      <button id="previous" title="Previous cycle">&lt;</button>
+      <button id="play">Play</button>
+      <button id="next" title="Next cycle">&gt;</button>
+      <button id="last" title="Last cycle">&gt;|</button>
+      <span class="tool-separator"></span>
+      <button id="zoomOut" title="Zoom out">−</button>
+      <button id="zoomReset" title="Reset zoom and pan">Fit</button>
+      <button id="zoomIn" title="Zoom in">+</button>
+      <output id="zoomLabel">100%</output>
+      <label class="cycle-control">Cycle
+        <input id="cycle" type="range" min="0" max="0" value="0">
+        <output id="cycleLabel">0</output>
+      </label>
+    </section>
+
+    <section class="workspace">
+      <div class="canvas-card">
+        <svg id="topology" role="img" aria-label="NoC topology heat map">
+        </svg>
+        <div id="legend"></div>
+      </div>
+      <aside id="details">
+        <h2>Selection</h2>
+        <p>Click a router, shim, LLCH, or link.</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <span id="status">Loading sample...</span>
+    <span>Synthetic values are marked and must not be treated as simulation results.</span>
+  </footer>
+  <script src="viewer.js?v=noc16-south-memory-v2"></script>
+</body>
+</html>

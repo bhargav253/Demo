@@ -7,3 +7,8 @@ fusesoc.conf
 scripts/edalize/edalize.egg-info/SOURCES.txt
 scripts/edalize/fusesoc.egg-info/SOURCES.txt
 venv/
+/plan/
+
+# Private simulation notes and generated run output.
+/sim/noc/plan/
+/sim/noc/results/
