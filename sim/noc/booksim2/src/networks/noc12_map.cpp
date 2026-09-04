@@ -169,30 +169,54 @@ int Noc12Map::RoutePort(int router, int destination_node) {
     return tile_port[(ep.instance % 4)];
   }
 
+  // L2 routers are injection/ejection points, not transit routers. Select one
+  // adjacent L1 when leaving a source L2. Once in L1, remain on the 3x3
+  // cardinal mesh and use deterministic X-then-Y routing. Non-LLCH traffic
+  // enters only its final L2 through a canonical adjacent L1 gateway.
+  int target_l1;
+  if(ep.kind == Noc12Endpoint::LLCH) {
+    target_l1 = ep.router;
+  } else {
+    int const cluster = target - kL2Base;
+    int const row = min(cluster / 4, 2);
+    int const col = min(cluster % 4, 2);
+    target_l1 = L1(row * 3 + col);
+  }
   vector<vector<Edge> > const &graph = CoreGraph();
-  vector<int> distance(kL3Base, -1);
-  queue<int> pending; distance[target]=0; pending.push(target);
-  while(!pending.empty()) {
-    int const here=pending.front(); pending.pop();
-    for(size_t i=0;i<graph[here].size();++i) {
-      int const next=graph[here][i].next;
-      if(distance[next]<0) { distance[next]=distance[here]+1; pending.push(next); }
+
+  if(router < kL2Base) {
+    if(router == target_l1) {
+      if(ep.kind == Noc12Endpoint::LLCH) return ep.port;
+      for(size_t i = 0; i < graph[router].size(); ++i)
+        if(graph[router][i].next == target) return graph[router][i].out_port;
+      assert(false && "destination L2 is not attached to its L1 gateway");
+    }
+    pair<int,int> const here = Coord(router);
+    pair<int,int> const there = Coord(target_l1);
+    if(here.first < there.first) return 4;   // east
+    if(here.first > there.first) return 0;   // west
+    if(here.second < there.second) return 6; // south
+    if(here.second > there.second) return 2; // north
+    assert(false && "unreachable L1 routing state");
+  }
+
+  pair<int,int> const there = Coord(target_l1);
+  Edge best = {-1,-1,-1};
+  int best_distance = 999;
+  for(size_t i = 0; i < graph[router].size(); ++i) {
+    Edge const &e = graph[router][i];
+    if(e.next >= kL2Base) continue;
+    pair<int,int> const next = Coord(e.next);
+    int const distance = abs(there.first - next.first) +
+                         abs(there.second - next.second);
+    if((distance < best_distance) ||
+       ((distance == best_distance) && (e.out_port < best.out_port))) {
+      best = e;
+      best_distance = distance;
     }
   }
-  assert(distance[router] > 0);
-  pair<int,int> const here=Coord(router), there=Coord(target);
-  Edge best={-1,-1,-1}; int best_rank=999;
-  for(size_t i=0;i<graph[router].size();++i) {
-    Edge const &e=graph[router][i];
-    if(distance[e.next] != distance[router]-1) continue;
-    pair<int,int> const next=Coord(e.next);
-    bool const reduce_x = abs(there.first-next.first) < abs(there.first-here.first);
-    bool const reduce_y = abs(there.second-next.second) < abs(there.second-here.second);
-    int const rank = (here.first != there.first ? (reduce_x?0:20) :
-                      (reduce_y?0:20)) + e.out_port;
-    if(rank < best_rank) { best=e; best_rank=rank; }
-  }
-  assert(best.next >= 0); return best.out_port;
+  assert(best.next >= 0);
+  return best.out_port;
 }
 
 vector<vector<int> > Noc12Map::GrantWeights(int wanted_router) {

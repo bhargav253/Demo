@@ -3,6 +3,15 @@
 
 #include "networks/noc16_map.hpp"
 
+static int NextRouter(int router, int output) {
+  std::vector<Noc16Link> const links = Noc16Map::InternalLinks();
+  for(size_t i = 0; i < links.size(); ++i)
+    if(links[i].source_router == router && links[i].source_port == output &&
+       links[i].source_lane == 0 && links[i].sink_router < Noc16Map::kL3Base)
+      return links[i].sink_router;
+  return -1;
+}
+
 int main() {
   Noc16Map::Validate();
   if(Noc16Map::RouterName(Noc16Map::L1(0)) != "L1_00") return 1;
@@ -24,6 +33,24 @@ int main() {
     for(int lane = 0; lane < 4; ++lane) {
       Noc16Endpoint const ep = Noc16Map::Endpoint(Noc16Map::LLCH(llch, lane));
       if(ep.instance != llch || ep.lane != lane || ep.router_lane != lane) return 1;
+    }
+  for(int source = 0; source < 16; ++source)
+    for(int llch = 0; llch < 16; ++llch) {
+      int router = Noc16Map::L2(source);
+      int const destination = Noc16Map::LLCH(llch, 0);
+      bool entered_l1 = false;
+      for(int hop = 0; hop < 12; ++hop) {
+        Noc16Endpoint const ep = Noc16Map::Endpoint(destination);
+        if(router == ep.router) break;
+        int const next = NextRouter(router,
+            Noc16Map::RoutePort(router, destination));
+        if(next < 0) return 1;
+        if(next < Noc16Map::kL2Base) entered_l1 = true;
+        if(entered_l1 && next >= Noc16Map::kL2Base) return 1;
+        router = next;
+        if(hop == 11) return 1;
+      }
+      if(router != Noc16Map::Endpoint(destination).router) return 1;
     }
   std::vector<std::vector<int> > const w00 = Noc16Map::L1GrantWeights(0);
   // L1_00: local p0 contributes 1:10:4:1; east p2 contributes
