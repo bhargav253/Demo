@@ -33,18 +33,18 @@ module prim_fifo_async #(
   // Depth must be a power of 2 for the gray code pointers to work
   `ASSERT_INIT(ParamCheckDepth_A, (Depth == 2**$clog2(Depth)))
 
-  localparam int unsigned PTRV_W    = (Depth == 1) ? 1 : $clog2(Depth);
-  localparam int unsigned PTR_WIDTH = (Depth == 1) ? 1 : PTRV_W+1;
+  localparam int unsigned PtrValueW    = (Depth == 1) ? 1 : $clog2(Depth);
+  localparam int unsigned PtrW = (Depth == 1) ? 1 : PtrValueW+1;
 
-  logic [PTR_WIDTH-1:0] fifo_wptr_q, fifo_wptr_d;
-  logic [PTR_WIDTH-1:0] fifo_rptr_q, fifo_rptr_d;
-  logic [PTR_WIDTH-1:0] fifo_wptr_sync_combi, fifo_rptr_sync_combi;
-  logic [PTR_WIDTH-1:0] fifo_wptr_gray_sync, fifo_rptr_gray_sync, fifo_rptr_sync_q;
-  logic [PTR_WIDTH-1:0] fifo_wptr_gray_q, fifo_wptr_gray_d;
-  logic [PTR_WIDTH-1:0] fifo_rptr_gray_q, fifo_rptr_gray_d;
-  logic                 fifo_incr_wptr, fifo_incr_rptr;
-  logic                 full_wclk, full_rclk, empty_rclk;
-  logic [Width-1:0]     storage [Depth];
+  logic [PtrW-1:0]  fifo_wptr_q, fifo_wptr_d;
+  logic [PtrW-1:0]  fifo_rptr_q, fifo_rptr_d;
+  logic [PtrW-1:0]  fifo_wptr_sync_combi, fifo_rptr_sync_combi;
+  logic [PtrW-1:0]  fifo_wptr_gray_sync, fifo_rptr_gray_sync, fifo_rptr_sync_q;
+  logic [PtrW-1:0]  fifo_wptr_gray_q, fifo_wptr_gray_d;
+  logic [PtrW-1:0]  fifo_rptr_gray_q, fifo_rptr_gray_d;
+  logic             fifo_incr_wptr, fifo_incr_rptr;
+  logic             full_wclk, full_rclk, empty_rclk;
+  logic [Width-1:0] storage [Depth];
 
   ///////////////////
   // Write Pointer //
@@ -53,9 +53,9 @@ module prim_fifo_async #(
   assign fifo_incr_wptr = wvalid_i & wready_o;
 
   // decimal version
-  assign fifo_wptr_d = fifo_wptr_q + PTR_WIDTH'(1'b1);
+  assign fifo_wptr_d = fifo_wptr_q + PtrW'(1'b1);
 
-  always_ff @(posedge clk_wr_i or negedge rst_wr_ni) begin
+  always_ff @(posedge clk_wr_i) begin
     if (!rst_wr_ni) begin
       fifo_wptr_q <= '0;
     end else if (fifo_incr_wptr) begin
@@ -64,7 +64,7 @@ module prim_fifo_async #(
   end
 
   // gray-coded version
-  always_ff @(posedge clk_wr_i or negedge rst_wr_ni) begin
+  always_ff @(posedge clk_wr_i) begin
     if (!rst_wr_ni) begin
       fifo_wptr_gray_q <= '0;
     end else if (fifo_incr_wptr) begin
@@ -73,7 +73,7 @@ module prim_fifo_async #(
   end
 
   // sync gray-coded pointer to read clk
-  prim_flop_2sync #(.Width(PTR_WIDTH)) sync_wptr (
+  prim_flop_2sync #(.Width(PtrW)) u_sync_wptr (
     .clk_i    (clk_rd_i),
     .rst_ni   (rst_rd_ni),
     .d_i      (fifo_wptr_gray_q),
@@ -86,9 +86,9 @@ module prim_fifo_async #(
   assign fifo_incr_rptr = rvalid_o & rready_i;
 
   // decimal version
-  assign fifo_rptr_d = fifo_rptr_q + PTR_WIDTH'(1'b1);
+  assign fifo_rptr_d = fifo_rptr_q + PtrW'(1'b1);
 
-  always_ff @(posedge clk_rd_i or negedge rst_rd_ni) begin
+  always_ff @(posedge clk_rd_i) begin
     if (!rst_rd_ni) begin
       fifo_rptr_q <= '0;
     end else if (fifo_incr_rptr) begin
@@ -97,7 +97,7 @@ module prim_fifo_async #(
   end
 
   // gray-coded version
-  always_ff @(posedge clk_rd_i or negedge rst_rd_ni) begin
+  always_ff @(posedge clk_rd_i) begin
     if (!rst_rd_ni) begin
       fifo_rptr_gray_q <= '0;
     end else if (fifo_incr_rptr) begin
@@ -106,14 +106,14 @@ module prim_fifo_async #(
   end
 
   // sync gray-coded pointer to write clk
-  prim_flop_2sync #(.Width(PTR_WIDTH)) sync_rptr (
+  prim_flop_2sync #(.Width(PtrW)) u_sync_rptr (
     .clk_i    (clk_wr_i),
     .rst_ni   (rst_wr_ni),
     .d_i      (fifo_rptr_gray_q),
     .q_o      (fifo_rptr_gray_sync));
 
   // Registered version of synced read pointer
-  always_ff @(posedge clk_wr_i or negedge rst_wr_ni) begin
+  always_ff @(posedge clk_wr_i) begin
     if (!rst_wr_ni) begin
       fifo_rptr_sync_q <= '0;
     end else begin
@@ -125,43 +125,43 @@ module prim_fifo_async #(
   // Empty / Full //
   //////////////////
 
-  logic [PTR_WIDTH-1:0] xor_mask;
-  assign xor_mask   =  PTR_WIDTH'(1'b1) << (PTR_WIDTH-1);
+  logic [PtrW-1:0]  xor_mask;
+  assign xor_mask   =  PtrW'(1'b1) << (PtrW-1);
   assign full_wclk  = (fifo_wptr_q == (fifo_rptr_sync_q ^ xor_mask));
   assign full_rclk  = (fifo_wptr_sync_combi == (fifo_rptr_q ^ xor_mask));
   assign empty_rclk = (fifo_wptr_sync_combi ==  fifo_rptr_q);
 
-  if (Depth > 1) begin : g_depth_calc
+  if (Depth > 1) begin : gen_depth_calc
 
     // Current depth in the write clock side
-    logic               wptr_msb;
-    logic               rptr_sync_msb;
-    logic  [PTRV_W-1:0] wptr_value;
-    logic  [PTRV_W-1:0] rptr_sync_value;
+    logic                 wptr_msb;
+    logic                 rptr_sync_msb;
+    logic [PtrValueW-1:0] wptr_value;
+    logic [PtrValueW-1:0] rptr_sync_value;
 
-    assign wptr_msb        = fifo_wptr_q[PTR_WIDTH-1];
-    assign rptr_sync_msb   = fifo_rptr_sync_q[PTR_WIDTH-1];
-    assign wptr_value      = fifo_wptr_q[0+:PTRV_W];
-    assign rptr_sync_value = fifo_rptr_sync_q[0+:PTRV_W];
+    assign wptr_msb        = fifo_wptr_q[PtrW-1];
+    assign rptr_sync_msb   = fifo_rptr_sync_q[PtrW-1];
+    assign wptr_value      = fifo_wptr_q[0+:PtrValueW];
+    assign rptr_sync_value = fifo_rptr_sync_q[0+:PtrValueW];
     assign wdepth_o = (full_wclk) ? DepthW'(Depth) :
                       (wptr_msb == rptr_sync_msb) ? DepthW'(wptr_value) - DepthW'(rptr_sync_value) :
                       (DepthW'(Depth) - DepthW'(rptr_sync_value) + DepthW'(wptr_value)) ;
 
     // Current depth in the read clock side
-    logic               rptr_msb;
-    logic               wptr_sync_msb;
-    logic  [PTRV_W-1:0] rptr_value;
-    logic  [PTRV_W-1:0] wptr_sync_value;
+    logic                 rptr_msb;
+    logic                 wptr_sync_msb;
+    logic [PtrValueW-1:0] rptr_value;
+    logic [PtrValueW-1:0] wptr_sync_value;
 
-    assign wptr_sync_msb   = fifo_wptr_sync_combi[PTR_WIDTH-1];
-    assign rptr_msb        = fifo_rptr_q[PTR_WIDTH-1];
-    assign wptr_sync_value = fifo_wptr_sync_combi[0+:PTRV_W];
-    assign rptr_value      = fifo_rptr_q[0+:PTRV_W];
+    assign wptr_sync_msb   = fifo_wptr_sync_combi[PtrW-1];
+    assign rptr_msb        = fifo_rptr_q[PtrW-1];
+    assign wptr_sync_value = fifo_wptr_sync_combi[0+:PtrValueW];
+    assign rptr_value      = fifo_rptr_q[0+:PtrValueW];
     assign rdepth_o = (full_rclk) ? DepthW'(Depth) :
                       (wptr_sync_msb == rptr_msb) ? DepthW'(wptr_sync_value) - DepthW'(rptr_value) :
                       (DepthW'(Depth) - DepthW'(rptr_value) + DepthW'(wptr_sync_value)) ;
 
-  end else begin : g_no_depth_calc
+  end else begin : gen_no_depth_calc
 
     assign rdepth_o = full_rclk;
     assign wdepth_o = full_wclk;
@@ -176,17 +176,17 @@ module prim_fifo_async #(
   /////////////
 
   logic [Width-1:0] rdata_int;
-  if (Depth > 1) begin : g_storage_mux
+  if (Depth > 1) begin : gen_storage_mux
 
     always_ff @(posedge clk_wr_i) begin
       if (fifo_incr_wptr) begin
-        storage[fifo_wptr_q[PTRV_W-1:0]] <= wdata_i;
+        storage[fifo_wptr_q[PtrValueW-1:0]] <= wdata_i;
       end
     end
 
-    assign rdata_int = storage[fifo_rptr_q[PTRV_W-1:0]];
+    assign rdata_int = storage[fifo_rptr_q[PtrValueW-1:0]];
 
-  end else begin : g_storage_simple
+  end else begin : gen_storage_simple
 
     always_ff @(posedge clk_wr_i) begin
       if (fifo_incr_wptr) begin
@@ -220,44 +220,44 @@ module prim_fifo_async #(
   //////////////////////////////////////
 
   // This code is all in a generate context to avoid lint errors when Depth <= 2
-  if (Depth > 2) begin : g_full_gray_conversion
+  if (Depth > 2) begin : gen_full_gray_conversion
 
-    function automatic [PTR_WIDTH-1:0] dec2gray(input logic [PTR_WIDTH-1:0] decval);
-      logic [PTR_WIDTH-1:0] decval_sub;
-      logic [PTR_WIDTH-1:0] decval_in;
-      logic                 unused_decval_msb;
+    function automatic [PtrW-1:0] dec2gray(input logic [PtrW-1:0] decval);
+      logic [PtrW-1:0] decval_sub;
+      logic [PtrW-1:0] decval_in;
+      logic            unused_decval_msb;
 
-      decval_sub = (PTR_WIDTH)'(Depth) - {1'b0, decval[PTR_WIDTH-2:0]} - 1'b1;
+      decval_sub = (PtrW)'(Depth) - {1'b0, decval[PtrW-2:0]} - 1'b1;
 
-      decval_in = decval[PTR_WIDTH-1] ? decval_sub : decval;
+      decval_in = decval[PtrW-1] ? decval_sub : decval;
 
       // We do not care about the MSB, hence we mask it out
-      unused_decval_msb = decval_in[PTR_WIDTH-1];
-      decval_in[PTR_WIDTH-1] = 1'b0;
+      unused_decval_msb = decval_in[PtrW-1];
+      decval_in[PtrW-1] = 1'b0;
 
       // Perform the XOR conversion
       dec2gray = decval_in;
       dec2gray ^= (decval_in >> 1);
 
       // Override the MSB
-      dec2gray[PTR_WIDTH-1] = decval[PTR_WIDTH-1];
+      dec2gray[PtrW-1] = decval[PtrW-1];
     endfunction
 
     // Algorithm walks up from 0..N-1 then flips the upper bit and walks down from N-1 to 0.
-    function automatic [PTR_WIDTH-1:0] gray2dec(input logic [PTR_WIDTH-1:0] grayval);
-      logic [PTR_WIDTH-1:0] dec_tmp, dec_tmp_sub;
-      logic                 unused_decsub_msb;
+    function automatic [PtrW-1:0] gray2dec(input logic [PtrW-1:0] grayval);
+      logic [PtrW-1:0] dec_tmp, dec_tmp_sub;
+      logic            unused_decsub_msb;
 
       dec_tmp = '0;
-      for (int unsigned i = PTR_WIDTH-1; i > 0; i--) begin
+      for (int unsigned i = PtrW-1; i > 0; i--) begin
         dec_tmp[i-1] = dec_tmp[i] ^ grayval[i-1];
       end
-      dec_tmp_sub = (PTR_WIDTH)'(Depth) - dec_tmp - 1'b1;
-      if (grayval[PTR_WIDTH-1]) begin
+      dec_tmp_sub = (PtrW)'(Depth) - dec_tmp - 1'b1;
+      if (grayval[PtrW-1]) begin
         gray2dec = dec_tmp_sub;
         // Override MSB
-        gray2dec[PTR_WIDTH-1] = 1'b1;
-        unused_decsub_msb = dec_tmp_sub[PTR_WIDTH-1];
+        gray2dec[PtrW-1] = 1'b1;
+        unused_decsub_msb = dec_tmp_sub[PtrW-1];
       end else begin
         gray2dec = dec_tmp;
       end
@@ -271,15 +271,15 @@ module prim_fifo_async #(
     assign fifo_rptr_gray_d = dec2gray(fifo_rptr_d);
     assign fifo_wptr_gray_d = dec2gray(fifo_wptr_d);
 
-  end else if (Depth == 2) begin : g_simple_gray_conversion
+  end else if (Depth == 2) begin : gen_simple_gray_conversion
 
-    assign fifo_rptr_sync_combi = {fifo_rptr_gray_sync[PTR_WIDTH-1], ^fifo_rptr_gray_sync};
-    assign fifo_wptr_sync_combi = {fifo_wptr_gray_sync[PTR_WIDTH-1], ^fifo_wptr_gray_sync};
+    assign fifo_rptr_sync_combi = {fifo_rptr_gray_sync[PtrW-1], ^fifo_rptr_gray_sync};
+    assign fifo_wptr_sync_combi = {fifo_wptr_gray_sync[PtrW-1], ^fifo_wptr_gray_sync};
 
-    assign fifo_rptr_gray_d = {fifo_rptr_d[PTR_WIDTH-1], ^fifo_rptr_d};
-    assign fifo_wptr_gray_d = {fifo_wptr_d[PTR_WIDTH-1], ^fifo_wptr_d};
+    assign fifo_rptr_gray_d = {fifo_rptr_d[PtrW-1], ^fifo_rptr_d};
+    assign fifo_wptr_gray_d = {fifo_wptr_d[PtrW-1], ^fifo_wptr_d};
 
-  end else begin : g_no_gray_conversion
+  end else begin : gen_no_gray_conversion
 
     assign fifo_rptr_sync_combi = fifo_rptr_gray_sync;
     assign fifo_wptr_sync_combi = fifo_wptr_gray_sync;

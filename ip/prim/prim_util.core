@@ -3,12 +3,12 @@ CAPI=2:
 # Licensed under the Apache License, Version 2.0, see LICENSE for details.
 # SPDX-License-Identifier: Apache-2.0
 
-name: "lowrisc:prim:util:0.1"
+name: "axon:prim:util:0.1.0"
 description: "Utilities"
 filesets:
   files_rtl:
     depend:
-      - lowrisc:prim:assert
+      - axon:prim:assert
     files:
       - rtl/prim_util_pkg.sv
     file_type: systemVerilogSource

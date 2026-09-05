@@ -14,18 +14,18 @@ module prim_fifo_async_simple #(
                                            // if the FSMs need to be partial-reset-safe.
 ) (
   // write port
-  input  logic              clk_wr_i,
-  input  logic              rst_wr_ni,
-  input  logic              wvalid_i,
-  output logic              wready_o,
-  input  logic [Width-1:0]  wdata_i,
+  input  logic             clk_wr_i,
+  input  logic             rst_wr_ni,
+  input  logic             wvalid_i,
+  output logic             wready_o,
+  input  logic [Width-1:0] wdata_i,
 
   // read port
-  input  logic              clk_rd_i,
-  input  logic              rst_rd_ni,
-  output logic              rvalid_o,
-  input  logic              rready_i,
-  output logic [Width-1:0]  rdata_o
+  input  logic             clk_rd_i,
+  input  logic             rst_rd_ni,
+  output logic             rvalid_o,
+  input  logic             rready_i,
+  output logic [Width-1:0] rdata_o
 );
 
   ////////////////
@@ -33,9 +33,9 @@ module prim_fifo_async_simple #(
   ////////////////
 
   // Convert ready/valid to req/ack
-  logic wr_en;
-  logic src_req, src_ack;
-  logic pending_d, pending_q, not_in_reset_q;
+  logic             wr_en;
+  logic             src_req, src_ack;
+  logic             pending_d, pending_q, not_in_reset_q;
   assign wready_o = !pending_q && not_in_reset_q;
   assign wr_en = wvalid_i && wready_o;
   assign src_req = pending_q || wvalid_i;
@@ -43,11 +43,11 @@ module prim_fifo_async_simple #(
   assign pending_d = (src_ack)  ? 1'b0 :
                      (wr_en)    ? 1'b1 : pending_q;
 
-  logic dst_req, dst_ack;
+  logic             dst_req, dst_ack;
   assign rvalid_o = dst_req;
   assign dst_ack = dst_req && rready_i;
 
-  always_ff @(posedge clk_wr_i or negedge rst_wr_ni) begin
+  always_ff @(posedge clk_wr_i) begin
     if (!rst_wr_ni) begin
       pending_q <= 1'b0;
       not_in_reset_q <= 1'b0;

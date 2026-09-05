@@ -1,0 +1,41 @@
+CAPI=2:
+# Copyright lowRISC contributors (OpenTitan project).
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+
+name: "axon:prim:sum_tree:0.1.0"
+description: "Combinational parallel summation tree"
+
+filesets:
+  files_rtl:
+    depend:
+      - axon:prim:assert
+    files:
+      - rtl/prim_sum_tree.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      - axon:lint:common
+    files:
+      - lint/prim_sum_tree.vlt
+    file_type: vlt
+
+targets:
+  default:
+    filesets:
+      - files_rtl
+
+  lint:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
+    default_tool: verilator
+    tools:
+      verilator:
+        lint_only: true
+        verilator_options:
+          - -Wall
+          - --lint-only
+          - --top-module prim_sum_tree
+    toplevel: prim_sum_tree

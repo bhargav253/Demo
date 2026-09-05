@@ -11,7 +11,7 @@ module prim_flop_2sync #(
 ) (
   input                    clk_i,
   input                    rst_ni,
-  input        [Width-1:0] d_i,
+  input [Width-1:0] d_i,
   output logic [Width-1:0] q_o
 );
 
@@ -31,7 +31,7 @@ module prim_flop_2sync #(
     .dst_data_o(d_o)
   );
 `else // !`ifdef SIMULATION
-  logic unused_sig;
+  logic             unused_sig;
   assign unused_sig = EnablePrimCdcRand;
   always_comb d_o = d_i;
 `endif // !`ifdef SIMULATION

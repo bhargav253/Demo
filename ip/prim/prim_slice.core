@@ -1,0 +1,36 @@
+CAPI=2:
+# SPDX-License-Identifier: Apache-2.0
+
+name: "axon:prim:slice:0.1.0"
+description: "Two-entry ready/valid pipeline slice"
+
+filesets:
+  files_rtl:
+    depend:
+      - axon:prim:assert
+    files:
+      - rtl/prim_slice.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      - axon:lint:common
+
+targets:
+  default:
+    filesets:
+      - files_rtl
+
+  lint:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
+    default_tool: verilator
+    tools:
+      verilator:
+        lint_only: true
+        verilator_options:
+          - -Wall
+          - --lint-only
+          - --top-module prim_slice
+    toplevel: prim_slice

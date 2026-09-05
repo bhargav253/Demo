@@ -1,0 +1,51 @@
+CAPI=2:
+# SPDX-License-Identifier: Apache-2.0
+
+name: "axon:bus:components:0.1.0"
+description: "Axon APB and AXI4-Lite bus components"
+
+filesets:
+  files_rtl:
+    depend:
+      - axon:prim:fifo
+      - axon:prim:slice
+    files:
+      - rtl/intf_pkg.sv
+      - rtl/apb_reg.sv
+      - rtl/apb_split.sv
+      - rtl/axil2apb.sv
+      - rtl/axil_adaptor.sv
+      - rtl/axil_dp_ram.sv
+      - rtl/axil_wr_ext.sv
+      - rtl/axil_rd_ext.sv
+      - rtl/axil_ext.sv
+      - rtl/axil_rd_merge.sv
+      - rtl/axil_reg.sv
+      - rtl/axil_rom.sv
+      - rtl/axil_split.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      - axon:lint:common
+    files:
+      - lint/bus.vlt
+    file_type: vlt
+
+targets:
+  default:
+    filesets:
+      - files_rtl
+
+  lint:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
+    default_tool: verilator
+    tools:
+      verilator:
+        lint_only: true
+        verilator_options:
+          - -Wall
+          - -Wno-MULTITOP
+          - --lint-only

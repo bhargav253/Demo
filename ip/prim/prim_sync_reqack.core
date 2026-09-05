@@ -1,0 +1,39 @@
+CAPI=2:
+# Copyright lowRISC contributors (OpenTitan project).
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+
+name: "axon:prim:sync_reqack:0.1.0"
+description: "Request/acknowledge clock-domain crossing"
+
+filesets:
+  files_rtl:
+    depend:
+      - axon:prim:assert
+      - axon:prim:flop_2sync
+    files:
+      - rtl/prim_sync_reqack.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      - axon:lint:common
+
+targets:
+  default:
+    filesets:
+      - files_rtl
+
+  lint:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
+    default_tool: verilator
+    tools:
+      verilator:
+        lint_only: true
+        verilator_options:
+          - -Wall
+          - --lint-only
+          - --top-module prim_sync_reqack
+    toplevel: prim_sync_reqack
