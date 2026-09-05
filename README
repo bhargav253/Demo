@@ -19,3 +19,11 @@ verilator https://verilator.org/guide/latest/install.html
 gtkwave http://gtkwave.sourceforge.net/
 cocotb https://docs.cocotb.org/en/stable/install.html
 ```
+
+### Development methodology
+
+The repository coding, FuseSoC, verification, documentation, generation, and
+AI-assisted review workflow is defined in
+[`docs/development-manual.md`](docs/development-manual.md). The manual marks
+each interface as available, manual, or planned while the environment is being
+built.
