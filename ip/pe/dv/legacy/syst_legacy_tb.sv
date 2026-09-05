@@ -1,5 +1,7 @@
-`ifndef PE_TB__SV
- `define PE_TB__SV
+`ifndef SYST_LEGACY_TB__SV
+ `define SYST_LEGACY_TB__SV
+
+// axon-policy-allow: legacy-file
 
  `timescale 1ns/1ps
 
@@ -8,7 +10,9 @@ class bubble;
    constraint bubble_gap {gap dist { 0:=70, 1:=15, 2:=10, 3:= 5};}
 endclass
 
-module pe_tb;
+// Historical testbench retained as a behavioral reference. It reports data
+// mismatches but does not fail the process, so it is not verification evidence.
+module syst_legacy_tb;
 
    logic clk,rst_n,wen,ren;   
    logic in_val;   
@@ -38,29 +42,29 @@ module pe_tb;
    localparam MAX_CYCLES = 10000;   
    
    /*
-    pe_top AUTO_TEMPLATE (
+    syst AUTO_TEMPLATE (
     );
     */
 
-   pe_top DUT (/*AUTOINST*/
+   syst u_dut (
 	       // Outputs
-	       .out_val,
-	       .c11			(c11[8:0]),
-	       .c12			(c12[8:0]),
-	       .c21			(c21[8:0]),
-	       .c22			(c22[8:0]),
+	       .result_valid_o		(out_val),
+	       .c11_o			(c11[8:0]),
+	       .c12_o			(c12[8:0]),
+	       .c21_o			(c21[8:0]),
+	       .c22_o			(c22[8:0]),
 	       // Inputs
-	       .clk,
-	       .rst_n,
-	       .in_val,
-	       .a11			(a11[3:0]),
-	       .a12			(a12[3:0]),
-	       .a21			(a21[3:0]),
-	       .a22			(a22[3:0]),
-	       .b11			(b11[3:0]),
-	       .b12			(b12[3:0]),
-	       .b21			(b21[3:0]),
-	       .b22			(b22[3:0]));
+	       .clk_i			(clk),
+	       .rst_ni			(rst_n),
+	       .input_valid_i		(in_val),
+	       .a11_i			(a11[3:0]),
+	       .a12_i			(a12[3:0]),
+	       .a21_i			(a21[3:0]),
+	       .a22_i			(a22[3:0]),
+	       .b11_i			(b11[3:0]),
+	       .b12_i			(b12[3:0]),
+	       .b21_i			(b21[3:0]),
+	       .b22_i			(b22[3:0]));
 
    initial begin
       clk = 0;
@@ -258,7 +262,7 @@ endmodule
 
 `endif
 
-//End of pe_tb
+// End of syst_legacy_tb
 
 // Local variables:
 // verilog-library-directories:("../rtl/")

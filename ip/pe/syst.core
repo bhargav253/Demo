@@ -1,0 +1,42 @@
+CAPI=2:
+# SPDX-License-Identifier: Apache-2.0
+
+name: "axon:pe:syst:0.1.0"
+description: "Dual-buffered 2x2 systolic matrix-multiply prototype"
+
+filesets:
+  files_rtl:
+    files:
+      - rtl/syst_inf.sv
+      - rtl/syst_outf.sv
+      - rtl/syst_mac.sv
+      - rtl/syst_eng.sv
+      - rtl/syst.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      - axon:lint:common
+    files:
+      - lint/syst.vlt
+    file_type: vlt
+
+targets:
+  default:
+    filesets:
+      - files_rtl
+
+  lint:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
+    default_tool: verilator
+    tools:
+      verilator:
+        lint_only: true
+        verilator_options:
+          - -Wall
+          - --lint-only
+          - --top-module
+          - syst
+    toplevel: syst
