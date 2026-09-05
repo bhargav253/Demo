@@ -1,0 +1,40 @@
+CAPI=2:
+# SPDX-License-Identifier: Apache-2.0
+
+name: "axon:noc:islip_arbiter:0.1.0"
+description: "Single-iteration iSLIP input/output arbiter"
+
+filesets:
+  files_rtl:
+    depend:
+      - axon:prim:arbiter
+    files:
+      - rtl/noc_islip_arbiter.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      - axon:lint:common
+    files:
+      - lint/noc_islip_arbiter.vlt
+    file_type: vlt
+
+targets:
+  default:
+    filesets:
+      - files_rtl
+
+  lint:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
+    default_tool: verilator
+    tools:
+      verilator:
+        lint_only: true
+        verilator_options:
+          - -Wall
+          - --lint-only
+          - --top-module
+          - noc_islip_arbiter
+    toplevel: noc_islip_arbiter
