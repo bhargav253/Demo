@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "riscv_arch_test": {
+    "url": "https://github.com/riscv/riscv-arch-test.git",
+    "revision": "edfa48d307ecda3d83b033dcb80ef96cde866994"
+  },
+  "tools": {
+    "gcc": {
+      "version": "15.2.0-1",
+      "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v15.2.0-1/xpack-riscv-none-elf-gcc-15.2.0-1-linux-x64.tar.gz",
+      "archive": "xpack-riscv-none-elf-gcc-15.2.0-1-linux-x64.tar.gz",
+      "sha256": "aaaa8060c914851a3e5ee1ba82cc3d6f80972f90638a05c6e823a37557a33758",
+      "bin": "local/gcc/xpack-riscv-none-elf-gcc-15.2.0-1/bin"
+    },
+    "sail": {
+      "version": "0.13.1",
+      "url": "https://github.com/riscv/sail-riscv/releases/download/0.13.1/sail-riscv-Linux-x86_64.tar.gz",
+      "archive": "sail-riscv-Linux-x86_64.tar.gz",
+      "sha256": "ee052f64494a2f5f071afd9c2cb4aa5eaae4ba84753e4f77e442b4f83f2e9469",
+      "bin": "local/sail/sail-riscv-Linux-x86_64/bin"
+    },
+    "mise": {
+      "version": "2026.9.1",
+      "url": "https://github.com/jdx/mise/releases/download/v2026.9.1/mise-v2026.9.1-linux-x64",
+      "archive": "mise-v2026.9.1-linux-x64",
+      "sha256": "c98423c8470d6dc416d9f7036d0646d8ef5ae92ad9186907f8fcc84cbe7db4ea"
+    },
+    "ruby": {
+      "version": "3.4.10",
+      "bin": "local/mise-data/installs/ruby/3.4.10/bin"
+    },
+    "uv": {
+      "version": "0.11.33",
+      "bin": "local/mise-data/installs/uv/0.11.33/uv-x86_64-unknown-linux-gnu"
+    },
+    "bundler": {
+      "version": "4.0.19"
+    }
+  }
+}

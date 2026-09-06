@@ -1,0 +1,70 @@
+CAPI=2:
+# SPDX-License-Identifier: Apache-2.0
+name: "axon:core:riscv:0.1.0"
+description: "Ultra-Embedded-derived RV32IM processor"
+filesets:
+  files_rtl:
+    files:
+      - rtl/riscv_defs_pkg.sv
+      - rtl/riscv_alu.sv
+      - rtl/riscv_regfile.sv
+      - rtl/riscv_fetch.sv
+      - rtl/riscv_decode.sv
+      - rtl/riscv_exec.sv
+      - rtl/riscv_lsu.sv
+      - rtl/riscv_muldiv.sv
+      - rtl/riscv_csr.sv
+      - rtl/riscv_core.sv
+    file_type: systemVerilogSource
+  files_waiver:
+    files: [lint/riscv.vlt]
+    file_type: vlt
+  files_sim:
+    files: [dv/tb/riscv_sim.cpp]
+    file_type: cppSource
+parameters:
+  ELF:
+    datatype: str
+    paramtype: plusarg
+    description: Absolute path to a prebuilt ELF32 image
+  TEST:
+    datatype: str
+    paramtype: plusarg
+    default: smoke
+  SEED:
+    datatype: int
+    paramtype: plusarg
+    default: 1
+  CYCLES:
+    datatype: int
+    paramtype: plusarg
+    default: 100000
+  WAIT:
+    datatype: int
+    paramtype: plusarg
+    default: 0
+  WAVE:
+    datatype: str
+    paramtype: plusarg
+    description: Optional FST output path in the run artifact directory
+targets:
+  default:
+    filesets: [files_rtl]
+  lint:
+    filesets: [files_rtl, files_waiver]
+    flow: lint
+    flow_options:
+      tool: verilator
+      verilator_options: [-Wall]
+    toplevel: riscv_core
+  sim: &sim
+    filesets: [files_rtl, files_waiver, files_sim]
+    flow: sim
+    flow_options:
+      tool: verilator
+      mode: cc
+      verilator_options: [-Wall, --trace-fst, --assert]
+    parameters: [ELF, TEST, SEED, CYCLES, WAIT, WAVE]
+    toplevel: riscv_core
+  sim_fw:
+    <<: *sim

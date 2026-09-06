@@ -1,0 +1,40 @@
+`verilator_config
+// SPDX-License-Identifier: Apache-2.0
+// Only the relevant instruction/result bits are consumed.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_decode.sv" -match "*Bits of signal are not used: 'scoreboard_d'*"
+// Legacy invalid-instruction detection is not routed to traps; documented compliance gap.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_decode.sv" -match "*Signal is not used: 'fault_invalid_inst_w'*"
+// Only the relevant instruction/result bits are consumed.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_exec.sv" -match "*Bits of signal are not used: 'opcode_opcode_i'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_exec.sv" -match "*Signal is not used: 'opcode_ra_idx_i'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_exec.sv" -match "*Signal is not used: 'opcode_rb_idx_i'*"
+// Only the relevant instruction/result bits are consumed.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_exec.sv" -match "*Bits of signal are not used: 'v'*"
+// Only the relevant instruction/result bits are consumed.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_lsu.sv" -match "*Bits of signal are not used: 'opcode_opcode_i'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_lsu.sv" -match "*Signal is not used: 'opcode_pc_i'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_lsu.sv" -match "*Signal is not used: 'opcode_ra_idx_i'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_lsu.sv" -match "*Signal is not used: 'opcode_rb_idx_i'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_muldiv.sv" -match "*Signal is not used: 'opcode_opcode_i'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_muldiv.sv" -match "*Signal is not used: 'opcode_pc_i'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_muldiv.sv" -match "*Signal is not used: 'opcode_ra_idx_i'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_muldiv.sv" -match "*Signal is not used: 'opcode_rb_idx_i'*"
+// Only the relevant instruction/result bits are consumed.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_muldiv.sv" -match "*Bits of signal are not used: 'mult_result_w'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_csr.sv" -match "*Signal is not used: 'opcode_rb_idx_i'*"
+// Legacy execution-unit interface field; retained during mechanical migration.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_csr.sv" -match "*Signal is not used: 'opcode_rb_operand_i'*"
+// Legacy CSR block does not implement machine trap value; documented compliance gap.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_csr.sv" -match "*Signal is not used: 'fault_addr_i'*"
+// Legacy core forces machine mode; privileged compliance is explicitly unclaimed.
+lint_off -rule UNUSEDSIGNAL -file "*/riscv_csr.sv" -match "*Signal is not used: 'csr_mpriv_d'*"

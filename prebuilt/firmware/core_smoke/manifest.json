@@ -1,0 +1,16 @@
+{
+  "suite": "Axon directed bring-up (not ACT)",
+  "compiler": "xPack RISC-V GCC 15.2.0-1",
+  "config_directory": "../../../sw/platforms/core_sim",
+  "config_sha256": {
+    "link.ld": "15f6522e8dbb15af89816485f7ace873158b8075d5303a6db0e0fad420d6fd54",
+    "../../tests/core_smoke.S": "6b9060890b4820040c9f2e9140d25eb771571a8bc594b5d85e0a3842273ac850"
+  },
+  "generation_command": "See sw/README.md; output is generated outside tracked source.",
+  "tests": [
+    {
+      "file": "smoke.elf",
+      "sha256": "26e4b3238ecc7e4a91d62a334a56d7ae9b9049550fa0648c67d975f561a247d6"
+    }
+  ]
+}

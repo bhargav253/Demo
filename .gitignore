@@ -15,5 +15,5 @@ venv/
 /artifacts/
 
 # Private simulation notes and generated run output.
-/sim/noc/plan/
-/sim/noc/results/
+/models/noc/plan/
+/models/noc/results/

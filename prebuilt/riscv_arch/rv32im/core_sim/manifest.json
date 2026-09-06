@@ -1,0 +1,214 @@
+{
+  "suite": "riscv-arch-test ACT4",
+  "suite_revision": "edfa48d307ecda3d83b033dcb80ef96cde866994",
+  "scope": "39 I and 8 M instruction tests; no privileged compliance claim",
+  "versions": {
+    "gcc": "riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "sail": "0.13.1",
+    "ruby": "ruby 3.4.10 (2026-06-30 revision 2b0b7728dc) +PRISM [x86_64-linux]",
+    "uv": "uv 0.11.33 (x86_64-unknown-linux-gnu)",
+    "bundler": "4.0.19"
+  },
+  "config_directory": "../../../../verification/riscv_arch/configs/rv32im_core_sim",
+  "config_sha256": {
+    "rvmodel_macros.h": "972416103c272df11a3cb27d9d68c53f9cd9fcf3719366d7285cef6c7ce3bfbd",
+    "COPYING.BSD": "acc6d427b663b8cbc68037d871bb88e357b2983fad18d9382f820715805cad65",
+    "test_config.yaml": "731eaf523beb55f590614f0a27204f3ed5305d2eb94a319689e793f339de4d24",
+    "link.ld": "096685f33ac0056f9153fb12893cbc2576aafcc8aed8ba4db313e24f872d2a08",
+    "axon-rv32im.yaml": "6f61e51e1afaa7c344b955ac12ac6ed7c0527ada2bbf2dd28582c68f11c1bfeb",
+    "sail.json": "000b7c98e7fb08db5e85b88b0b89552ccdac53702298b79e63a2acab67cc85f2"
+  },
+  "dependency_lock_sha256": "5474f9178913cca0e75902a0006b0136071f8ce18f40bc2f25a6d401c81a5084",
+  "generation_command": "python3 tools/verification/riscv_arch.py generate --workspace <external-workspace>",
+  "generation_receipt_sha256": "5fa955a43a469d40981c1bb7cc7912658b18741856c951cf2754befb95b478d9",
+  "tests": [
+    {
+      "file": "I-add-00.elf",
+      "sha256": "a4f57d3474c97e7c89d485c04832469e665f434107d0551555590aee6f040e12"
+    },
+    {
+      "file": "I-addi-00.elf",
+      "sha256": "92414e62917009c1ffd7147a08261c1d9ec537b16fc7154f81beb104ade0f29f"
+    },
+    {
+      "file": "I-and-00.elf",
+      "sha256": "081721f2df76ddd7a39e5be35a9818fa88f60e2a1a593fc07e495f3976b96c08"
+    },
+    {
+      "file": "I-andi-00.elf",
+      "sha256": "a55ed1c8a09c8c58bb73aac6cff6616b5a76209d978ad22c5684a304048d3421"
+    },
+    {
+      "file": "I-auipc-00.elf",
+      "sha256": "824a7e0167fa8346bbc54a41e4e58dd47fe3183261ec75e97270e4526fd911b6"
+    },
+    {
+      "file": "I-beq-00.elf",
+      "sha256": "a74547dd91082ff9fe3a91ada4db4ba37466bf0000784a2ed14df61be98826b1"
+    },
+    {
+      "file": "I-bge-00.elf",
+      "sha256": "3310a82ac85eff8e151d99f178024d60d75d93ffdbdc43800cbdf2c12f7a1fa7"
+    },
+    {
+      "file": "I-bgeu-00.elf",
+      "sha256": "102df3e7061cb31c89c120aab1c37b49d846099864de2ce2c6ab6661ed6e7c9c"
+    },
+    {
+      "file": "I-blt-00.elf",
+      "sha256": "0b616b287db2b48703347b013a621248d1b0dea92f265c130ae4a340a377884e"
+    },
+    {
+      "file": "I-bltu-00.elf",
+      "sha256": "91af695e7176a64a265847d4125bfdb807eb01f82859e552c93f4de53621bc06"
+    },
+    {
+      "file": "I-bne-00.elf",
+      "sha256": "8e46c5dad39b6ab00018ed2f2bad676dc72986f91aba8e5f1c53b11e719a374b"
+    },
+    {
+      "file": "I-fence-00.elf",
+      "sha256": "6983b7625a7dc1f1f9b30d435c7cf1b4a6798045ea97e78522d84196d8e9559a"
+    },
+    {
+      "file": "I-jal-00.elf",
+      "sha256": "5e36cebabb77163288035e3529e3beb5af2ed9d7a26acb9093ba550bcaba22b2"
+    },
+    {
+      "file": "I-jalr-00.elf",
+      "sha256": "58bb306401c2ef9b1e9ff756b57c63d1b144c9837d4feed2da94943ac1bf892e"
+    },
+    {
+      "file": "I-lb-00.elf",
+      "sha256": "45efde7dbd20cfae93cfdefb2c4857799aff9af1855ae28d21deca96bd925913"
+    },
+    {
+      "file": "I-lbu-00.elf",
+      "sha256": "b01afca1158849d9cbe221085d00ad9dba9e9bf728435636f0a14516699b46b4"
+    },
+    {
+      "file": "I-lh-00.elf",
+      "sha256": "012851d052aac6b249d21097fc554bef2217353b9475612165dfdd1ea9b8d98a"
+    },
+    {
+      "file": "I-lhu-00.elf",
+      "sha256": "7c99721e96bf7e9926281a48fadd6a0c13d5468a22d44ba3640d5b0039a4d5e9"
+    },
+    {
+      "file": "I-lui-00.elf",
+      "sha256": "e8ee8a459da8617471fe5b9dffe9c605cf60be719ff20f5e07e2863bae400a47"
+    },
+    {
+      "file": "I-lw-00.elf",
+      "sha256": "d1ff21a4ed0044703df030c7ebf41e0101574ae91408efba10d87d975aa9ba56"
+    },
+    {
+      "file": "I-nop-00.elf",
+      "sha256": "74528f310629d05ae6d1bfd798e8b14b9b012481824dce5a8cf0ee6edcc34c61"
+    },
+    {
+      "file": "I-or-00.elf",
+      "sha256": "85fce6a3afd6b629bca9bd333e45a335039def37fc775d139f502b9b29c0bb13"
+    },
+    {
+      "file": "I-ori-00.elf",
+      "sha256": "eaba6a52b1d2f236da334f9d37ab5007e3fa27eb6625a6c7bb479f4bcebb4572"
+    },
+    {
+      "file": "I-sb-00.elf",
+      "sha256": "795368260b6a565c3c89406ff06b16c5b724967c422e87cf3bc1923dde80d289"
+    },
+    {
+      "file": "I-sh-00.elf",
+      "sha256": "0bdf86be2af92435c9601aaf88addba134eac5114c173ee51b19bbbb59ff64f4"
+    },
+    {
+      "file": "I-sll-00.elf",
+      "sha256": "8fc04bfc5b8725b7ae0096c54dc492dd72699da489459f0006507722db8fe5d3"
+    },
+    {
+      "file": "I-slli-00.elf",
+      "sha256": "351006a7ff51dc054edc2897eb6e7a73cfd5417c1bc4929f05b72c3d9ad786e0"
+    },
+    {
+      "file": "I-slt-00.elf",
+      "sha256": "c14790f86b49249268ce8df2b2d0bd62cd5fc89cb867a50f880886590ce57956"
+    },
+    {
+      "file": "I-slti-00.elf",
+      "sha256": "6c887faf7d11ee69aac12f50438bfafcd8f1b3db9c525b324de9b3aae1fd1153"
+    },
+    {
+      "file": "I-sltiu-00.elf",
+      "sha256": "6de1ac4019f3649705910e9d7926c973c9a1bd5366bbcf13b582db31b1c3d827"
+    },
+    {
+      "file": "I-sltu-00.elf",
+      "sha256": "abf3f78e88cb88bfafc35eb8b8a57ba7902a52160100ba77789f59b93784545d"
+    },
+    {
+      "file": "I-sra-00.elf",
+      "sha256": "7cf9d964dc172abae2a392b2e92bd3999313e47a832f4f13aafacae324fc8414"
+    },
+    {
+      "file": "I-srai-00.elf",
+      "sha256": "9db3e90c7fa5b8c270aed421e229dac83f14c7889f5badd800d02f349734efdf"
+    },
+    {
+      "file": "I-srl-00.elf",
+      "sha256": "932344c1cd4ae20cdfb566de976015db7e8b2b8af4a11285e2c00aadf6f927ac"
+    },
+    {
+      "file": "I-srli-00.elf",
+      "sha256": "a89abf891c322bcce9451165eec9b6a890cb09c37533c0aa87d54d10a94887a3"
+    },
+    {
+      "file": "I-sub-00.elf",
+      "sha256": "cfc7eced3bba71fd6b097303e574e48c1d839cea1a7ca9246a37118d25d2051a"
+    },
+    {
+      "file": "I-sw-00.elf",
+      "sha256": "743cf93e15626710d4e7fcb9926956ddf35438409b709168526df5a37c385c18"
+    },
+    {
+      "file": "I-xor-00.elf",
+      "sha256": "fbefbe330fd19d140479dcc341d99ab568fc28fe4afdb48eba9190416170194d"
+    },
+    {
+      "file": "I-xori-00.elf",
+      "sha256": "686f3bc661e7668ea955ac70dbf67fa3f815dcf9ed9c767aff426cc98486f860"
+    },
+    {
+      "file": "M-div-00.elf",
+      "sha256": "d2cffdde2ab7a7299dc0b2e7b82166b353454e446f190b2a1c00f8cd5b2ff59e"
+    },
+    {
+      "file": "M-divu-00.elf",
+      "sha256": "8ff78076796a059ad88bb0fc2ea5fdcd7b2af2a084ff3d6efcb69aa51cfdc6b3"
+    },
+    {
+      "file": "M-mul-00.elf",
+      "sha256": "5f4d9524ebfae3136bd658384a40baad42b638909000a64671671e8bcda2c90e"
+    },
+    {
+      "file": "M-mulh-00.elf",
+      "sha256": "b22c81c1e6ca2fed99b51d7449928ab56d961fdc80c706c08efbdd6f4822b4e6"
+    },
+    {
+      "file": "M-mulhsu-00.elf",
+      "sha256": "a7f8f2e34451a1b0b15a2a7bfc3ebac83cd9257cdfb20ed25448be0ea85c04be"
+    },
+    {
+      "file": "M-mulhu-00.elf",
+      "sha256": "1741cf013323f1784baaa03c43ee9776adae242ebcfc1eb99eed5cbecc952dea"
+    },
+    {
+      "file": "M-rem-00.elf",
+      "sha256": "f534a0fa9639b08d3667e9d136bea717a88de90c24530c1730956571f5c0520e"
+    },
+    {
+      "file": "M-remu-00.elf",
+      "sha256": "cc7ae4214caeb8077fba8b06c277e6d23b126330d1caa4539ed4aa73ad2410a7"
+    }
+  ]
+}
