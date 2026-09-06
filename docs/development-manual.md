@@ -54,6 +54,13 @@ ip/
   pe/                   processing-element and systolic datapaths
   soc/                  SoC-level composition
 
+models/                 architectural/performance models
+platforms/              hardware/software integration manifests
+sw/                     firmware and platform support
+verification/           shared suites and adapters
+prebuilt/               selected test executables and provenance
+third_party/            pinned dependency identities
+
 scripts/
   regtool/              register-description and top-generation tools
   fusesoc/              local FuseSoC starting point
@@ -148,7 +155,7 @@ library_root = build/cache/libraries
 Machine-specific EDA installation paths belong in the user's environment or a
 future explicitly designed tool adapter, not in the tracked core graph.
 Ordinary core discovery and open-source lint/simulation must not require local
-configuration. The customized BookSim flow under `sim/noc` remains a separate
+configuration. The customized BookSim flow under `models/noc` remains a separate
 documented simulator workflow.
 
 Tool dependency ownership is deliberately separated:
@@ -899,3 +906,165 @@ waves.
 The current methodology is proven only when a second component can use the
 same commands, target semantics, artifacts, and review flow without special
 root-level changes.
+
+## Prebuilt processor firmware tests
+
+**Available on the `riscv` branch:** `axon:core:riscv:0.1.0` exposes `sim_fw`
+using the same repository-owned FuseSoC/Edalize build path. The generic temporary
+Stage 1 runner `tools/verification/run_firmware.py` builds once, snapshots the executable,
+and executes ELF images in private artifact directories. It checks binary and
+platform input hashes when using a manifest, retains commands/results, and fails
+on any test failure or timeout. It owns no HDL file lists.
+
+Platform firmware linker scripts live under `sw/platforms/`; architectural-test
+linkers and platform macros live under `verification/riscv_arch/configs/`.
+The platform manifest links these to the memory/boot contract and RTL harness.
+Heavy architectural-test generators and reference models run in a separate
+generation workspace. Selected ELFs under `prebuilt/firmware/` and
+`prebuilt/riscv_arch/` are intentional tracked deliverables with provenance and
+applicable licenses. Ordinary builds and regressions never regenerate or
+overwrite these source assets. See [the RISC-V guide](../ip/core/README.md).
+
+## Shared models and firmware organization
+
+The current ownership map is [repository-layout.md](repository-layout.md).
+Architectural/performance models live under `models/`; the relocated BookSim
+workflow is `models/noc`. Its existing in-source compilation and ignored result
+paths are a documented legacy exception, unchanged by this relocation. IP-local
+RTL simulation continues to live under `ip/<block>/dv`.
+
+`platforms/core_sim/platform.json` links the implemented simulation platform to
+its RTL, firmware linker and architectural-test configurations. Orchestrator and
+PE platforms remain planned. Shared recipes now live under `tools/verification`,
+with external dependency pins in `third_party/sources.lock.json`. `AGENTS.md`
+provides agent navigation and required commands; specifications own behavior.
+
+## Firmware and software development policy
+
+This section defines the intended workflow. **Available today:** the `core_sim`
+platform, an assembly smoke program with embedded startup, a platform linker,
+the Verilator ELF loader, and the prebuilt I/M architectural-test collection.
+**Planned:** general C startup/runtime support, platform drivers, orchestrator
+firmware, PE kernels and accelerator integration. These plans do not imply that
+the corresponding hardware or software already exists.
+
+### Compiler toolchain and platform support
+
+Start with one pinned bare-metal RISC-V GCC/binutils toolchain shared across
+compatible CPU roles. The current baseline is `-march=rv32im -mabi=ilp32`.
+Select ISA/ABI flags from the implemented and verified instruction set; a
+compiler accepting an extension is not evidence that the hardware supports it.
+Keep source/tool identities and setup recipes in the repository, with installed
+tools in an external workspace. The existing optional architectural-test setup
+provides a pinned compiler; normal execution of prebuilt tests needs no compiler.
+Do not make Sail or ACT4 dependencies of ordinary project firmware compilation.
+
+A project-specific firmware stack initially means platform support, not a
+project-specific compiler. Add the following as bring-up requires them:
+
+- Linker script: place code, data, BSS and stack within the platform's memories.
+- Startup: establish the stack and required machine state, initialize runtime
+  sections, call the program entry, and report completion or failure. Specify
+  which initialization the loader performs and which startup must perform.
+- Board/platform support and drivers: expose the implemented console, timers,
+  interrupts, DMA and accelerator interfaces. Do not assume these peripherals
+  exist merely because a software API is useful.
+- Runtime/library support: begin with freestanding assembly/C; add libc, heap
+  allocation, an OS or other libraries only for an identified application need.
+
+The current simulation loader is host C++ code that loads ELF segments into RAM,
+zeros segment tails and starts the CPU at the ELF entry point. It is not a
+firmware bootloader. A future FPGA or physical platform needs its own image
+delivery/reset contract; reuse firmware only when those contracts are compatible.
+Linker and startup support therefore belong to a named platform, while reusable
+drivers and kernels should be shared when their interfaces actually match.
+
+### Build, load and run boundaries
+
+Keep the flow explicit:
+
+1. Select the platform, firmware program, ISA/ABI and pinned toolchain.
+2. Compile and link source from `sw/` into a private `build/` directory. Retain
+   the ELF and, for debugging, its link map and disassembly.
+3. Build the hardware simulator through its authoritative FuseSoC target.
+4. Load the ELF through the platform harness and run a self-checking program
+   with a timeout and an explicit pass/fail contract.
+5. Retain the command, platform, source/tool identities, ELF and simulator hashes,
+   result and diagnostic logs in a unique `artifacts/` directory.
+
+FuseSoC owns the HDL dependency graph and simulator build. Firmware compilation
+owns the software dependency graph. The current CPU exposes `default` for RTL,
+`lint` for lint, `sim` for harness smoke and `sim_fw` for ELF execution. A linker
+script, loader and individual firmware program do not each need a FuseSoC target.
+The loader is compiled into the simulator; the ELF is a runtime input. Reuse the
+same simulator for different programs when its hardware configuration is unchanged.
+
+For now, use the tested compiler and runner commands in
+[sw/README.md](../sw/README.md). As multiple programs appear, add a small shared
+firmware build entry point using the existing Make/Python tooling. It should
+select platform/program/toolchain, track source dependencies and produce the
+same reviewable artifacts. That entry point is **Planned**, not an existing CLI.
+Avoid adding another build framework solely to wrap compiler invocations.
+
+### Architectural tests and project tests
+
+Keep three kinds of evidence distinct:
+
+| Test layer | Purpose | Repository ownership |
+| --- | --- | --- |
+| Architectural instruction tests | Check the selected standard ISA behavior against reference expectations | `verification/riscv_arch/`, selected ELFs in `prebuilt/riscv_arch/` |
+| Platform firmware tests | Check boot, memory, MMIO, interrupts and driver integration as implemented | Sources in `sw/`, platform harness and integration DV |
+| PE workload tests | Check custom operations, numerical results and full kernel execution | Future kernels/tests in `sw/`, independent models in `models/`, corresponding DV |
+
+ACT4 orchestrates the architectural-test build and reference flow; the compiler
+assembles/links the programs, and Sail supplies reference execution results used
+to build the final self-checking ELFs. Keep upstream sources and installed tools
+in the external generation workspace. Track our suite inventory, platform
+adapters, dependency pins and generation/publication recipes in this monorepo.
+See [the architectural-test workflow](../verification/riscv_arch/README.md) for
+the implemented commands and provenance checks.
+
+Generate selected architectural binaries once for a reviewed configuration,
+publish them explicitly with manifests/licenses, then reuse them for ordinary
+RTL regressions. An RTL-only change with the same platform/ISA contract normally
+requires rerunning these binaries, not regenerating them. Changes to suite
+inputs, ISA profile, memory/boot/completion contract or pinned generation tools
+require reviewing and regenerating the affected collection. Routine project
+firmware development instead recompiles the changed software into `build/`;
+only deliberately selected deliverables are published into `prebuilt/`.
+
+The current 39 I and 8 M binaries are a bounded instruction-test collection,
+not full processor compliance or proof. Privileged behavior, illegal-instruction
+and misalignment gaps remain documented in `ip/core/doc/riscv.md`. Firmware
+tests complement constrained-random DV, assertions, coverage and formal work;
+they do not replace checks for bus timing, backpressure or concurrency.
+
+### Growth toward orchestrator and PE firmware
+
+Reuse the CPU implementation and toolchain for global orchestration and PE-local
+control while their ISA requirements match. A firmware role is not an ISA variant.
+Introduce a separate platform when memories, peripherals or boot contracts differ;
+introduce a separate ISA profile when supported instructions differ.
+
+For the first PE, prefer the smallest software interface that meets the hardware
+requirements. MMIO-controlled GEMM/GEMV or SIMD engines can use ordinary compiled
+firmware plus drivers. If custom instructions are selected, first specify their
+encodings, operands, arithmetic and architectural effects, then add assembler
+wrappers and directed tests. A compiler backend becomes a separate project only
+when automatic instruction selection or scheduling is needed. A tensor/workload
+compiler that maps operations onto engines is another later layer, not required
+for initial bare-metal bring-up.
+
+Develop in small, self-checking steps: assembly boot, C startup and memory tests,
+one peripheral/engine driver, one deterministic kernel, then multi-PE dispatch
+and synchronization. Before implementing custom arithmetic, define precision,
+accumulation, rounding, overflow and acceptable error, and create independent
+golden results. Test tails, strides, alignment, completion and failure handling
+before measuring throughput. Standard RISC-V tests continue to cover the baseline
+CPU; project tests must cover custom engine semantics and orchestration.
+
+Keep this manual authoritative for the workflow, the
+[repository layout](repository-layout.md) authoritative for ownership, and
+platform/IP specifications authoritative for interfaces. Scoped `AGENTS.md`
+files should link to these contracts and relevant checks rather than duplicate
+memory maps, instruction definitions or compiler settings.

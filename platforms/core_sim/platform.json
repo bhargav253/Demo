@@ -1,0 +1,13 @@
+{
+  "name": "core_sim",
+  "status": "implemented",
+  "description": "Single RV32IM CPU with a flat RAM and MMIO simulation harness",
+  "hardware_core": "axon:core:riscv:0.1.0",
+  "simulation_target": "sim_fw",
+  "memory_contract": "ip/core/doc/riscv.md",
+  "memory_implementation": "ip/core/dv/tb/riscv_sim.cpp",
+  "firmware_linker": "sw/platforms/core_sim/link.ld",
+  "architecture_test_config": "verification/riscv_arch/configs/rv32im_core_sim/test_config.yaml",
+  "architecture_test_manifest": "prebuilt/riscv_arch/rv32im/core_sim/manifest.json",
+  "firmware_test_manifest": "prebuilt/firmware/core_smoke/manifest.json"
+}

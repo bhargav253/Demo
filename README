@@ -32,6 +32,7 @@ python3 tools/env/formal_setup.py
 
 | Core | Purpose | Supported targets |
 | --- | --- | --- |
+| `axon:core:riscv:0.1.0` | RV32IM processor and prebuilt I/M instruction tests | `default`, `lint`, `sim`, `sim_fw` |
 | `axon:bus:components:0.1.0` | APB and AXI4-Lite components | `default`, `lint` |
 | `axon:noc:islip_arbiter:0.1.0` | Single-iteration iSLIP allocator | `default`, `lint`, `sim`, `coverage`, `formal`, `formal_cover` |
 | `axon:pe:syst:0.1.0` | Dual-buffered 2x2 systolic prototype | `default`, `lint` |
@@ -142,7 +143,12 @@ produce per-run databases plus `merged.dat`, `summary.txt`, `summary.json`,
 
 ```text
 ip/                     RTL, DV collateral, and FuseSoC cores
-sim/                    simulator-specific support
+models/                 architectural/performance models
+platforms/              integration manifests
+sw/                     firmware source and platform support
+verification/           shared verification integrations
+prebuilt/               executable tests and provenance
+third_party/            pinned external dependency identities
 scripts/regtool/        register-description and RTL-generation tools
 scripts/coverage/       reusable coverage reporting tools
 scripts/fusesoc/        Axon-maintained FuseSoC source
@@ -162,3 +168,19 @@ coding, FuseSoC, verification, generation, documentation, and AI-assisted
 review principles. Designers and agents should read it before changing
 supported RTL or tooling. Commands marked temporary describe current Stage 1
 scaffolding and must not be treated as the final Stage 2 interface.
+
+## RISC-V firmware verification
+
+See [the core guide](ip/core/README.md) for RTL lint, ELF simulation and the
+prebuilt 47-test ACT4 I/M collection. ACT4/Sail/compiler setup is isolated in a
+separate generation workspace; ordinary test execution uses Verilator and the
+repository bootstrap only. Full privileged compliance is not claimed.
+
+## Repository navigation
+
+[AGENTS.md](AGENTS.md) maps specifications, commands and source ownership for
+AI-assisted work. [Repository layout](docs/repository-layout.md) describes the
+shared CPU/platform/firmware boundaries. The customized BookSim model now lives
+in [models/noc](models/noc/README.md). The reproducible architectural-test recipe
+is in [verification/riscv_arch](verification/riscv_arch/README.md); installed tools
+remain optional and external.
