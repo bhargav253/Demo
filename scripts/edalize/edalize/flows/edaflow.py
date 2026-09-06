@@ -79,7 +79,6 @@ class Node(object):
         self.tool = tool
 
         # Import and instantiate the tool class requested by "tool"
-        print(f"looking for {tool}")
         self.inst = getattr(import_module(f"edalize.tools.{tool}"), tool.capitalize())()
 
 

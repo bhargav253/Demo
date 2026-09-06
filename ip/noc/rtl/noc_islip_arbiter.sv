@@ -3,7 +3,9 @@
 // One scheduling iteration of an iSLIP input/output arbiter.
 // req_i[input][output] and match_o[input][output] use the same orientation.
 
-`include "prim_assert.sv"
+`ifndef YOSYS
+  `include "prim_assert.sv"
+`endif
 
 module noc_islip_arbiter #(
   parameter int unsigned NumPorts = 4
@@ -12,6 +14,11 @@ module noc_islip_arbiter #(
   input  logic                               rst_ni,
   input  logic [NumPorts-1:0][NumPorts-1:0] req_i,
   output logic [NumPorts-1:0][NumPorts-1:0] match_o
+`ifdef FPV_ON
+  ,
+  output logic [NumPorts-1:0][NumPorts-1:0] grant_mask_o,
+  output logic [NumPorts-1:0][NumPorts-1:0] accept_mask_o
+`endif
 );
 
   logic [NumPorts-1:0][NumPorts-1:0] grant;
@@ -20,7 +27,16 @@ module noc_islip_arbiter #(
   logic [NumPorts-1:0][NumPorts-1:0] accept_mask_q;
   logic [NumPorts-1:0][NumPorts-1:0] accept_mask_next;
 
+`ifdef FPV_ON
+  assign grant_mask_o  = grant_mask_q;
+  assign accept_mask_o = accept_mask_q;
+`endif
+
+`ifdef YOSYS
+  initial assert (NumPorts > 0);
+`else
   `ASSERT_INIT(NumPortsPositive_A, NumPorts > 0)
+`endif
 
   for (genvar output_idx = 0; output_idx < NumPorts; output_idx++) begin : gen_grant
     logic [NumPorts-1:0] output_req;
@@ -60,7 +76,11 @@ module noc_islip_arbiter #(
     );
   end
 
+`ifdef FPV_ON
+   always @($global_clock) begin
+`else
    always_ff @(posedge clk_i) begin
+`endif
       if (!rst_ni) begin
          grant_mask_q  <= '0;
          accept_mask_q <= '0;

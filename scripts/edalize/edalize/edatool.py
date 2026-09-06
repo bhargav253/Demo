@@ -236,8 +236,6 @@ class Edatool(object):
         self.stdout = None
         self.stderr = None
 
-        print(f"EDAM --> {edam}")
-        
         if not edam:
             edam = eda_api
         self.edam = edam

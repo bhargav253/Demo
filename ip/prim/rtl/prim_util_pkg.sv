@@ -41,7 +41,7 @@ package prim_util_pkg;
    *   logic [vbits(64 + 1)-1:0] store_number_64;       // width is [6:0]
    */
   function automatic integer vbits(integer value);
-    return (value == 1) ? 1 : $clog2(value);
+    vbits = (value == 1) ? 1 : $clog2(value);
   endfunction
 
   /**

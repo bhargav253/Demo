@@ -1,29 +1,164 @@
-### Directory Structure
-```
-Demo
-├── scripts
-│   └── fusesoc
-│   └── edalize
-└── ip
-    └── bus
-    └── core
-    └── prim
-    └── lint
-    └── pe
-    └── soc
+# Axon hardware development environment
+
+Axon is a monorepo for RTL, reusable IP, simulators, and the tools that build
+and verify them. FuseSoC core files are the authoritative HDL composition and
+dependency graph. Repository-owned FuseSoC and Edalize sources provide a
+repeatable environment for designers, automation, and AI coding agents.
+
+## Quick start
+
+The host currently needs Git, Make, Python 3.10 or newer, GCC/G++, and
+Verilator. Bootstrap initially needs network access for pinned Python packages.
+
+```bash
+git clone <repository-url>
+cd <repository-directory>
+python3 tools/env/bootstrap.py
+python3 tools/env/doctor.py
+tools/bin/fusesoc core list
 ```
 
-### prereqs
-```
-verilator https://verilator.org/guide/latest/install.html
-gtkwave http://gtkwave.sourceforge.net/
-cocotb https://docs.cocotb.org/en/stable/install.html
+Bootstrap creates an ignored `.venv` and installs the Axon-owned FuseSoC and
+Edalize packages directly from this checkout. Shell activation is unnecessary,
+and rerunning bootstrap is safe. Doctor reports host tools and resolved local
+packages without changing the environment. Formal users install the pinned,
+repo-local open-source tool bundle separately:
+
+```bash
+python3 tools/env/formal_setup.py
 ```
 
-### Development methodology
+## Current IP catalog
 
-The repository coding, FuseSoC, verification, documentation, generation, and
-AI-assisted review workflow is defined in
-[`docs/development-manual.md`](docs/development-manual.md). The manual marks
-each interface as available, manual, or planned while the environment is being
-built.
+| Core | Purpose | Supported targets |
+| --- | --- | --- |
+| `axon:bus:components:0.1.0` | APB and AXI4-Lite components | `default`, `lint` |
+| `axon:noc:islip_arbiter:0.1.0` | Single-iteration iSLIP allocator | `default`, `lint`, `sim`, `coverage`, `formal`, `formal_cover` |
+| `axon:pe:syst:0.1.0` | Dual-buffered 2x2 systolic prototype | `default`, `lint` |
+| `axon:prim:arbiter:0.1.0` | Fixed, PPC, and tree arbiters | `default`, qualified lint targets |
+| `axon:prim:arbiter_rr_select:0.1.0` | Stateless round-robin selector | `default`, `lint` |
+| `axon:prim:fifo:0.1.0` | Synchronous and asynchronous FIFO family | `default`, qualified lint targets |
+| `axon:prim:slice:0.1.0` | Two-entry ready/valid slice | `default`, `lint` |
+| `axon:prim:sum_tree:0.1.0` | Parallel combinational sum tree | `default`, `lint` |
+| `axon:prim:sync_reqack:0.1.0` | Request/acknowledge CDC | `default`, `lint` |
+| `axon:prim:assert:0.1.0` | Portable assertion macros | `default` |
+| `axon:prim:cdc_rand_delay:0.1.0` | DV-only randomized CDC delay | `default` |
+| `axon:prim:count:0.1.0` | Configurable saturating counter | `default` |
+| `axon:prim:flop:0.1.0` | Generic flop primitives | `default` |
+| `axon:prim:flop_2sync:0.1.0` | Flop-based synchronizer | `default` |
+| `axon:prim:util:0.1.0` | Shared RTL utilities | `default` |
+
+`axon:lint:common:0.1.0` provides shared Verilator configuration rather than
+synthesizable IP.
+
+## Dependency model
+
+Consumers depend on the narrowest reusable core and receive only its `default`
+RTL fileset. Testbenches, formal harnesses, coverage monitors, and lint waivers
+do not leak through dependencies. The first verification slice resolves as:
+
+```text
+axon:noc:islip_arbiter
+  -> axon:prim:arbiter_rr_select
+     -> axon:prim:util
+        -> axon:prim:assert
+```
+
+Inspect the authoritative catalog and an individual core with:
+
+```bash
+tools/bin/fusesoc core list
+tools/bin/fusesoc core show axon:noc:islip_arbiter:0.1.0
+```
+
+## Basic FuseSoC commands
+
+Lint iSLIP:
+
+```bash
+tools/bin/fusesoc run --target lint axon:noc:islip_arbiter:0.1.0
+```
+
+Run a self-checking simulation:
+
+```bash
+tools/bin/fusesoc run --target sim axon:noc:islip_arbiter:0.1.0 \
+  --TEST=directed --SEED=1 --CYCLES=200
+```
+
+Run one coverage-instrumented simulation:
+
+```bash
+tools/bin/fusesoc run --target coverage axon:noc:islip_arbiter:0.1.0 \
+  --TEST=random --SEED=42 --CYCLES=200
+```
+
+The direct coverage target writes one raw database to
+`build/axon_noc_islip_arbiter_0.1.0/coverage/coverage.dat`.
+
+Prove the iSLIP safety properties and generate cover witnesses:
+
+```bash
+tools/bin/fusesoc run --target formal axon:noc:islip_arbiter:0.1.0
+tools/bin/fusesoc run --target formal_cover axon:noc:islip_arbiter:0.1.0
+```
+
+Formal results live under the corresponding `formal-symbiyosys/build/` and
+`formal_cover-symbiyosys/build/` directories beneath the core's build root.
+Failed proofs and successful cover searches include VCD traces that can be
+opened with GTKWave.
+
+## Temporary Stage 1 orchestration
+
+The root Makefile and Python runners are thin proving scaffolding. They contain
+no RTL file lists and call FuseSoC for dependency resolution and builds. They
+are useful today but are not the final Axon command methodology; Stage 2 will
+replace them with the selected unified test/regression/coverage interface.
+
+```bash
+# Environment convenience
+make bootstrap
+make doctor
+make cores
+
+# Retained lint result
+make lint CORE=axon:noc:islip_arbiter:0.1.0
+
+# Build once and run deterministic random seeds concurrently
+make sim-regress CORE=axon:noc:islip_arbiter:0.1.0 \
+  TEST=random SEED_START=1 SEED_COUNT=100 JOBS=8 CYCLES=200
+
+# Instrument, run a campaign, merge, and report categorized coverage
+make coverage CORE=axon:noc:islip_arbiter:0.1.0 \
+  SEED_START=1 SEED_COUNT=100 JOBS=8 CYCLES=200
+```
+
+Disposable compilation output lives under `build/`. Unique simulation,
+regression, and coverage evidence lives under `artifacts/`. Coverage campaigns
+produce per-run databases plus `merged.dat`, `summary.txt`, `summary.json`,
+`coverage.info`, annotated RTL, logs, and a compatibility manifest.
+
+## Repository map
+
+```text
+ip/                     RTL, DV collateral, and FuseSoC cores
+sim/                    simulator-specific support
+scripts/regtool/        register-description and RTL-generation tools
+scripts/coverage/       reusable coverage reporting tools
+scripts/fusesoc/        Axon-maintained FuseSoC source
+scripts/edalize/        Axon-maintained Edalize source
+tools/env/              deterministic setup and diagnosis
+tools/build/            temporary Stage 1 execution wrappers
+docs/                   tracked development documentation
+.agents/skills/         repository-local AI workflows
+build/                  disposable generated builds
+artifacts/              retained run evidence and reports
+```
+
+## Development manual
+
+The [Axon hardware development manual](docs/development-manual.md) defines the
+coding, FuseSoC, verification, generation, documentation, and AI-assisted
+review principles. Designers and agents should read it before changing
+supported RTL or tooling. Commands marked temporary describe current Stage 1
+scaffolding and must not be treated as the final Stage 2 interface.

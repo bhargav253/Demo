@@ -1,13 +1,18 @@
-fusesoc.conf
 **/__pycache__/
 **/build/
-**/build/
+!tools/build/
+!tools/build/**
+tools/build/__pycache__/
 **/*.gtkw
 **/*~
 scripts/edalize/edalize.egg-info/SOURCES.txt
 scripts/edalize/fusesoc.egg-info/SOURCES.txt
+**/*.egg-info/
+.venv/
 venv/
+.tools/
 /plan/
+/artifacts/
 
 # Private simulation notes and generated run output.
 /sim/noc/plan/
