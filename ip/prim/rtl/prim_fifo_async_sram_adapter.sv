@@ -21,50 +21,50 @@ module prim_fifo_async_sram_adapter #(
   localparam int unsigned DepthW = $clog2(Depth+1)
 ) (
   // Write port
-  input                     clk_wr_i,
-  input                     rst_wr_ni,
-  input                     wvalid_i,
+  input  logic              clk_wr_i,
+  input  logic              rst_wr_ni,
+  input  logic              wvalid_i,
   output logic              wready_o,
-  input        [Width-1:0]  wdata_i,
+  input  logic [Width-1:0]  wdata_i,
   output logic [DepthW-1:0] wdepth_o,
 
   // Read port
-  input                     clk_rd_i,
-  input                     rst_rd_ni,
+  input  logic              clk_rd_i,
+  input  logic              rst_rd_ni,
   output logic              rvalid_o,
-  input                     rready_i,
+  input  logic              rready_i,
   output logic [Width-1:0]  rdata_o,
   output logic [DepthW-1:0] rdepth_o,
 
-  output logic r_full_o,
-  output logic r_notempty_o,
+  output logic              r_full_o,
+  output logic              r_notempty_o,
 
-  output logic w_full_o,
+  output logic              w_full_o,
 
   // TODO: watermark(threshold) ?
 
   // SRAM interface
   // Write SRAM port
   output logic              w_sram_req_o,
-  input                     w_sram_gnt_i,
+  input  logic              w_sram_gnt_i,
   output logic              w_sram_write_o,
   output logic [SramAw-1:0] w_sram_addr_o,
   output logic [SramDw-1:0] w_sram_wdata_o,
   output logic [SramDw-1:0] w_sram_wmask_o,
-  input                     w_sram_rvalid_i, // not used
-  input        [SramDw-1:0] w_sram_rdata_i,  // not used
-  input        [1:0]        w_sram_rerror_i, // not used
+  input  logic              w_sram_rvalid_i, // not used
+  input  logic [SramDw-1:0] w_sram_rdata_i,  // not used
+  input  logic [1:0]        w_sram_rerror_i, // not used
 
   // Read SRAM port
   output logic              r_sram_req_o,
-  input                     r_sram_gnt_i,
+  input  logic              r_sram_gnt_i,
   output logic              r_sram_write_o,
   output logic [SramAw-1:0] r_sram_addr_o,
   output logic [SramDw-1:0] r_sram_wdata_o, // not used
   output logic [SramDw-1:0] r_sram_wmask_o, // not used
-  input                     r_sram_rvalid_i,
-  input        [SramDw-1:0] r_sram_rdata_i,
-  input        [1:0]        r_sram_rerror_i
+  input  logic              r_sram_rvalid_i,
+  input  logic [SramDw-1:0] r_sram_rdata_i,
+  input  logic [1:0]        r_sram_rerror_i
 );
 
   ////////////////
@@ -92,9 +92,9 @@ module prim_fifo_async_sram_adapter #(
   logic [PtrVW-1:0] r_rptr_v, w_rptr_v;
   logic             r_rptr_p, w_rptr_p; // phase
 
-  logic w_wptr_inc, r_rptr_inc;
+  logic             w_wptr_inc, r_rptr_inc;
 
-  logic w_full, r_full, r_empty;
+  logic             w_full, r_full, r_empty;
 
   // SRAM response one clock delayed. So store the value into read clock
   // domain
@@ -103,15 +103,15 @@ module prim_fifo_async_sram_adapter #(
 
   // SRAM has another read pointer (for address of SRAM req)
   // It is -1 of r_rptr if stored, else same to r_rptr
-  logic            r_sram_rptr_inc;
-  logic [PtrW-1:0] r_sram_rptr;
+  logic             r_sram_rptr_inc;
+  logic [PtrW-1:0]  r_sram_rptr;
 
   // r_sram_rptr == r_wptr
   // Used to determine r_sram_req
-  logic r_sramrptr_empty;
+  logic             r_sramrptr_empty;
 
-  logic rfifo_ack; // Used to check if FIFO read interface consumes a data
-  logic rsram_ack;
+  logic             rfifo_ack; // Used to check if FIFO read interface consumes a data
+  logic             rsram_ack;
 
   //////////////
   // Datapath //
@@ -122,7 +122,7 @@ module prim_fifo_async_sram_adapter #(
 
   assign w_wptr_d = w_wptr_q + PtrW'(1);
 
-  always_ff @(posedge clk_wr_i or negedge rst_wr_ni) begin
+  always_ff @(posedge clk_wr_i) begin
     if (!rst_wr_ni) begin
       w_wptr_q      <= PtrW'(0);
       w_wptr_gray_q <= PtrW'(0);
@@ -164,7 +164,7 @@ module prim_fifo_async_sram_adapter #(
 
   assign r_rptr_d = r_rptr_q + PtrW'(1);
 
-  always_ff @(posedge clk_rd_i or negedge rst_rd_ni) begin
+  always_ff @(posedge clk_rd_i) begin
     if (!rst_rd_ni) begin
       r_rptr_q      <= PtrW'(0);
       r_rptr_gray_q <= PtrW'(0);
@@ -200,7 +200,7 @@ module prim_fifo_async_sram_adapter #(
   // Begin: SRAM Read pointer
   assign r_sram_rptr_inc = rsram_ack;
 
-  always_ff @(posedge clk_rd_i or negedge rst_rd_ni) begin
+  always_ff @(posedge clk_rd_i) begin
     if (!rst_rd_ni) begin
       r_sram_rptr <= PtrW'(0);
     end else if (r_sram_rptr_inc) begin
@@ -218,7 +218,7 @@ module prim_fifo_async_sram_adapter #(
   assign r_full  = (r_wptr   == (r_rptr_q ^ XorMask));
   assign r_empty = (r_wptr   == r_rptr_q);
 
-  logic  unused_r_empty;
+  logic             unused_r_empty;
   assign unused_r_empty = r_empty;
 
   assign r_full_o     = r_full;
@@ -256,7 +256,7 @@ module prim_fifo_async_sram_adapter #(
   assign w_sram_wdata_o = SramDw'(wdata_i);
   assign w_sram_wmask_o = SramDw'({Width{1'b1}});
 
-  logic unused_w_sram;
+  logic             unused_w_sram;
   assign unused_w_sram = ^{w_sram_rvalid_i, w_sram_rdata_i, w_sram_rerror_i};
 
   // SRAM Read Request
@@ -299,16 +299,16 @@ module prim_fifo_async_sram_adapter #(
 
   assign rdata_o = (stored) ? rdata_q : rdata_d;
 
-  logic unused_rsram;
+  logic             unused_rsram;
   assign unused_rsram = ^{r_sram_rerror_i};
 
-  if (Width < SramDw) begin : g_unused_rdata
-    logic unused_rdata;
+  if (Width < SramDw) begin : gen_unused_rdata
+    logic            unused_rdata;
     assign unused_rdata = ^r_sram_rdata_i[SramDw-1:Width];
-  end : g_unused_rdata
+  end : gen_unused_rdata
 
   // read clock domain rdata storage
-  logic store_en;
+  logic             store_en;
 
   // Karnaugh Map (r_sram_rvalid_i):
   // rfifo_ack   | 0 | 1 |
@@ -319,7 +319,7 @@ module prim_fifo_async_sram_adapter #(
   // stored = s.r.v && XNOR(stored, rptr_inc)
   assign store_en = r_sram_rvalid_i && !(stored ^ rfifo_ack);
 
-  always_ff @(posedge clk_rd_i or negedge rst_rd_ni) begin
+  always_ff @(posedge clk_rd_i) begin
     if (!rst_rd_ni) begin
       stored <= 1'b 0;
       rdata_q <= Width'(0);

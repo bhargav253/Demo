@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+fusesoc_bin="$repo_root/.venv/bin/fusesoc"
+formal_bin="$repo_root/.tools/oss-cad-suite/bin"
+
+if [[ ! -x "$fusesoc_bin" ]]; then
+  echo "error: Axon FuseSoC environment is missing; run 'python3 tools/env/bootstrap.py'" >&2
+  exit 2
+fi
+
+for argument in "$@"; do
+  case "$argument" in
+    formal|formal_cover|--target=formal|--target=formal_cover)
+      if [[ -d "$formal_bin" ]]; then
+        export PATH="$formal_bin:$PATH"
+      fi
+      break
+      ;;
+  esac
+done
+
+exec "$fusesoc_bin" --config "$repo_root/fusesoc.conf" "$@"

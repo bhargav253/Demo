@@ -18,12 +18,15 @@ module prim_cdc_rand_delay #(
     parameter int DataWidth = 1,
     parameter bit Enable = 1
 ) (
-    input logic                   clk_i,
-    input logic                   rst_ni,
-    input logic [DataWidth-1:0]   prev_data_i,
-    input logic [DataWidth-1:0]   src_data_i,
-    output logic [DataWidth-1:0]  dst_data_o
+    input  logic                 clk_i,
+    input  logic                 rst_ni,
+    input  logic [DataWidth-1:0] prev_data_i,
+    input  logic [DataWidth-1:0] src_data_i,
+    output logic [DataWidth-1:0] dst_data_o
 );
+// The transition-sensitive block below is deliberate simulation instrumentation. A
+// clocked or always_comb replacement would change when the random CDC delay is sampled.
+// axon-policy-allow: legacy-always
 `ifdef SIMULATION
   if (Enable) begin : gen_enable
 
@@ -53,8 +56,12 @@ module prim_cdc_rand_delay #(
     end
 
     // Clear data_del on any cycle start.
-    always @(posedge clk_i or negedge rst_ni) begin
-      data_sel <= 0;
+    always @(posedge clk_i) begin
+      if (!rst_ni) begin
+        data_sel <= '0;
+      end else begin
+        data_sel <= '0;
+      end
     end
 
     always_comb dst_data_o = (prev_data_i & data_sel) | (src_data_i & ~data_sel);

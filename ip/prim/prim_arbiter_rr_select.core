@@ -1,0 +1,39 @@
+CAPI=2:
+# SPDX-License-Identifier: Apache-2.0
+
+name: "axon:prim:arbiter_rr_select:0.1.0"
+description: "Stateless round-robin selection primitive"
+
+filesets:
+  files_rtl:
+    depend:
+      - axon:prim:util
+    files:
+      - rtl/prim_leading_one_ppc.sv
+      - rtl/prim_arbiter_rr_select.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      - axon:lint:common
+    files:
+      - lint/prim_arbiter.vlt
+    file_type: vlt
+
+targets:
+  default:
+    filesets:
+      - files_rtl
+
+  lint:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
+    flow: lint
+    flow_options:
+      tool: verilator
+      verilator_options:
+        - -Wall
+        - -Wno-DECLFILENAME
+        - -Wno-UNUSED
+    toplevel: prim_arbiter_rr_select

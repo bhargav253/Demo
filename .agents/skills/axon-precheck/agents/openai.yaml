@@ -1,0 +1,7 @@
+interface:
+  display_name: "Axon Precheck"
+  short_description: "Review Axon hardware changes before commit"
+  default_prompt: "Use $axon-precheck to verify and review my current hardware changes before commit."
+
+policy:
+  allow_implicit_invocation: false

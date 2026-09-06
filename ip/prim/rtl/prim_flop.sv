@@ -8,13 +8,13 @@ module prim_flop #(
   parameter int               Width      = 1,
   parameter logic [Width-1:0] ResetValue = 0
 ) (
-  input                    clk_i,
-  input                    rst_ni,
-  input        [Width-1:0] d_i,
+  input  logic             clk_i,
+  input  logic             rst_ni,
+  input  logic [Width-1:0] d_i,
   output logic [Width-1:0] q_o
 );
 
-  always_ff @(posedge clk_i or negedge rst_ni) begin
+  always_ff @(posedge clk_i) begin
     if (!rst_ni) begin
       q_o <= ResetValue;
     end else begin

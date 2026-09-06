@@ -3,21 +3,20 @@ CAPI=2:
 # Licensed under the Apache License, Version 2.0, see LICENSE for details.
 # SPDX-License-Identifier: Apache-2.0
 
-name: "lowrisc:prim:count"
-description: ""
+name: "axon:prim:count:0.1.0"
+description: "Configurable saturating counter"
 filesets:
   files_rtl:
     depend:
-      - lowrisc:prim:assert
+      - axon:prim:assert
     files:
-      - rtl/prim_count_pkg.sv
       - rtl/prim_count.sv
     file_type: systemVerilogSource
 
   files_verilator_waiver:
     depend:
       # common waivers
-      - lowrisc:lint:common
+      - axon:lint:common
     files:
       - lint/prim_count.vlt
     file_type: vlt
@@ -25,5 +24,4 @@ filesets:
 targets:
   default:
     filesets:
-      - files_verilator_waiver
       - files_rtl

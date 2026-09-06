@@ -1,12 +1,12 @@
 /*
- 
+
 */
 
 module dma_axi_if
   import intf_pkg::*;
   import dma_pkg::*;
 #(
-  parameter int DMA_ID_VAL = 0
+  parameter int DmaIdVal = 0
 )(/*AUTOARG*/
    // Outputs
    dma_axi_rd_resp_o, dma_axi_wr_resp_o, axi_awreq_o, axi_awvalid_o,
@@ -19,39 +19,39 @@ module dma_axi_if
    dma_active_i
    );
 
-  input                     clk_i;
-  input                     rst_ni;
+  input  logic           clk_i;
+  input  logic           rst_ni;
   // From/To Streamers
-  input   dma_axi_req_t     dma_axi_rd_req_i;
-  output  dma_axi_resp_t    dma_axi_rd_resp_o;
-  input   dma_axi_req_t     dma_axi_wr_req_i;
-  output  dma_axi_resp_t    dma_axi_wr_resp_o;
+  input  dma_axi_req_t   dma_axi_rd_req_i;
+  output dma_axi_resp_t  dma_axi_rd_resp_o;
+  input  dma_axi_req_t   dma_axi_wr_req_i;
+  output dma_axi_resp_t  dma_axi_wr_resp_o;
   // Master AXI I/F
-  output  axi_waddr_t       axi_awreq_o;
-  output  logic             axi_awvalid_o;
-  input                     axi_awready_i;
-  output  axi_wdata_t       axi_wreq_o;
-  output  logic             axi_wvalid_o;
-  input   logic             axi_wready_i;
-  input   axi_bresp_t       axi_brsp_i;
-  input   logic             axi_bvalid_i;
-  output  logic	            axi_bready_o;
-  output  axi_raddr_t       axi_arreq_o;
-  output  logic             axi_arvalid_o;
-  input   logic             axi_arready_i;
-  input   axi_rdata_t       axi_rrsp_i;
-  input   logic             axi_rvalid_i;
-  output  logic             axi_rready_o;
+  output axi_waddr_t     axi_awreq_o;
+  output logic           axi_awvalid_o;
+  input  logic           axi_awready_i;
+  output axi_wdata_t     axi_wreq_o;
+  output logic           axi_wvalid_o;
+  input  logic           axi_wready_i;
+  input  axi_bresp_t     axi_brsp_i;
+  input  logic           axi_bvalid_i;
+  output logic           axi_bready_o;
+  output axi_raddr_t     axi_arreq_o;
+  output logic           axi_arvalid_o;
+  input  logic           axi_arready_i;
+  input  axi_rdata_t     axi_rrsp_i;
+  input  logic           axi_rvalid_i;
+  output logic           axi_rready_o;
 
   // From/To FIFOs interface
-  output  dma_fifo_req_t    dma_fifo_req_o;
-  input   dma_fifo_resp_t   dma_fifo_resp_i;
+  output dma_fifo_req_t  dma_fifo_req_o;
+  input  dma_fifo_resp_t dma_fifo_resp_i;
   // From/To DMA FSM
-  output  logic             axi_pend_txn_o;
-  output  dma_error_t       axi_dma_err_o;
-  input                     clear_dma_i;
-  input                     dma_abort_i;
-  input 		    dma_active_i;   
+  output logic           axi_pend_txn_o;
+  output dma_error_t     axi_dma_err_o;
+  input  logic           clear_dma_i;
+  input  logic           dma_abort_i;
+  input  logic           dma_active_i;
 
   pend_rd_t     rd_counter_ff, next_rd_counter;
   pend_wr_t     wr_counter_ff, next_wr_counter;
@@ -72,10 +72,10 @@ module dma_axi_if
   logic         wr_data_req_vld;
   logic         aw_txn_started_ff, next_aw_txn;
 
-  wr_req_t    wr_data_req_in, wr_data_req_out;
+  wr_req_t      wr_data_req_in, wr_data_req_out;
   axi_alen_t    beat_counter_ff, next_beat_count;
 
-  dma_error_t dma_error_ff, next_dma_error;
+  dma_error_t   dma_error_ff, next_dma_error;
 
   function automatic axi_data_t apply_strb(axi_data_t data, axi_wr_strb_t mask);
     axi_data_t out_data;
@@ -108,7 +108,6 @@ module dma_axi_if
     .rdata_o  (wr_data_req_out),
     .full_o   (),
     .depth_o  (),
-    .err_o    (),
     .clr_i    (1'b0)
   );
 
@@ -130,7 +129,6 @@ module dma_axi_if
     .rdata_o  (rd_txn_last_strb),
     .full_o   (),
     .depth_o  (),
-    .err_o    (),
     .clr_i    (1'b0)
   );
 
@@ -152,7 +150,6 @@ module dma_axi_if
     .rdata_o  (rd_txn_addr),
     .full_o   (),
     .depth_o  (),
-    .err_o    (),
     .clr_i    (1'b0)
   );
 
@@ -170,7 +167,6 @@ module dma_axi_if
     .rready_i (wr_resp_hpn),
     .full_o   (),
     .depth_o  (),
-    .err_o    (),
     .clr_i    (1'b0)
   );
 
@@ -280,7 +276,7 @@ module dma_axi_if
 
     if (dma_active_i) begin
       // Address Read Channel - AR*
-      axi_arreq_o.arid   = axi_tid_t'(DMA_ID_VAL);
+      axi_arreq_o.arid   = axi_tid_t'(DmaIdVal);
 
       axi_arvalid_o = (rd_counter_ff < `DMA_RD_TXN_BUFF) ? dma_axi_rd_req_i.valid : 1'b0;
       if (axi_arvalid_o) begin
@@ -296,12 +292,12 @@ module dma_axi_if
         dma_fifo_req_o.wr_vld = dma_abort_i ? 1'b0 : 1'b1; // Ignore incoming data in case of abort
         dma_fifo_req_o.wdata  = apply_strb(axi_rrsp_i.rdata, rd_txn_last_strb);
         if (axi_rrsp_i.rlast && axi_rready_o) begin
-          rd_err_hpn = (axi_rrsp_i.rresp == AXI_SLVERR) ||
-                       (axi_rrsp_i.rresp == AXI_DECERR);
+          rd_err_hpn = (axi_rrsp_i.rresp == AxiSlaveError) ||
+                       (axi_rrsp_i.rresp == AxiDecodeError);
         end
       end
       // Address Write Channel - AW*
-      axi_awreq_o.awid   = axi_tid_t'(DMA_ID_VAL);
+      axi_awreq_o.awid   = axi_tid_t'(DmaIdVal);
       // Send a write txn based on the following conditions:
       // 1- if (we have enough buffer space - `DMA_WR_TXN_BUFF)
       // 2- We have a request coming from the streamer - ...valid
@@ -323,7 +319,7 @@ module dma_axi_if
       // Write Data Channel - W*
       if (wr_data_req_vld && (dma_fifo_resp_i.rd_vld || dma_abort_i)) begin
         dma_fifo_req_o.rd_rdy = dma_abort_i ? 1'b0 : axi_wready_i; // Ignore fifo content in case of abort
-        axi_wreq_o.wid    = axi_tid_t'(DMA_ID_VAL);
+        axi_wreq_o.wid    = axi_tid_t'(DmaIdVal);
         axi_wreq_o.wdata  = dma_fifo_resp_i.rdata;
         axi_wreq_o.wstrb  = wr_data_req_out.wstrb;
         axi_wreq_o.wlast  = (beat_counter_ff == wr_data_req_out.alen);
@@ -332,13 +328,13 @@ module dma_axi_if
       // Write Response Channel - B*
       axi_bready_o = 1'b1;
       if (axi_bvalid_i) begin
-        wr_err_hpn  = (axi_brsp_i.bresp == AXI_SLVERR) ||
-                      (axi_brsp_i.bresp == AXI_DECERR);
+        wr_err_hpn  = (axi_brsp_i.bresp == AxiSlaveError) ||
+                      (axi_brsp_i.bresp == AxiDecodeError);
       end
     end
   end : axi4_master
 
-  always_ff @(posedge clk_i or negedge rst_ni) begin
+  always_ff @(posedge clk_i) begin
     if (!rst_ni) begin
       rd_counter_ff     <= pend_rd_t'('0);
       wr_counter_ff     <= pend_rd_t'('0);

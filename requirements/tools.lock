@@ -1,0 +1,16 @@
+# Axon hardware-tool Python environment.
+# Regenerate deliberately; do not hand-upgrade packages during unrelated work.
+argcomplete==3.7.2
+attrs==26.1.0
+babel==2.18.0
+fastjsonschema==2.22.2
+Jinja2==3.1.6
+jsonschema2md==1.7.0
+Markdown==3.10.3
+MarkupSafe==3.0.3
+okonomiyaki==3.0.0
+pyparsing==3.3.2
+PyYAML==6.0.3
+setuptools==84.0.0
+simplesat==0.9.2
+six==1.17.0

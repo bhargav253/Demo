@@ -3,40 +3,40 @@ CAPI=2:
 # Licensed under the Apache License, Version 2.0, see LICENSE for details.
 # SPDX-License-Identifier: Apache-2.0
 
-name: "lowrisc:prim:fifo"
+name: "axon:prim:fifo:0.1.0"
 description: "Synchronous and asynchronous fifos"
 filesets:
   files_rtl:
     depend:
-      - lowrisc:prim:assert
-      - lowrisc:prim:util
-      - lowrisc:prim:flop_2sync
-      - lowrisc:prim:count
+      - axon:prim:assert
+      - axon:prim:util
+      - axon:prim:flop_2sync
+      - axon:prim:sync_reqack
     files:
       - rtl/prim_fifo_async_sram_adapter.sv
       - rtl/prim_fifo_async_simple.sv
       - rtl/prim_fifo_async.sv
       - rtl/prim_fifo_sync.sv
       - rtl/prim_fifo_sync_cnt.sv
-      - rtl/prim_fifo_assert.svh : {is_include_file : true}
     file_type: systemVerilogSource
 
   files_verilator_waiver:
     depend:
       # common waivers
-      - lowrisc:lint:common
+      - axon:lint:common
     files:
       - lint/prim_fifo.vlt
     file_type: vlt
 
 targets:
-  default: &default_target
+  default:
     filesets:
-      - files_verilator_waiver
       - files_rtl
 
-  lint_fifo_sync:
-    <<: *default_target
+  lint_sync:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
     default_tool: verilator
     tools:
       verilator:
@@ -49,8 +49,10 @@ targets:
           - --top-module prim_fifo_sync
     toplevel: prim_fifo_sync
 
-  lint_fifo_sync_cnt:
-    <<: *default_target
+  lint_sync_cnt:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
     default_tool: verilator
     tools:
       verilator:
@@ -63,8 +65,10 @@ targets:
           - --top-module prim_fifo_sync_cnt
     toplevel: prim_fifo_sync_cnt
 
-  lint_fifo_async:
-    <<: *default_target
+  lint_async:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
     default_tool: verilator
     tools:
       verilator:
@@ -77,8 +81,10 @@ targets:
           - --top-module prim_fifo_async
     toplevel: prim_fifo_async
 
-  lint_fifo_async_simple:
-    <<: *default_target
+  lint_async_simple:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
     default_tool: verilator
     tools:
       verilator:
@@ -91,8 +97,10 @@ targets:
           - --top-module prim_fifo_async_simple
     toplevel: prim_fifo_async_simple
 
-  lint_fifo_async_sram_adapter:
-    <<: *default_target
+  lint_async_sram_adapter:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
     default_tool: verilator
     tools:
       verilator:

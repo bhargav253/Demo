@@ -1,0 +1,148 @@
+CAPI=2:
+# SPDX-License-Identifier: Apache-2.0
+
+name: "axon:noc:islip_arbiter:0.1.0"
+description: "Single-iteration iSLIP input/output arbiter"
+
+filesets:
+  files_rtl:
+    depend:
+      - axon:prim:arbiter_rr_select
+    files:
+      - rtl/noc_islip_arbiter.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      - axon:lint:common
+    files:
+      - lint/noc_islip_arbiter.vlt
+    file_type: vlt
+
+  files_tb:
+    files:
+      - dv/tb/noc_islip_arbiter_tb.sv
+    file_type: systemVerilogSource
+
+  files_coverage_config:
+    files:
+      - dv/coverage/noc_islip_arbiter_coverage.vlt
+      - dv/coverage/noc_islip_arbiter_coverage.sv
+      - dv/coverage/noc_islip_arbiter_coverage_main.cpp: {file_type: cppSource}
+    file_type: vlt
+
+  files_formal:
+    files:
+      - dv/formal/noc_islip_arbiter_formal.sv
+      - dv/formal/noc_islip_arbiter.sby.j2: {file_type: sbyConfigTemplate}
+    file_type: systemVerilogSource
+
+parameters:
+  NumPorts:
+    datatype: int
+    default: 4
+    description: Number of input and output ports
+    paramtype: vlogparam
+  TEST:
+    datatype: str
+    default: smoke
+    description: Unit test name
+    paramtype: plusarg
+  SEED:
+    datatype: int
+    default: 1
+    description: Reproducible simulation seed
+    paramtype: plusarg
+  CYCLES:
+    datatype: int
+    default: 200
+    description: Number of randomized arbitration cycles
+    paramtype: plusarg
+
+targets:
+  default:
+    filesets:
+      - files_rtl
+
+  lint:
+    filesets:
+      - files_rtl
+      - files_verilator_waiver
+    flow: lint
+    flow_options:
+      tool: verilator
+      verilator_options:
+        - -Wall
+        - -Wno-DECLFILENAME
+        - -Wno-UNUSED
+    toplevel: noc_islip_arbiter
+
+  sim:
+    filesets:
+      - files_rtl
+      - files_tb
+    flow: sim
+    flow_options:
+      tool: verilator
+      mode: binary
+      verilator_options:
+        - --timing
+        - -Wall
+        - -Wno-DECLFILENAME
+        - -Wno-UNUSED
+    parameters:
+      - TEST
+      - SEED
+      - CYCLES
+    toplevel: noc_islip_arbiter_tb
+
+  coverage:
+    filesets:
+      - files_rtl
+      - files_tb
+      - files_coverage_config
+    flow: sim
+    flow_options:
+      tool: verilator
+      mode: cc
+      verilator_options:
+        - --timing
+        - --coverage-line
+        - --coverage-toggle
+        - --coverage-user
+        - -Wall
+        - -Wno-DECLFILENAME
+        - -Wno-UNUSED
+      run_options:
+        - +AXON_COVERAGE_FILE=coverage.dat
+    parameters:
+      - TEST
+      - SEED
+      - CYCLES
+    toplevel: noc_islip_arbiter_tb
+
+  formal:
+    default_tool: symbiyosys
+    filesets:
+      - files_rtl
+      - files_formal
+    parameters:
+      - NumPorts=4
+    tools:
+      symbiyosys:
+        tasknames:
+          - prove
+    toplevel: noc_islip_arbiter_formal
+
+  formal_cover:
+    default_tool: symbiyosys
+    filesets:
+      - files_rtl
+      - files_formal
+    parameters:
+      - NumPorts=4
+    tools:
+      symbiyosys:
+        tasknames:
+          - cover
+    toplevel: noc_islip_arbiter_formal

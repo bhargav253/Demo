@@ -1,0 +1,4 @@
+`verilator_config
+
+// Verification infrastructure must not dilute the RTL coverage denominator.
+coverage_off -file "*noc_islip_arbiter_tb.sv"

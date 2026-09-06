@@ -1,0 +1,10 @@
+`verilator_config
+
+// The edge outputs of the 2x2 array are intentionally unconsumed. They are
+// retained on each reusable MAC element because internal instances use them.
+lint_off -rule UNUSEDSIGNAL -file "*/rtl/syst_eng.sv" -match "*a_out*"
+lint_off -rule UNUSEDSIGNAL -file "*/rtl/syst_eng.sv" -match "*b_out*"
+lint_off -rule UNUSEDSIGNAL -file "*/rtl/syst_eng.sv" -match "*a_slot_out*"
+lint_off -rule UNUSEDSIGNAL -file "*/rtl/syst_eng.sv" -match "*b_slot_out*"
+lint_off -rule UNUSEDSIGNAL -file "*/rtl/syst_eng.sv" -match "*a_valid_out*"
+lint_off -rule UNUSEDSIGNAL -file "*/rtl/syst_eng.sv" -match "*b_valid_out*"
