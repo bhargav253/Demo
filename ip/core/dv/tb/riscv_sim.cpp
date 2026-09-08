@@ -3,6 +3,9 @@
 #include "Vriscv_core.h"
 #include "verilated.h"
 #include "verilated_fst_c.h"
+#if VM_COVERAGE
+#include "verilated_cov.h"
+#endif
 #include <cstdint>
 #include <fstream>
 #include <iostream>
@@ -64,7 +67,7 @@ int main(int argc, char **argv) {
   try {
     VerilatedContext context;
     context.commandArgs(argc, argv);
-    std::string elf, test = "smoke", wave;
+    std::string elf, test = "smoke", wave, coverage;
     uint64_t cycles = 100000;
     unsigned seed = 1, delay = 0;
     for (int i = 1; i < argc; ++i) {
@@ -76,9 +79,15 @@ int main(int argc, char **argv) {
       else if (a.rfind("+SEED=",0)==0) seed=std::stoul(value("+SEED="));
       else if (a.rfind("+WAIT=",0)==0) delay=std::stoul(value("+WAIT="));
       else if (a.rfind("+WAVE=",0)==0) wave=value("+WAVE=");
+      // Compatibility with the legacy generic simulation runner.
+      else if (a.rfind("+AXON_WAVE_FILE=",0)==0) wave=value("+AXON_WAVE_FILE=");
+      else if (a.rfind("+COVERAGE=",0)==0) coverage=value("+COVERAGE=");
       else throw std::runtime_error("Unknown argument: " + a);
     }
     if (!cycles || delay > 1000) throw std::runtime_error("Invalid cycle/wait limit");
+#if !VM_COVERAGE
+    if (!coverage.empty()) throw std::runtime_error("Coverage requires the coverage build target");
+#endif
     uint32_t entry = RamBase;
     if (!elf.empty()) entry = load_elf(elf);
     else {
@@ -101,6 +110,14 @@ int main(int argc, char **argv) {
     dut.mem_d_accept_i=0; dut.mem_d_ack_i=0; dut.mem_d_error_i=0;
     dut.mem_d_data_rd_i=0; dut.mem_d_resp_tag_i=0;
     for (unsigned i=0;i<5;++i) { dut.clk_i=0; eval(); dut.clk_i=1; eval(); }
+#if VM_COVERAGE
+    context.coveragep()->zero();  // Exclude reset initialization from measured activity.
+#endif
+    auto write_coverage = [&] {
+#if VM_COVERAGE
+      if (!coverage.empty()) context.coveragep()->write(coverage.c_str());
+#endif
+    };
     struct Reply { bool valid=false, error=false; uint32_t data=0, pc=0, tag=0; } ir, dr;
     std::cout << "TEST=" << test << " SEED=" << seed << " WAIT=" << delay << " ELF=" << elf << '\n';
     for (uint64_t cycle=0;cycle<cycles;++cycle) {
@@ -139,13 +156,13 @@ int main(int argc, char **argv) {
       }
       dut.clk_i=1; eval();
       if (done) {
-        dut.final(); if(trace) trace->close();
+        dut.final(); if(trace) trace->close(); write_coverage();
         std::cout << (status==1 ? "PASS" : "FAIL") << " status=" << status << " cycles=" << cycle+1 << '\n';
         return status==1 ? 0 : 1;
       }
       if (context.gotFinish()) throw std::runtime_error("Unexpected RTL termination");
     }
-    dut.final(); if(trace) trace->close();
+    dut.final(); if(trace) trace->close(); write_coverage();
     throw std::runtime_error("TIMEOUT without platform pass/fail store");
   } catch (const std::exception &e) {
     std::cerr << "FAIL: " << e.what() << '\n'; return 1;

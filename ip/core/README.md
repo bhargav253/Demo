@@ -11,26 +11,31 @@ needed to execute the supplied ELF tests.
 
 ```bash
 python3 tools/env/bootstrap.py
-tools/bin/fusesoc run --target lint axon:core:riscv:0.1.0
-tools/bin/fusesoc run --target sim axon:core:riscv:0.1.0
-
-# Directed firmware and the official I/M collection; build once per campaign.
-python3 tools/verification/run_firmware.py --manifest prebuilt/firmware/core_smoke/manifest.json
-python3 tools/verification/run_firmware.py --manifest prebuilt/riscv_arch/rv32im/core_sim/manifest.json --jobs 4
-
-# Repeat with deterministic instruction/data acceptance delays.
-python3 tools/verification/run_firmware.py --manifest prebuilt/riscv_arch/rv32im/core_sim/manifest.json \
-  --jobs 4 --wait 3 --seed 42 --cycles 2000000
+tools/bin/fusesoc regress axon:core:riscv:0.1.0 --suite smoke
+tools/bin/fusesoc regress axon:core:riscv:0.1.0 --suite health
+tools/bin/fusesoc coverage axon:core:riscv:0.1.0 --suite coverage
+tools/bin/fusesoc status axon:core:riscv:0.1.0
 ```
 
-`--waves` records FST files. Each invocation creates a unique campaign under
-`artifacts/axon_core_riscv_0.1.0/firmware/`, containing a build log, executable
-snapshot, input ELF snapshots, per-test logs, commands, hashes, and results JSON.
-Any failed test, invalid ELF, checksum/configuration mismatch, or timeout returns
-nonzero. These snapshots keep a concurrent later build from changing a run.
+The health suite runs 97 jobs: lint, boot smoke, directed firmware, and the 47
+instruction tests with baseline and delayed memory acceptance. Coverage uses a
+separate instrumented build. Each campaign produces HTML/Markdown health reports,
+JSON evidence, JUnit, and retained diagnostic artifacts. Coverage percentages
+are descriptive; a selected-suite pass does not close architectural gaps.
+
+Run/replay one member:
+
+```bash
+tools/bin/fusesoc test axon:core:riscv:0.1.0 --test act4/I-add-00 --run-mode wait3 --seed 42
+tools/bin/fusesoc replay <campaign>/runs/<job>/run.json
+```
+
+See [the validation guide](../../docs/validation.md) for schema, modes, suites,
+limits, coverage scope and deferred work. `validation` in `riscv.core` owns the
+suite definitions; the existing firmware runner remains a compatibility path.
 
 The standard `make sim CORE=axon:core:riscv:0.1.0` command runs the small built-in
-boot/store smoke test. The firmware runner is a generic temporary Stage 1
+boot/store smoke test. The firmware runner is a generic legacy
 orchestrator; HDL composition remains exclusively in the `.core` file.
 
 | FuseSoC target | Contract |
@@ -39,6 +44,7 @@ orchestrator; HDL composition remains exclusively in the `.core` file.
 | `lint` | Verilator `-Wall`, with reviewed per-file/per-signal unused-field waivers |
 | `sim` | C++ RAM/ELF harness; built-in smoke when no ELF is supplied |
 | `sim_fw` | Same harness, named entry point for firmware campaigns |
+| `coverage` | Instrumented harness and bus observation cover bins |
 
 For one external ELF use an absolute path:
 

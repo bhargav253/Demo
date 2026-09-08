@@ -2,6 +2,14 @@
 
 module noc_islip_arbiter_tb;
 
+  string wave_file;
+  initial begin
+    if ($value$plusargs("AXON_WAVE_FILE=%s", wave_file)) begin
+      $dumpfile(wave_file);
+      $dumpvars(0, noc_islip_arbiter_tb);
+    end
+  end
+
   localparam int unsigned NumPorts = 4;
   localparam time ClockPeriod = 10ns;
 

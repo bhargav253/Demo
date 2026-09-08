@@ -22,6 +22,10 @@ filesets:
   files_sim:
     files: [dv/tb/riscv_sim.cpp]
     file_type: cppSource
+  files_coverage:
+    tags: [coverage_exclude]
+    files: [dv/coverage/riscv_coverage.sv]
+    file_type: systemVerilogSource
 parameters:
   ELF:
     datatype: str
@@ -47,6 +51,11 @@ parameters:
     datatype: str
     paramtype: plusarg
     description: Optional FST output path in the run artifact directory
+  COVERAGE:
+    datatype: str
+    paramtype: plusarg
+    description: Verilator coverage database output path
+    default: coverage.dat
 targets:
   default:
     filesets: [files_rtl]
@@ -68,3 +77,79 @@ targets:
     toplevel: riscv_core
   sim_fw:
     <<: *sim
+
+  coverage:
+    <<: *sim
+    filesets: [files_rtl, files_waiver, files_sim, files_coverage]
+    flow_options:
+      tool: verilator
+      mode: cc
+      verilator_options: [-Wall, --trace-fst, --assert, --coverage-line, --coverage-toggle, --coverage-user]
+    parameters: [ELF, TEST, SEED, CYCLES, WAIT, WAVE, COVERAGE]
+
+validation:
+  version: 1
+  description: RV32IM RAM/ELF health and coverage campaigns
+  build_modes:
+    lint:
+      target: lint
+      kind: target
+    sim:
+      target: sim_fw
+      kind: simulation
+      pass_pattern: '(?m)^PASS status=1 cycles=[0-9]+$'
+      fail_pattern: '(?m)^(FAIL|%Error|%Fatal)'
+      wave_arg: WAVE
+    coverage:
+      target: coverage
+      kind: simulation
+      pass_pattern: '(?m)^PASS status=1 cycles=[0-9]+$'
+      fail_pattern: '(?m)^(FAIL|%Error|%Fatal)'
+      wave_arg: WAVE
+      coverage_arg: COVERAGE
+  coverage_build_mode: coverage
+  run_modes:
+    base:
+      parameters: {WAIT: 0}
+    wait1:
+      parameters: {WAIT: 1}
+    wait3:
+      parameters: {WAIT: 3}
+    wait7:
+      parameters: {WAIT: 7}
+  tests:
+    lint:
+      build_mode: lint
+    boot:
+      build_mode: sim
+      parameters: {TEST: smoke, CYCLES: 100000}
+    firmware:
+      build_mode: sim
+      manifest: prebuilt/firmware/core_smoke/manifest.json
+      parameters: {TEST: firmware, CYCLES: 1000000}
+    act4:
+      build_mode: sim
+      manifest: prebuilt/riscv_arch/rv32im/core_sim/manifest.json
+      parameters: {TEST: act4, CYCLES: 2000000}
+  regressions:
+    smoke: &smoke
+      - tests: [lint, boot, firmware]
+    health: &health
+      - tests: [lint, boot, firmware, act4]
+      - tests: [act4]
+        run_modes: [wait3]
+        seeds: [42]
+    presubmit: *health
+    postsubmit: *health
+    coverage: *health
+    nightly:
+      - tests: [lint, boot, firmware]
+      - tests: [act4]
+        run_modes: [base, wait1, wait3, wait7]
+        seeds: [1, 42]
+  limitations:
+    - PASS means all selected checks passed; coverage percentages are descriptive, with no automatic closure threshold.
+    - 39 I and 8 M instruction tests; not full architectural certification.
+    - WAIT/SEED vary deterministic acceptance timing; they do not generate random programs or arbitrary response latency.
+    - Interrupts, privileged CSR/trap gaps, reset with in-flight work and arbitrary memory latency remain unverified.
+    - Functional coverage bins observe fetched instruction classes and bus events, not retired instructions or ISA compliance.

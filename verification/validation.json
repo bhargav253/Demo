@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "jobs": 4,
+  "timeout": 600,
+  "max_log_mib": 4,
+  "max_wave_mib": 32,
+  "max_build_file_mib": 1024
+}

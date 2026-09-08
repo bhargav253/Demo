@@ -21,6 +21,26 @@ filesets:
       - lint/syst.vlt
     file_type: vlt
 
+  files_assertions:
+    depend: [axon:prim:assert]
+    files:
+      - dv/assertions/syst_fifo_assert.sv
+    file_type: systemVerilogSource
+
+  files_tb:
+    files:
+      - dv/tb/syst_tb.sv
+    file_type: systemVerilogSource
+
+  files_fifo_tb:
+    files: [dv/tb/syst_fifo_tb.sv]
+    file_type: systemVerilogSource
+
+parameters:
+  TEST: {datatype: str, default: smoke, paramtype: plusarg}
+  SEED: {datatype: int, default: 1, paramtype: plusarg}
+  CYCLES: {datatype: int, default: 200, paramtype: plusarg}
+
 targets:
   default:
     filesets:
@@ -30,13 +50,28 @@ targets:
     filesets:
       - files_rtl
       - files_verilator_waiver
-    default_tool: verilator
-    tools:
-      verilator:
-        lint_only: true
-        verilator_options:
-          - -Wall
-          - --lint-only
-          - --top-module
-          - syst
+    flow: lint
+    flow_options:
+      tool: verilator
+      verilator_options: [-Wall]
     toplevel: syst
+
+  sim:
+    filesets: [files_rtl, files_verilator_waiver, files_tb, files_assertions]
+    flow: sim
+    flow_options:
+      tool: verilator
+      mode: binary
+      verilator_options: [--timing, --assert, --trace-fst, -DAXON_ASSERTIONS, -Wall]
+    parameters: [TEST, SEED, CYCLES]
+    toplevel: syst_tb
+
+  sim_fifo:
+    filesets: [files_rtl, files_verilator_waiver, files_fifo_tb, files_assertions]
+    flow: sim
+    flow_options:
+      tool: verilator
+      mode: binary
+      verilator_options: [--timing, --assert, --trace-fst, -DAXON_ASSERTIONS, -Wall]
+    parameters: [TEST, SEED, CYCLES]
+    toplevel: syst_fifo_tb

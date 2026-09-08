@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "paths": [
+        "docs/*.md",
+        "README",
+        "**/README.md"
+      ],
+      "kind": "documentation",
+      "reason": "Documentation-only paths; source and platform ownership take precedence"
+    },
+    {
+      "paths": [
+        "scripts/**",
+        "tools/**",
+        "requirements/**",
+        "third_party/**",
+        "fusesoc.conf",
+        "verification/validation.json",
+        "verification/impact.json",
+        "Makefile",
+        ".gitignore",
+        "AGENTS.md",
+        "**/AGENTS.md",
+        ".agents/**"
+      ],
+      "kind": "global",
+      "reason": "Shared build, validation, dependency or repository policy"
+    }
+  ]
+}

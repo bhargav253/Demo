@@ -25,6 +25,7 @@ filesets:
     file_type: systemVerilogSource
 
   files_coverage_config:
+    tags: [coverage_exclude]
     files:
       - dv/coverage/noc_islip_arbiter_coverage.vlt
       - dv/coverage/noc_islip_arbiter_coverage.sv
@@ -38,6 +39,15 @@ filesets:
     file_type: systemVerilogSource
 
 parameters:
+  AXON_WAVE_FILE:
+    datatype: str
+    paramtype: plusarg
+    description: Optional FST path
+  AXON_COVERAGE_FILE:
+    datatype: str
+    paramtype: plusarg
+    default: coverage.dat
+    description: Per-run raw coverage database
   NumPorts:
     datatype: int
     default: 4
@@ -87,6 +97,8 @@ targets:
       mode: binary
       verilator_options:
         - --timing
+        - --trace-fst
+        - --assert
         - -Wall
         - -Wno-DECLFILENAME
         - -Wno-UNUSED
@@ -94,6 +106,7 @@ targets:
       - TEST
       - SEED
       - CYCLES
+      - AXON_WAVE_FILE
     toplevel: noc_islip_arbiter_tb
 
   coverage:
@@ -113,12 +126,11 @@ targets:
         - -Wall
         - -Wno-DECLFILENAME
         - -Wno-UNUSED
-      run_options:
-        - +AXON_COVERAGE_FILE=coverage.dat
     parameters:
       - TEST
       - SEED
       - CYCLES
+      - AXON_COVERAGE_FILE
     toplevel: noc_islip_arbiter_tb
 
   formal:
@@ -146,3 +158,42 @@ targets:
         tasknames:
           - cover
     toplevel: noc_islip_arbiter_formal
+
+validation:
+  version: 1
+  description: Small control reference for the shared validation engine
+  build_modes:
+    lint: {target: lint, kind: target}
+    sim:
+      target: sim
+      kind: simulation
+      pass_pattern: 'PASS: [0-9]+ checks'
+      wave_arg: AXON_WAVE_FILE
+    coverage:
+      target: coverage
+      kind: simulation
+      pass_pattern: 'PASS: [0-9]+ checks'
+      coverage_arg: AXON_COVERAGE_FILE
+  coverage_build_mode: coverage
+  run_modes:
+    base: {parameters: {}}
+  tests:
+    lint: {build_mode: lint}
+    smoke: {build_mode: sim, parameters: {TEST: smoke, CYCLES: 200}}
+    directed: {build_mode: sim, parameters: {TEST: directed, CYCLES: 200}}
+    random: {build_mode: sim, parameters: {TEST: random, CYCLES: 200}}
+  regressions:
+    smoke:
+      - tests: [lint, smoke]
+    health: &health
+      - tests: [lint, directed]
+      - tests: [random]
+        seeds: [1, 2, 3, 4, 5, 6, 7, 8]
+    presubmit: *health
+    postsubmit: *health
+    nightly: *health
+    coverage: *health
+  limitations:
+    - PASS means all selected checks passed; coverage percentages are descriptive, with no automatic closure threshold.
+    - Default four-port single-iteration allocator only.
+    - This simulation campaign does not run formal; the separate Stage 1 formal gate remains available.

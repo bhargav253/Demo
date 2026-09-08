@@ -99,7 +99,12 @@
 //  ASSUME_I:     Assume an immediate property
 
 `ifdef VERILATOR
- `include "prim_assert_dummy_macros.svh"
+ `ifdef AXON_ASSERTIONS
+  `include "prim_assert_standard_macros.svh"
+  `define INC_ASSERT
+ `else
+  `include "prim_assert_dummy_macros.svh"
+ `endif
 `elsif SYNTHESIS
  `include "prim_assert_dummy_macros.svh"
 `elsif YOSYS

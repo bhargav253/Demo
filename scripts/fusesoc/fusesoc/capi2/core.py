@@ -66,6 +66,9 @@ class Core:
 
         self.is_generated = generated
 
+    def get_validation(self):
+        return copy.deepcopy(self._capi_data.get("validation"))
+
     def __repr__(self):
         return str(self.name)
 

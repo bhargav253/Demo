@@ -689,6 +689,9 @@ def get_parser():
     )
     parser_run.set_defaults(func=run)
 
+    from fusesoc.validation.cli import register
+    register(subparsers)
+
     # config subparser
     parser_config = subparsers.add_parser(
         "config",

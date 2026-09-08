@@ -1,0 +1,16 @@
+{
+  "axon:noc:islip_arbiter:0.1.0": {
+    "formal_targets": [
+      "formal",
+      "formal_cover"
+    ],
+    "scope": "Default four-port single-iteration safety and deterministic simulation"
+  },
+  "axon:pe:syst:0.1.0": {
+    "formal_targets": [],
+    "scope": "Default unsigned 2x2 datapath simulation; local assertions execute in sim; no full datapath formal claim",
+    "simulation_targets": [
+      "sim_fifo"
+    ]
+  }
+}

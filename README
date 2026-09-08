@@ -32,10 +32,10 @@ python3 tools/env/formal_setup.py
 
 | Core | Purpose | Supported targets |
 | --- | --- | --- |
-| `axon:core:riscv:0.1.0` | RV32IM processor and prebuilt I/M instruction tests | `default`, `lint`, `sim`, `sim_fw` |
+| `axon:core:riscv:0.1.0` | RV32IM processor and prebuilt I/M instruction tests | `default`, `lint`, `sim`, `sim_fw`, `coverage` |
 | `axon:bus:components:0.1.0` | APB and AXI4-Lite components | `default`, `lint` |
 | `axon:noc:islip_arbiter:0.1.0` | Single-iteration iSLIP allocator | `default`, `lint`, `sim`, `coverage`, `formal`, `formal_cover` |
-| `axon:pe:syst:0.1.0` | Dual-buffered 2x2 systolic prototype | `default`, `lint` |
+| `axon:pe:syst:0.1.0` | Dual-buffered 2x2 prototype; matrix simulation currently fails | `default`, `lint`, `sim`, `sim_fifo` |
 | `axon:prim:arbiter:0.1.0` | Fixed, PPC, and tree arbiters | `default`, qualified lint targets |
 | `axon:prim:arbiter_rr_select:0.1.0` | Stateless round-robin selector | `default`, `lint` |
 | `axon:prim:fifo:0.1.0` | Synchronous and asynchronous FIFO family | `default`, qualified lint targets |
@@ -109,12 +109,33 @@ Formal results live under the corresponding `formal-symbiyosys/build/` and
 Failed proofs and successful cover searches include VCD traces that can be
 opened with GTKWave.
 
-## Temporary Stage 1 orchestration
+## Integrated validation
 
-The root Makefile and Python runners are thin proving scaffolding. They contain
-no RTL file lists and call FuseSoC for dependency resolution and builds. They
-are useful today but are not the final Axon command methodology; Stage 2 will
-replace them with the selected unified test/regression/coverage interface.
+The primary RISC-V health and coverage commands are now:
+
+```sh
+tools/bin/fusesoc regress axon:core:riscv:0.1.0 --suite health
+tools/bin/fusesoc coverage axon:core:riscv:0.1.0 --suite coverage
+tools/bin/fusesoc status axon:core:riscv:0.1.0
+```
+
+Health runs 97 declared checks, using one simulator build for all firmware runs.
+Reports include HTML, Markdown, JSON and JUnit; failures retain logs/waves and
+verified replay inputs. Core-local declarations replace ad hoc campaign command
+assembly. Read [the validation guide](docs/validation.md) for the DVSim-style
+model, test selection, replay, coverage interpretation and migration. Earlier
+Make/Python interfaces remain compatibility paths. Dependency-selected smoke checks are available with
+`tools/bin/fusesoc presubmit --base <reference> --dry-run`; remove `--dry-run`
+to run the affected cores and their consumers. Missing smoke declarations block
+the gate. Eligible simulator builds now use a verified local content-addressed
+cache; `fusesoc cache list` explains retained entries. Additional cores need
+qualified smoke suites, and CI enforcement is not configured.
+
+## Legacy Make/Python orchestration
+
+The root Makefile and Python runners remain available for compatibility. They
+contain no RTL file lists and call FuseSoC for dependency resolution and builds.
+Use the integrated FuseSoC commands above for new test/regression/coverage work.
 
 ```bash
 # Environment convenience
@@ -154,7 +175,7 @@ scripts/coverage/       reusable coverage reporting tools
 scripts/fusesoc/        Axon-maintained FuseSoC source
 scripts/edalize/        Axon-maintained Edalize source
 tools/env/              deterministic setup and diagnosis
-tools/build/            temporary Stage 1 execution wrappers
+tools/build/            legacy execution wrappers
 docs/                   tracked development documentation
 .agents/skills/         repository-local AI workflows
 build/                  disposable generated builds
@@ -166,8 +187,8 @@ artifacts/              retained run evidence and reports
 The [Axon hardware development manual](docs/development-manual.md) defines the
 coding, FuseSoC, verification, generation, documentation, and AI-assisted
 review principles. Designers and agents should read it before changing
-supported RTL or tooling. Commands marked temporary describe current Stage 1
-scaffolding and must not be treated as the final Stage 2 interface.
+supported RTL or tooling. Commands marked legacy document compatibility interfaces. New campaign
+features belong in the integrated FuseSoC command family.
 
 ## RISC-V firmware verification
 
@@ -184,3 +205,28 @@ shared CPU/platform/firmware boundaries. The customized BookSim model now lives
 in [models/noc](models/noc/README.md). The reproducible architectural-test recipe
 is in [verification/riscv_arch](verification/riscv_arch/README.md); installed tools
 remain optional and external.
+
+Legacy retained validation (Make/Python CLI)
+------------------------------------------
+These compatibility entry points retain evidence for individual targets and
+composed per-IP checks.
+They use the same FuseSoC cores as direct commands:
+
+    python3 tools/build/check_ip.py --core axon:noc:islip_arbiter:0.1.0
+    python3 tools/build/check_ip.py --core axon:pe:syst:0.1.0
+
+Equivalent temporary shorthand: make check-ip CORE=<full-vlnv>.
+Defaults: 100 random seeds, 8 workers, 200 cycles, plus directed/lint and the
+profile's formal/local checks. Profiles live in verification/ip_checks.json.
+The syst top-level simulation currently exposes a matrix mismatch; its gate
+must fail until the behavioral repair is agreed and verified.
+
+Retained individual run, including failure waves and a JSON manifest:
+
+    python3 tools/build/run_target.py sim --core axon:pe:syst:0.1.0 --target sim_fifo --test directed --seed 1 --cycles 2000
+    python3 tools/build/run_target.py formal --core axon:noc:islip_arbiter:0.1.0 --target formal
+
+Each result prints its artifact path and exact rerun command. --timeout,
+--max-log-mib and --max-wave-mib bound target execution. Passing simulations
+remove waves; failures retain them under artifacts/. Direct FuseSoC remains
+usable but does not itself provide the composed gate/retained manifest contract.

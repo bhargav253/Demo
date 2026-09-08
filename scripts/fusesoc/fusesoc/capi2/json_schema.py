@@ -721,3 +721,11 @@ capi2_schema = """
   }
 }
 """
+
+
+# Axon-owned extension; validated during ordinary core discovery as well as runs.
+import json as _json
+from fusesoc.validation.schema import SCHEMA as _validation_schema
+_schema = _json.loads(capi2_schema)
+_schema['properties']['validation'] = _validation_schema
+capi2_schema = _json.dumps(_schema)

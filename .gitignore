@@ -2,7 +2,7 @@
 **/build/
 !tools/build/
 !tools/build/**
-tools/build/__pycache__/
+tools/build/**/__pycache__/
 **/*.gtkw
 **/*~
 scripts/edalize/edalize.egg-info/SOURCES.txt

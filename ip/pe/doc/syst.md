@@ -55,14 +55,16 @@ verified and must not be inferred solely from the current state machine.
 
 ## Assertions and invariants
 
-No functional assertions are currently present. Future verification should
-cover FIFO occupancy, valid scheduling, slot alignment, result ordering,
-matrix arithmetic, and behavior under bubbles and reset.
+The simulation-only bound FIFO monitor checks occupancy, underflow, overflow
+and legal operation counts. Valid scheduling, slot alignment and matrix-level
+behavior remain unverified while the top-level functional test fails.
 
 ## FuseSoC targets
 
 - `default` contains only the reusable synthesizable RTL;
-- `lint` runs strict Verilator lint with `syst` as the top.
+- `lint` runs strict Verilator lint with `syst` as the top;
+- `sim` runs the new self-failing matrix test (currently failing);
+- `sim_fifo` runs independent FIFO checks with active assertions.
 
 The old randomized testbench is retained as `dv/legacy/syst_legacy_tb.sv` for
 behavioral reference only. It prints mismatches rather than failing the
@@ -80,8 +82,34 @@ enforcement through an explicit legacy-file annotation.
 - The external interface has no ready signal.
 - Arithmetic is unsigned.
 - The controller assumes a particular stream ordering and internal latency.
-- Simulation, deterministic checking, and formal work are deferred until the
-  methodology reaches this second vertical slice.
+- Matrix simulation is executable but failing; no matrix-functional maturity
+  or datapath formal proof is claimed.
 
 `block_diag.jpg` is retained as the original historical drawing. The editable
 source of the normalized overview is `syst.drawio`.
+
+## Diagnostic example and known limitations
+
+The supported `dv/tb/syst_tb.sv` replaces the legacy bench as executable evidence.
+It drives and checks on falling edges, compares against independent unsigned
+A×B arithmetic, and fails nonzero on mismatches or missing results. Input-order
+completion is the proposed contract awaiting designer confirmation. With two
+back-to-back matrices, the first expected result `[19,22,43,50]` instead appeared
+as `[32,38,22,16]`. The output selector resets to engine 1 while input submission
+starts at engine 0. Arithmetic alignment still needs investigation after the
+ordering contract is confirmed. No RTL datapath repair is claimed yet.
+
+The independent `sim_fifo` target checks the input FIFO at Depth=3 and output
+FIFO at Depth=2: exact capacity, one/two-element operations, simultaneous
+read/write, wraparound, ordering, empty state and reset with pending data.
+`--TEST=directed --SEED=1 --CYCLES=2000` passed 2,011 checks. The bound monitor
+uses Axon assertion wrappers with `AXON_ASSERTIONS` and `--assert` enabled to
+check occupancy, legal counts, underflow and overflow. The diagnostic
+`--TEST=negative_underflow` intentionally fails `NoUnderflow_A`; it is excluded
+from passing gates. These are simulation assertions, not formal proofs.
+
+The FIFO contract permits reads only from pre-edge occupancy. Simultaneous
+writes may consume capacity freed by reads at that edge. Input FIFO pushes four
+items and pops zero/one/two; output FIFO pushes zero/one/two and pops four.
+Full flags and runtime overflow protection remain absent. These tests establish
+local FIFO behavior; they do not establish a safe external top-level schedule.

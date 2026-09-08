@@ -5,12 +5,16 @@ from __future__ import annotations
 
 import argparse
 import fcntl
+import math
 import os
 import re
 import shlex
 import subprocess
 import sys
-import tempfile
+import shutil
+import signal
+import time
+from evidence import digest, execute, provenance, save
 import uuid
 from datetime import UTC, datetime
 from pathlib import Path
@@ -64,19 +68,7 @@ def target_names(info: str) -> set[str]:
 
 
 def stream_command(command: list[str], cwd: Path, log_file: TextIO) -> int:
-    process = subprocess.Popen(
-        command,
-        cwd=cwd,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        bufsize=1,
-    )
-    assert process.stdout is not None
-    for line in process.stdout:
-        print(line, end="", flush=True)
-        log_file.write(line)
-    return process.wait()
+    return execute(command, cwd, log_file, echo=True)
 
 
 def find_simulator(work_root: Path) -> Path | None:
@@ -93,144 +85,114 @@ def write_result(log_file: TextIO, result: str, return_code: int) -> None:
     log_file.write(f"Exit status: {return_code}\n")
 
 
-def run_lint(core: str, target: str, work_root: Path) -> int:
-    command = [
-        str(FUSESOC),
-        "run",
-        "--clean",
-        "--target",
-        target,
-        "--work-root",
-        str(work_root),
-        core,
-    ]
+def run_target(args) -> int:
+    core, target = args.core, args.target
+    run_id = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%fZ") + "-" + uuid.uuid4().hex[:8]
+    report_dir = (REPO_ROOT / "artifacts" / SAFE_PART.sub("_", core) / target /
+                  SAFE_PART.sub("_", args.test or "default") / f"seed-{args.seed or 0}" / run_id)
+    report_dir.mkdir(parents=True)
+    work_root = REPO_ROOT / "build" / SAFE_PART.sub("_", core) / target
     work_root.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.NamedTemporaryFile(
-        mode="w",
-        encoding="utf-8",
-        prefix=f".{target}-",
-        suffix=".log.tmp",
-        dir=work_root.parent,
-        delete=False,
-    ) as log_file:
-        temporary_log = Path(log_file.name)
-        log_file.write(f"Core: {core}\nTarget: {target}\n")
-        log_file.write(f"Command: {shlex.join(command)}\n\n")
-        return_code = stream_command(command, REPO_ROOT, log_file)
-        result = "PASS" if return_code == 0 else "FAIL"
-        write_result(log_file, result, return_code)
-
-    work_root.mkdir(parents=True, exist_ok=True)
-    report = work_root / "lint.log"
-    temporary_log.replace(report)
-    print(f"Result: {result}", flush=True)
-    print(f"Report: {report.relative_to(REPO_ROOT)}", flush=True)
-    return return_code
-
-
-def run_sim(
-    core: str,
-    target: str,
-    test: str,
-    seed: int,
-    cycles: int,
-    rebuild: bool,
-    skip_build: bool,
-    work_root: Path,
-) -> int:
-    safe_core = SAFE_PART.sub("_", core)
-    safe_test = SAFE_PART.sub("_", test)
-    timestamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%fZ")
-    run_id = f"{timestamp}-{os.getpid()}-{uuid.uuid4().hex[:8]}"
-    report_dir = (
-        REPO_ROOT
-        / "artifacts"
-        / safe_core
-        / target
-        / safe_test
-        / f"seed-{seed}"
-        / run_id
-    )
-    report_dir.mkdir(parents=True, exist_ok=False)
-    temporary_report = report_dir / ".sim.log.tmp"
-    report = report_dir / "sim.log"
-
-    build_command = [str(FUSESOC), "run"]
-    if rebuild:
-        build_command.append("--clean")
-    build_command += [
-        "--build",
-        "--target",
-        target,
-        "--work-root",
-        str(work_root),
-        core,
-    ]
-
-    work_root.parent.mkdir(parents=True, exist_ok=True)
-    lock_path = work_root.parent / f".{target}.lock"
-    with temporary_report.open("w", encoding="utf-8") as log_file:
-        log_file.write(f"Core: {core}\nTarget: {target}\n")
-        log_file.write(f"Test: {test}\nSeed: {seed}\n")
-        log_file.write(f"Cycles: {cycles}\n")
-        log_file.write(f"Forced rebuild: {'yes' if rebuild else 'no'}\n")
-        log_file.write(f"Build command: {shlex.join(build_command)}\n\n")
-
-        if skip_build:
-            simulator = find_simulator(work_root)
-            build_status = 0
-            before_mtime = simulator.stat().st_mtime_ns if simulator else None
-            after_mtime = before_mtime
-            log_file.write("Build check: skipped by prepared regression\n")
-        else:
-            with lock_path.open("w", encoding="utf-8") as lock_file:
-                print(f"Build lock: {lock_path.relative_to(REPO_ROOT)}", flush=True)
-                fcntl.flock(lock_file, fcntl.LOCK_EX)
-                simulator_before = find_simulator(work_root)
-                before_mtime = (
-                    simulator_before.stat().st_mtime_ns if simulator_before else None
-                )
-                build_status = stream_command(build_command, REPO_ROOT, log_file)
-                simulator = find_simulator(work_root)
-                after_mtime = simulator.stat().st_mtime_ns if simulator else None
-                fcntl.flock(lock_file, fcntl.LOCK_UN)
-
-        if build_status != 0 or simulator is None:
-            result = "FAIL"
-            reuse = "FAILED"
-            return_code = build_status if build_status != 0 else 1
-            log_file.write(f"\nBuild result: {reuse}\n")
-            if simulator is None:
-                message = f"error: no unique simulator executable found in {work_root}"
-                print(message, file=sys.stderr)
-                log_file.write(f"\n{message}\n")
-        else:
-            reuse = "REUSED" if before_mtime == after_mtime else "BUILT"
-            run_command = [
-                str(simulator),
-                f"+TEST={test}",
-                f"+SEED={seed}",
-                f"+CYCLES={cycles}",
-            ]
-            log_file.write(f"\nBuild result: {reuse}\n")
-            log_file.write(f"Run command: {shlex.join(run_command)}\n\n")
-            print(f"Build result: {reuse}", flush=True)
-            return_code = stream_command(run_command, work_root, log_file)
-            result = "PASS" if return_code == 0 else "FAIL"
-
-        write_result(log_file, result, return_code)
-
-    temporary_report.replace(report)
-    print(f"Result: {result}", flush=True)
-    print(f"Report: {report.relative_to(REPO_ROOT)}", flush=True)
-    return return_code
+    # Formal runs own their working files so witnesses survive subsequent runs.
+    if args.action == "formal":
+        work_root = report_dir / "formal-work"
+    rerun = [sys.executable, str(Path(__file__).resolve()), args.action,
+             "--core", core, "--target", target, "--timeout", str(args.timeout)]
+    if args.action == "sim":
+        rerun += ["--test", args.test, "--seed", str(args.seed), "--cycles", str(args.cycles)]
+    rerun += ["--max-log-mib", str(args.max_log_mib), "--max-wave-mib", str(args.max_wave_mib)]
+    if args.rebuild:
+        rerun.append("--rebuild")
+    manifest = dict(provenance(REPO_ROOT), core=core, target=target, test=args.test,
+                    seed=args.seed, parameters={"CYCLES":args.cycles} if args.action == "sim" else {},
+                    result="RUNNING", rerun_command=shlex.join(rerun), commands=[],
+                    timeout_seconds=args.timeout, max_log_mib=args.max_log_mib,
+                    max_wave_mib=args.max_wave_mib, started_at=datetime.now(UTC).isoformat())
+    save(report_dir / "run.json", manifest)
+    report = report_dir / ("sim.log" if args.action == "sim" else target + ".log")
+    code = 1
+    previous_handlers = {}
+    def interrupt(signum, frame):
+        raise KeyboardInterrupt
+    for sig in (signal.SIGINT, signal.SIGTERM):
+        previous_handlers[sig] = signal.signal(sig, interrupt)
+    def call(command, cwd, log, simulation=False):
+        manifest['commands'].append({'argv':command, 'cwd':str(cwd)})
+        save(report_dir / "run.json", manifest)
+        return execute(command, cwd, log, args.timeout, args.max_log_mib*1024*1024,
+                       args.max_wave_mib*1024*1024 if simulation else 1024*1024*1024)
+    try:
+        with report.open('w') as log:
+            command = [str(FUSESOC), 'run']
+            if args.rebuild:
+                command.append('--clean')
+            if args.action == 'sim':
+                command.append('--build')
+            command += ['--target', target, '--work-root', str(work_root), core]
+            lock = work_root.parent / ('.' + target + '.lock')
+            with lock.open('w') as handle:
+                deadline = time.monotonic() + args.timeout
+                while True:
+                    try:
+                        fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                        break
+                    except BlockingIOError:
+                        if time.monotonic() >= deadline:
+                            raise TimeoutError('build lock timeout')
+                        time.sleep(.1)
+                before = find_simulator(work_root)
+                before_hash = digest(before) if before else None
+                code = 0 if args.skip_build else call(command, REPO_ROOT, log)
+                manifest['build_metadata'] = {str(p.relative_to(work_root)):digest(p)
+                    for p in work_root.rglob('*') if p.is_file() and p.suffix in ('.yml', '.vc', '.sv', '.svh', '.v', '.cpp', '.sby')}
+                for metadata in work_root.glob('*.eda.yml'):
+                    shutil.copy2(metadata, report_dir / metadata.name)
+                if code == 0 and args.action == 'sim':
+                    simulator = find_simulator(work_root)
+                    if simulator is None:
+                        raise RuntimeError('no unique simulator executable after build')
+                    manifest['executable_sha256'] = digest(simulator)
+                    manifest['build_result'] = 'REUSED' if before_hash == manifest['executable_sha256'] else 'BUILT'
+                    # Copy while holding the build lock; another build cannot change this run.
+                    snapshot = report_dir / simulator.name
+                    shutil.copy2(simulator, snapshot)
+            if code == 0 and args.action == 'sim':
+                command = [str(snapshot), f'+TEST={args.test}', f'+SEED={args.seed}',
+                           f'+CYCLES={args.cycles}', '+AXON_WAVE_FILE=waves.fst']
+                code = call(command, report_dir, log, simulation=True)
+                snapshot.unlink()
+            write_result(log, 'PASS' if code == 0 else 'FAIL', code)
+    except KeyboardInterrupt:
+        code = 130
+    except TimeoutError as exc:
+        code = 124
+        manifest['error'] = str(exc)
+    except (OSError, RuntimeError) as exc:
+        manifest['error'] = str(exc)
+        code = 1
+    for sig, handler in previous_handlers.items():
+        signal.signal(sig, handler)
+    manifest['result'] = {0:'PASS',124:'TIMEOUT',125:'OUTPUT_LIMIT',130:'INTERRUPTED'}.get(code, 'FAIL')
+    manifest['exit_status'] = code
+    manifest['finished_at'] = datetime.now(UTC).isoformat()
+    if code == 0:
+        (report_dir / 'waves.fst').unlink(missing_ok=True)
+        # Keep a concise tail for successful tool chatter.
+        lines = report.read_text(errors='replace').splitlines()
+        report.write_text('\n'.join(lines[-60:]) + '\n')
+    manifest['artifacts'] = [str(p.relative_to(report_dir)) for p in report_dir.rglob('*') if p.is_file()]
+    save(report_dir / 'run.json', manifest)
+    print(f"Result: {manifest['result']}")
+    print(f"Report: {report.relative_to(REPO_ROOT)}")
+    print(f"Rerun: {manifest['rerun_command']}")
+    return code if code >= 0 else 128 - code
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Run an Axon target through repository-local FuseSoC"
     )
-    parser.add_argument("action", choices=("lint", "sim"))
+    parser.add_argument("action", choices=("lint", "sim", "formal"))
     parser.add_argument("--core", required=True)
     parser.add_argument("--target", required=True)
     parser.add_argument("--test")
@@ -238,10 +200,17 @@ def main() -> int:
     parser.add_argument("--cycles", type=int, default=200)
     parser.add_argument("--rebuild", action="store_true")
     parser.add_argument("--skip-build", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument("--timeout", type=float, default=600)
+    parser.add_argument("--max-log-mib", type=int, default=2)
+    parser.add_argument("--max-wave-mib", type=int, default=32)
     args = parser.parse_args()
+    if not math.isfinite(args.timeout) or args.timeout <= 0 or args.max_log_mib < 1 or args.max_wave_mib < 1:
+        fail("timeout and output limits must be positive")
+    if args.action == 'formal' and not args.target.startswith('formal'):
+        fail("formal requires a formal target")
 
-    core = args.core.strip()
-    target = args.target.strip()
+    core = args.core = args.core.strip()
+    target = args.target = args.target.strip()
     if not core:
         fail("CORE is required; for example, "
              "make lint CORE=axon:noc:islip_arbiter:0.1.0")
@@ -259,6 +228,8 @@ def main() -> int:
         fail("SEED must be a non-negative integer for simulation")
     if args.action == "sim" and args.cycles < 1:
         fail("CYCLES must be a positive integer for simulation")
+    if args.skip_build and args.action != 'sim':
+        fail('--skip-build is only valid for prepared simulation runs')
     if args.rebuild and args.skip_build:
         fail("--rebuild and --skip-build cannot be used together")
 
@@ -273,18 +244,7 @@ def main() -> int:
     print(f"Axon {args.action}: {core} target={target}", flush=True)
     print(f"Build directory: {work_root.relative_to(REPO_ROOT)}", flush=True)
 
-    if args.action == "lint":
-        return run_lint(core, target, work_root)
-    return run_sim(
-        core,
-        target,
-        args.test,
-        args.seed,
-        args.cycles,
-        args.rebuild,
-        args.skip_build,
-        work_root,
-    )
+    return run_target(args)
 
 
 if __name__ == "__main__":

@@ -31,3 +31,11 @@ coverage:
 
 clean:
 	$(PYTHON) $(REPO_ROOT)/tools/env/clean.py
+
+# Temporary Stage 1 entry points; Stage 2 owns the replacement CLI.
+.PHONY: formal check-ip
+formal:
+	$(PYTHON) $(REPO_ROOT)/tools/build/run_target.py formal --core "$(CORE)" --target "$(or $(TARGET),formal)"
+
+check-ip:
+	$(PYTHON) $(REPO_ROOT)/tools/build/check_ip.py --core "$(CORE)" --seed-count "$(or $(SEED_COUNT),100)" --jobs "$(or $(JOBS),8)" --cycles "$(or $(CYCLES),200)"

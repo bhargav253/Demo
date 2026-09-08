@@ -322,8 +322,11 @@ The intended policy is:
   tool-specific implementation;
 - assertions are never silently disabled merely to make a target pass.
 
-This policy is **Planned**. The imported wrapper currently disables assertions
-under Verilator and will be corrected after the assertion compatibility test.
+The `syst` simulation targets explicitly enable `AXON_ASSERTIONS` and Verilator
+`--assert`, selecting the standard Axon wrappers. The FIFO underflow negative
+test confirms they execute and fail the process. Other legacy Verilator targets
+retain the imported disabled-wrapper behavior until individually qualified;
+repository-wide assertion compatibility remains **Planned**.
 
 Use:
 
@@ -340,9 +343,9 @@ functional assertions and formal checking remain required.
 
 ## FuseSoC model
 
-FuseSoC is the authoritative source-composition and dependency layer. Root
-Make targets will provide stable user-facing orchestration without duplicating
-source lists.
+FuseSoC is the authoritative source-composition and dependency layer. Integrated
+validation commands orchestrate targets without duplicating source lists; earlier
+scripts remain compatibility paths. See [validation](validation.md).
 
 ### Core identities
 
@@ -390,7 +393,9 @@ Rules:
 The target contract is being introduced incrementally. `default` is the
 reusable RTL target on supported cores. `lint` is **Available** on meaningful
 lint boundaries that expose it. `formal` and `formal_cover` are **Available**
-on the iSLIP reference core; the remaining targets below are **Planned**:
+on the iSLIP reference core. `sim` is **Available** for iSLIP; `syst` now has an
+executable diagnostic simulation with a known failing matrix test. Integration,
+synthesis and FPGA targets below remain **Planned**:
 
 | Target | Meaning |
 |---|---|
@@ -737,8 +742,8 @@ tools/bin/fusesoc run --target <lint_target> <vlnv>
 
 The core must be a complete `axon:<library>:<name>:<version>` VLNV. FuseSoC is
 responsible for resolving the source and dependency graph. Build products are
-disposable; retained operational logs are owned by the validation layer chosen
-in Stage 2.
+disposable; retained operational logs are owned by the integrated validation
+commands described in the [validation guide](validation.md).
 
 The iSLIP unit simulations are **Available**:
 
@@ -751,8 +756,8 @@ tools/bin/fusesoc run --target sim axon:noc:islip_arbiter:0.1.0 --TEST=random --
 It compiles `ip/noc/dv/tb/noc_islip_arbiter_tb.sv` as a timed SystemVerilog
 binary through the Edalize `sim` flow. No custom C++ harness is required.
 Requests are driven away from the rising edge, results are checked against an
-independent priority-pointer model, and a mismatch calls `$fatal`. The terminal
-output is retained in a unique
+independent priority-pointer model, and a mismatch calls `$fatal`. Direct FuseSoC execution leaves tool output in its build directory. Through the
+legacy single-target validation runner, terminal output is retained in a unique
 `artifacts/<core>/sim/<test>/seed-<seed>/<run-id>/sim.log` with the test, seed,
 build-reuse result, simulation result, and exit status.
 
@@ -762,7 +767,7 @@ defaults to 200. Every cycle compares the complete match matrix against the
 independent pointer-based model and separately checks that matches were
 requested and are one-hot-or-zero for every input and output.
 
-A temporary Stage 1 build-once, run-many-seeds regression proves the required
+The legacy regression runner builds once and runs many seeds to check the
 behavior. Its coordinator completes one locked incremental build check, releases the
 build lock, and then launches up to `JOBS` run-only simulator processes. It
 allows all scheduled seeds to finish, returns nonzero if any seed fails, and
@@ -778,7 +783,7 @@ tools/bin/fusesoc run --target coverage axon:noc:islip_arbiter:0.1.0 \
   --TEST=random --SEED=42 --CYCLES=200
 ```
 
-Temporary Stage 1 campaign scaffolding runs `smoke` and `directed` once and runs `random` over
+The legacy coverage coordinator runs `smoke` and `directed` once and `random` over
 the requested seed range. `COVERAGE_TESTS=smoke,random` selects a subset. Each
 worker owns a unique `sim.log` and `coverage.dat`; only successful runs are
 merged, and any failed or missing database fails the campaign.
@@ -814,17 +819,19 @@ released. Existing outputs are reused when FuseSoC/Edalize's generated Make
 dependencies are current. Use `REBUILD=1` to clean and rebuild that target
 explicitly. Separate tests and seeds never share a result directory.
 
-The remaining validation operations are **Planned** for the vertical slice:
+The composed per-IP validation operation is **Available** through the legacy
+`check-ip` runner. Its exact invocation is documented in the root README's
+legacy tooling section. `verification/ip_checks.json` declares required
+formal and additional simulation targets, without containing HDL sources.
+Every profile runs lint, directed simulation, and seeds 1 through 100 by default.
+iSLIP additionally requires both formal targets. `syst` additionally requires
+`sim_fifo`; a matrix failure prevents a passing check-ip result.
 
-```text
-formal <core>
-check-ip <core>
-check-fast
-check
-```
+`check-fast`, repository-wide `check`, and hosted CI integration remain
+**Planned**. CI should invoke the same local per-IP command when introduced.
 
-These are operation names, not promises about a Make-based final CLI. Stage 2
-selects the unified command surface.
+These legacy operation names describe the checks they perform. Use the integrated
+FuseSoC commands for new test and regression workflows.
 
 Expected meanings:
 
@@ -841,18 +848,35 @@ separate from the default fast gate.
 
 ## Artifact model
 
-The normalized artifact layout is **Planned**. Disposable tool work belongs
-under `build/`; retained diagnostic evidence belongs under `artifacts/`:
+The legacy single-target and composed-gate artifact contract is **Available**.
+Disposable tool builds belong under `build/`; each invocation retains evidence:
 
 ```text
-artifacts/<core>/<target>/<run-id>/
+artifacts/<core>/<target>/<test>/seed-<seed>/<run-id>/
   run.json
-  build.log
-  simulation.log
-  results.xml
-  metrics.json
-  waves.fst
+  sim.log                 # or lint.log / formal.log
+  waves.fst               # simulation failure only
+  formal-work/            # formal target only, including VCD cover/failure traces
+artifacts/<core>/check-ip/<run-id>/run.json
 ```
+
+Manifests record revision, dirty state and diff hash, tool versions, executed
+argument vectors and working directories, test/seed/runtime parameters, result,
+limits, and an exact rerun command. Simulation manifests additionally hash the
+executable and exported source/build metadata. Replaying dirty work requires the
+same source contents; the manifest is an identity record, not a source archive.
+Single-target timeouts default to 600 seconds per subprocess and build-lock wait.
+Logs are bounded to 2 MiB per subprocess, simulation files to 32 MiB each; compiler
+products have a separate 1 GiB per-file ceiling. A limit fails the run. SIGINT and
+SIGTERM terminate child work and record interruption. SIGKILL or machine loss
+cannot be finalized; a remaining RUNNING manifest is incomplete evidence.
+
+Passing simulations discard waves and the private executable, retaining at most
+60 log lines. Failed simulations retain the bounded log and FST. A trace cut off
+by a timeout or size limit may be incomplete. Formal work is private per run so
+counterexamples and cover witnesses survive subsequent invocations. The temporary
+legacy coverage/regression coordinators retain their existing campaign formats;
+`check-ip` uses the new single-target evidence contract for each child.
 
 ### Build and run isolation principles
 
@@ -866,8 +890,8 @@ These rules are mandatory for every new target and generator:
 - Build products are reusable; test results are not build products. Each test
   invocation receives a unique artifact directory.
 - Concurrent jobs must not configure or compile in the same mutable directory.
-  A per-build lock is the Stage 1 local mechanism; immutable content-addressed
-  cache entries are deferred to Stage 2.
+  Legacy runners use a per-build lock; immutable content-addressed
+  cache entries are available for qualified Verilator simulations.
 - Runtime-only inputs such as TEST and SEED reuse a matching simulator build.
   Compile-time parameters, defines, sources, generators, tools, or build options
   may require rebuilding.
@@ -910,8 +934,8 @@ root-level changes.
 ## Prebuilt processor firmware tests
 
 **Available on the `riscv` branch:** `axon:core:riscv:0.1.0` exposes `sim_fw`
-using the same repository-owned FuseSoC/Edalize build path. The generic temporary
-Stage 1 runner `tools/verification/run_firmware.py` builds once, snapshots the executable,
+using the same repository-owned FuseSoC/Edalize build path. The generic
+legacy runner `tools/verification/run_firmware.py` builds once, snapshots the executable,
 and executes ELF images in private artifact directories. It checks binary and
 platform input hashes when using a manifest, retains commands/results, and fails
 on any test failure or timeout. It owns no HDL file lists.
@@ -1068,3 +1092,29 @@ Keep this manual authoritative for the workflow, the
 platform/IP specifications authoritative for interfaces. Scoped `AGENTS.md`
 files should link to these contracts and relevant checks rather than duplicate
 memory maps, instruction definitions or compiler settings.
+
+
+## Integrated validation
+
+**Available:** `fusesoc test`, `regress`, `coverage`, `replay`, and `status` through
+`tools/bin/fusesoc`. [The validation guide](validation.md) defines the versioned
+core-local schema, CPU/iSLIP suites, execution/result contracts and coverage scope.
+This supersedes temporary Make/Python orchestration as the primary campaign
+interface; those entry points remain for compatibility and for deferred `syst`.
+
+The repository `presubmit` command performs automatic consumer selection;
+qualified simulator builds use a verified local content-addressed cache. Per-core
+pre/post-submit suite aliases select fixed checks. Affected cores without a
+qualified smoke suite block the gate. CI enforcement is not configured, and full
+DVSim feature compatibility is not claimed.
+
+
+### Dependency-selected check-in smoke suites
+
+**Available:** `tools/bin/fusesoc presubmit --base <reference> [--dry-run]`
+selects the changed cores and their direct/transitive FuseSoC consumers, then
+runs each core's declared `smoke` regression once. Source dependencies remain in
+`.core` files; no manual reverse-consumer list is required. Unknown inputs widen
+selection and affected cores without a smoke suite block execution. See
+[validation](validation.md#dependency-selected-smoke-checks) for scope,
+selection evidence and the distinction from fixed per-core regression aliases.
